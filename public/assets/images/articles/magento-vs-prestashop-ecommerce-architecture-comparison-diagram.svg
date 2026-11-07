@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" aria-label="FIG 1 · ENTERPRISE PHP COMMERCE, MULTISITE CMS &amp; LMS ARCHITECTURE MATRIX">
+  <defs>
+    <linearGradient id="dbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040806"/>
+      <stop offset="100%" stop-color="#07140E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" rx="20" fill="url(#dbg)" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.5"/>
+
+  <!-- Top Header -->
+  <rect x="28" y="24" width="1144" height="58" rx="12" fill="#071811" stroke="#C6A15B" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="52" y="60" fill="#E5C78B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="700">FIG 1 · ENTERPRISE PHP COMMERCE, MULTISITE CMS &amp; LMS ARCHITECTURE MATRIX</text>
+  <text x="1148" y="60" text-anchor="end" fill="#6EE7B7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">PHP PLATFORMS &amp; COMMERCE</text>
+
+  <!-- Left Architecture Column -->
+  <g transform="translate(28, 102)">
+    <rect width="546" height="326" rx="16" fill="#06120D" stroke="#10B981" stroke-opacity="0.38" stroke-width="1.4"/>
+    <text x="26" y="40" fill="#F8FAFC" font-family="Georgia, serif" font-size="22" font-weight="700">Enterprise &amp; Mid-Market PHP Commerce</text>
+    <text x="26" y="66" fill="#6EE7B7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">Magento / Adobe Commerce · Shopware 6.7 · PrestaShop 9</text>
+    <g transform="translate(24, 86)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">1. Magento Multi-Website B2B Catalogs, Shared Carts &amp; OpenSearch</text>
+    </g>
+    <g transform="translate(24, 142)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">2. Shopware 6.7 API-First Symfony Core + Composable Storefronts</text>
+    </g>
+    <g transform="translate(24, 198)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">3. PrestaShop 9 Modernized Symfony LTS Backoffice &amp; Lower TCO</text>
+    </g>
+    <g transform="translate(24, 254)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">4. WooCommerce &amp; OpenCart 4 Serve Agile SMB Merchandising</text>
+    </g>
+  </g>
+
+  <!-- Center Connector -->
+  <g transform="translate(578, 240)">
+    <line x1="0" y1="25" x2="44" y2="25" stroke="#C6A15B" stroke-width="2.5" stroke-dasharray="4 4"/>
+    <circle cx="22" cy="25" r="14" fill="#071811" stroke="#E5C78B" stroke-width="2"/>
+    <text x="22" y="30" text-anchor="middle" fill="#E5C78B" font-family="ui-monospace, monospace" font-size="12" font-weight="700">VS</text>
+  </g>
+
+  <!-- Right Architecture Column -->
+  <g transform="translate(626, 102)">
+    <rect width="546" height="326" rx="16" fill="#06120D" stroke="#C6A15B" stroke-opacity="0.42" stroke-width="1.4"/>
+    <text x="26" y="40" fill="#F8FAFC" font-family="Georgia, serif" font-size="22" font-weight="700">Institutional CMS, Custom Modeling &amp; LMS</text>
+    <text x="26" y="66" fill="#E5C78B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">TYPO3 v13 · Craft CMS 5 · Drupal 11 · October · Moodle</text>
+    <g transform="translate(24, 86)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">1. TYPO3 v13 LTS &amp; Drupal Govern 100+ Multisite Gov Portals</text>
+    </g>
+    <g transform="translate(24, 142)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">2. Craft CMS 5 Matrix Content Modeling + Native GraphQL API</text>
+    </g>
+    <g transform="translate(24, 198)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">3. October CMS &amp; Joomla 5 Deliver Rapid Multilingual Portals</text>
+    </g>
+    <g transform="translate(24, 254)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">4. Moodle LMS Scales SCORM/LTI Universities with Redis Caching</text>
+    </g>
+  </g>
+
+  <!-- Bottom Decision Strip -->
+  <rect x="28" y="446" width="1144" height="50" rx="12" fill="#050F0A" stroke="#10B981" stroke-opacity="0.28"/>
+  <text x="52" y="477" fill="#CBD5E1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">Decision Rule: Select Magento/Shopware 6.7 for ERP-heavy B2B commerce, PrestaShop 9 for lean retail TCO, and TYPO3/Craft/Drupal for structured portals.</text>
+</svg>

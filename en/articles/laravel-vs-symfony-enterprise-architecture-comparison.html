@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laravel 13 vs Symfony 8.1 &amp; 7.4 LTS: Enterprise PHP Guide | Youssef Ghamry</title>
+    <meta name="description" content="Compare Laravel 13 and Symfony 8.1 / 7.4 LTS across DI containers, Eloquent vs Doctrine ORM, Horizon vs Messenger queues, release lifecycles, and enterprise fit." />
+    <meta name="keywords" content="laravel vs symfony enterprise php comparison, laravel 13 vs symfony 8.1, symfony 7.4 lts vs laravel support, eloquent vs doctrine orm architecture, symfony messenger vs laravel horizon, enterprise php framework selection, laravel octane vs symfony frankenphp" />
+    <link rel="canonical" href="/en/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" />
+    <meta property="og:title" content="Laravel 13 vs Symfony 8.1 &amp; 7.4 LTS: Enterprise PHP Guide | Youssef Ghamry" />
+    <meta property="og:description" content="Compare Laravel 13 and Symfony 8.1 / 7.4 LTS across DI containers, Eloquent vs Doctrine ORM, Horizon vs Messenger queues, release lifecycles, and enterprise fit." />
+    <meta property="og:image" content="/assets/images/articles/laravel-vs-symfony-enterprise-architecture-comparison-featured.jpg" />
+    <meta property="og:image:alt" content="Architectural sculpture contrasting Laravel expressive full-stack golden lattice conduits with Symfony modular emerald hexagonal server blocks" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="PHP &amp; Backend" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Laravel 13 vs Symfony 8.1 &amp; 7.4 LTS: Enterprise PHP Guide | Youssef Ghamry" />
+    <meta name="twitter:description" content="Compare Laravel 13 and Symfony 8.1 / 7.4 LTS across DI containers, Eloquent vs Doctrine ORM, Horizon vs Messenger queues, release lifecycles, and enterprise fit." />
+    <meta name="twitter:image" content="/assets/images/articles/laravel-vs-symfony-enterprise-architecture-comparison-featured.jpg" />
+    <meta name="twitter:image:alt" content="Architectural sculpture contrasting Laravel expressive full-stack golden lattice conduits with Symfony modular emerald hexagonal server blocks" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PHP & Backend",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=php"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Laravel vs. Symfony for Enterprise PHP Applications: Architecture, Ecosystem Packages, Performance & Decision Matrix",
+          "item": "https://youssefghamry.com/en/articles/laravel-vs-symfony-enterprise-architecture-comparison.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Laravel vs. Symfony for Enterprise PHP Applications: Architecture, Ecosystem Packages, Performance & Decision Matrix",
+      "description": "Compare Laravel 13 and Symfony 8.1 / 7.4 LTS across DI containers, Eloquent vs Doctrine ORM, Horizon vs Messenger queues, release lifecycles, and enterprise fit.",
+      "image": "https://youssefghamry.com/assets/images/articles/laravel-vs-symfony-enterprise-architecture-comparison-featured.jpg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "PHP & Backend",
+      "keywords": "laravel vs symfony enterprise php comparison, laravel 13 vs symfony 8.1, symfony 7.4 lts vs laravel support, eloquent vs doctrine orm architecture, symfony messenger vs laravel horizon, enterprise php framework selection, laravel octane vs symfony frankenphp",
+      "citation": [
+        "https://laravel.com/docs/releases",
+        "https://symfony.com/releases",
+        "https://www.doctrine-project.org/projects/doctrine-orm/en/current/index.html",
+        "https://frankenphp.dev/docs/worker/"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/laravel-vs-symfony-enterprise-architecture-comparison.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the latest stable versions and PHP requirements for Laravel and Symfony?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Laravel 13 (released March 17, 2026) requires PHP 8.3 minimum and supports PHP 8.3 through 8.5, with security fixes until March 17, 2028. On the Symfony track, Symfony 8.1 (released May 2026) requires PHP 8.4.0+, while Symfony 7.4 LTS (released November 2025) requires PHP 8.2.0+ and provides security patches until November 2029."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Laravel use Symfony components under the hood?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Laravel builds upon several foundational Symfony packages—including `symfony/http-foundation`, `symfony/console`, `symfony/Routing` concepts, `symfony/mailer`, `symfony/finder`, and `symfony/process`—while providing its own IoC container, Eloquent ORM, queue/Horizon layer, and developer tooling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is faster in production: Laravel or Symfony?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both achieve single-digit millisecond latency when deployed with `composer --classmap-authoritative`, Zend OPcache, and persistent worker servers (`Laravel Octane` or `Symfony Runtime` on FrankenPHP/RoadRunner). Symfony’s ahead-of-time compiled DI container uses slightly less cold-boot reflection under classic PHP-FPM, while database indexing and ORM query discipline dominate real-world response times."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you use Doctrine ORM in Laravel or Eloquent in Symfony?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Technically yes (`laravel-doctrine/orm` bridges Doctrine into Laravel, and `illuminate/database` can run inside Symfony), but swimming against each framework’s native conventions forfeits first-party ecosystem integrations such as Laravel Sanctum/Filament or Symfony MakerBundle/API Platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which PHP framework is better for multi-year government and enterprise tenders?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If the tender RFP mandates a 3-to-4-year Long-Term Support (LTS) security SLA on a single major/minor branch or strict Domain-Driven Design separation, Symfony 7.4 LTS is purpose-built for that requirement. If rapid full-stack portal delivery, integrated admin dashboards, and annual upgrade agility are prioritized, Laravel 13 excels."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/laravel-vs-symfony-enterprise-architecture-comparison.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=php" class="hover:text-[#E5C78B]">PHP &amp; Backend</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">Laravel vs. Symfony for Enterprise PHP Applications: Architecture, Ecosystem Packages, Performance &amp; Decision Matrix</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>PHP Framework Comparison</span>
+              </span>
+              <span class="badge-emerald">⏱️ 15 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              Laravel vs. Symfony for Enterprise PHP Applications: Architecture, Ecosystem Packages, Performance &amp; Decision Matrix
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              A rigorous architectural comparison of Laravel 13 and Symfony 8.1 / 7.4 LTS for enterprise PHP systems—analyzing runtime vs. ahead-of-time compiled Dependency Injection, Eloquent Active Record vs. Doctrine Data Mapper, Horizon vs. Messenger async queues, LTS security lifecycles, and persistent worker performance.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/laravel-vs-symfony-enterprise-architecture-comparison-featured.jpg" alt="Architectural sculpture contrasting Laravel expressive full-stack golden lattice conduits with Symfony modular emerald hexagonal server blocks" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: PHP &amp; Backend</span>
+                <a href="/en/services/backend-development.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#service-container-and-request-lifecycle-architecture" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. Core Architecture: Runtime IoC Ergonomics vs. Ahead-of-Time Compiled DI Container
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#laravel-contextual-attribute-di-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Laravel 13 Contextual Service Binding &amp; Attribute Injection</a><a href="#symfony-compiled-tagged-iterator-di-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Symfony 8.1 / 7.4 LTS Compiled Autowiring &amp; Tagged Strategy Iterators</a>
+              </div>
+              <a href="#official-release-lifecycles-laravel-13-vs-symfony-lts" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. Official Release Lifecycles, PHP 8.3–8.5 Support &amp; Enterprise SLA Governance
+              </a>
+              <a href="#persistence-architecture-eloquent-active-record-vs-doctrine-data-mapper" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. Persistence Layer Trade-Offs: Eloquent Active Record vs. Doctrine Data Mapper
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#eloquent-strict-model-code" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Eloquent ORM Strict Mode &amp; Scoped Eager Loading in Laravel 13</a><a href="#doctrine-data-mapper-entity-code" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Doctrine ORM 3 Pure Domain Entity &amp; Unit-of-Work Encapsulation in Symfony</a>
+              </div>
+              <a href="#async-queues-and-persistent-worker-servers" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. Asynchronous Queues &amp; Persistent Worker Performance (Horizon, Messenger &amp; FrankenPHP)
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#frankenphp-worker-reset-hygiene-code" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Preventing Stateful Memory Leaks in Persistent Workers (Symfony ResetInterface)</a>
+              </div>
+              <a href="#executive-decision-matrix-when-to-pick-laravel-vs-symfony" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Executive Decision Matrix: Choosing Between Laravel and Symfony
+              </a>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Modern PHP (PHP 8.3, 8.4, and 8.5) powers high-throughput banking back-offices, sovereign government portals, B2B e-commerce platforms, and multi-tenant SaaS products—and two flagship frameworks anchor nearly every serious greenfield architectural review: Laravel and Symfony. Ironically, these two ecosystems are not adversarial strangers; Laravel builds its core HTTP request/response foundation, console runner, and mailer transports directly atop battle-tested Symfony Components.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Yet choosing between Laravel 13 (released March 17, 2026, requiring PHP 8.3+) and Symfony 8.1 (released May 2026, requiring PHP 8.4+) or Symfony 7.4 LTS (released November 2025, with security support through November 2029) shapes every layer of your engineering organization. Laravel optimizes for cohesive developer velocity through opinionated conventions, expressive Facades, and an unmatched first-party suite (Eloquent, Horizon, Octane, Sanctum, Reverb, Pulse). Symfony optimizes for explicit architectural boundaries, ahead-of-time compiled Dependency Injection, Domain-Driven Design (DDD) purity with Doctrine ORM, and multi-year Long-Term Support SLAs.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">This guide examines how both frameworks operate under real enterprise constraints, explains five side-by-side PHP 8.4/8.5 code implementations in detail, compares official support windows and runtime benchmarks, and provides a clear decision matrix for CTOs, lead architects, and technical proposal teams.</p>
+            </div>
+            <section id="service-container-and-request-lifecycle-architecture" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. Core Architecture: Runtime IoC Ergonomics vs. Ahead-of-Time Compiled DI Container</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">The deepest structural difference between Laravel and Symfony sits inside their Dependency Injection (DI) containers. Laravel’s Service Container is dynamic and runtime-oriented: ServiceProviders register bindings, contextual rules, and singletons during bootstrap, using PHP’s Reflection API (cached per worker in Octane or resolved rapidly under OPcache) alongside expressive static-like Facades that proxy calls to underlying container instances.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Symfony’s DependencyInjection component compiles your entire service graph—autowired constructors, PHP 8 Attributes, tagged strategy iterators, and environment parameters—ahead of time into plain, human-inspectable PHP classes inside var/cache/prod/. In production, Symfony instantiates services with zero runtime reflection overhead and fails fast at build/warmup time if a single interface binding is ambiguous or missing.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Neither model is accidental: Laravel’s dynamic container makes writing integration tests, swapping mocks on the fly (Http::fake(), Bus::fake()), and shipping features remarkably fluid, whereas Symfony’s compiled container enforces strict constructor-injected contracts across large distributed teams working on the same codebase for five to ten years.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/laravel-vs-symfony-architecture-comparison.svg"
+                    alt="Side-by-side enterprise PHP request lifecycle diagram comparing Laravel 13 runtime IoC, Eloquent ORM, Horizon, and Octane against Symfony 8.1 / 7.4 LTS compiled DI container, Doctrine ORM 3, and Messenger"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Request lifecycle, persistence pattern, and async worker orchestration in Laravel 13 versus Symfony 8.1 &amp; 7.4 LTS.
+                  </figcaption>
+                </figure>
+
+                <div id="laravel-contextual-attribute-di-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Laravel 13 Contextual Service Binding &amp; Attribute Injection
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Modern Laravel 13 goes far beyond global Facades by supporting declarative PHP 8 container attributes (#[Singleton], #[Give], #[Config]) directly on domain interfaces and constructors. In the example below, ProcurementAuditService receives both a typed configuration scalar and a dedicated ZATCA-compliant tax validator without cluttering AppServiceProvider with manual closures.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">app/Services/ProcurementAuditService.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Services;
+
+use App\Contracts\TaxComplianceValidator;
+use App\Validators\ZatcaInvoiceValidator;
+use Illuminate\Container\Attributes\Config;
+use Illuminate\Container\Attributes\Give;
+use Illuminate\Container\Attributes\Singleton;
+
+#[Singleton]
+final readonly class ProcurementAuditService
+{
+    public function __construct(
+        #[Give(ZatcaInvoiceValidator::class)]
+        private TaxComplianceValidator $validator,
+        #[Config('procurement.strict_budget_ceiling_sar')]
+        private int $maxBudgetSar,
+    ) {}
+
+    public function verifyBidAmount(int $proposedAmountSar, string $vatNumber): bool
+    {
+        if ($proposedAmountSar &gt; $this-&gt;maxBudgetSar) {
+            return false;
+        }
+
+        return $this-&gt;validator-&gt;isValidRegistration($vatNumber);
+    }
+}</code></pre>
+                </div>
+                </div>
+
+                <div id="symfony-compiled-tagged-iterator-di-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Symfony 8.1 / 7.4 LTS Compiled Autowiring &amp; Tagged Strategy Iterators
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In Symfony 8.1 and 7.4 LTS, multi-step compliance engines leverage #[AutowireIterator] so every class implementing BidRuleInterface is discovered, priority-sorted at container compilation time, and injected as a lazy generator—allowing new rules to be added in compliance with the Open/Closed Principle without touching the orchestrator class.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/Compliance/BidEvaluationPipeline.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Compliance;
+
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+
+final readonly class BidEvaluationPipeline
+{
+    /**
+     * @param iterable&lt;BidRuleInterface&gt; $rules Compiled &amp; ordered at cache:warmup
+     */
+    public function __construct(
+        #[AutowireIterator('app.bid_rule', defaultPriorityMethod: 'getPriority')]
+        private iterable $rules,
+        #[Autowire(param: 'app.strict_compliance_mode')]
+        private bool $strictMode,
+    ) {}
+
+    public function evaluate(TenderSubmissionDto $submission): ComplianceVerdict
+    {
+        foreach ($this-&gt;rules as $rule) {
+            $violation = $rule-&gt;inspect($submission);
+            if ($violation !== null &amp;&amp; $this-&gt;strictMode) {
+                return ComplianceVerdict::rejected($violation);
+            }
+        }
+
+        return ComplianceVerdict::approved();
+    }
+}</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="official-release-lifecycles-laravel-13-vs-symfony-lts" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. Official Release Lifecycles, PHP 8.3–8.5 Support &amp; Enterprise SLA Governance</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Government tenders, banking regulators, and ISO 27001 / NCA compliance audits frequently mandate documented vendor security support windows covering the entire contract duration. Here, Laravel and Symfony follow distinct predictable cadences that architects must factor into upgrade budgets.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Laravel ships one major release annually in Q1. Laravel 13—released on March 17, 2026—requires PHP 8.3 minimum (fully supporting PHP 8.3, 8.4, and 8.5), provides 18 months of bug fixes until Q3 2027, and 2 years of security fixes until March 17, 2028. Upgrading between annual Laravel releases is typically smooth (often 1–3 days aided by Laravel Shift and Rector), but teams must budget for an upgrade every 12 to 18 months.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Symfony ships minor releases every six months (May and November) and designates every <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.4</code> release as a Long-Term Support (LTS) version. Symfony 7.4 LTS (released November 2025, requiring PHP 8.2.0+) guarantees 3 years of bug fixes through November 2028 and 4 full years of security patches through November 2029—while Symfony 8.1 (released May 2026, requiring PHP 8.4.0+) delivers cutting-edge features on the standard 8-month fast track.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">Enterprise Architecture &amp; Lifecycle Matrix: Laravel 13 vs. Symfony 8.1 / 7.4 LTS</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Evaluation Criterion</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Laravel 13 (March 2026 Release)</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Symfony 8.1 (May 2026) &amp; Symfony 7.4 LTS</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Taxonomic Classification</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Batteries-Included Full-Stack PHP Web Framework</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Modular Decoupled Component Framework &amp; HTTP Platform</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">PHP Version Requirement</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">PHP 8.3 – 8.5 (PHP 8.3.0 minimum)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Symfony 8.1: PHP 8.4.0+ | Symfony 7.4 LTS: PHP 8.2.0+</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Official Security Support Window</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">2 Years per major release (Laravel 13 until March 17, 2028)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">4 Years on LTS (Symfony 7.4 LTS until November 2029); 8 months on standard minors</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Dependency Injection Engine</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Dynamic runtime IoC Container + ServiceProviders + Facades</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Ahead-of-time PHP-compiled ContainerBuilder + zero-reflection autowiring</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Default Database Persistence</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Eloquent ORM (Active Record) — rapid CRUD &amp; expressive scopes</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Doctrine ORM 3 (Data Mapper &amp; Unit of Work) — pure POPO DDD entities</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Async Queues &amp; Event Buses</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Laravel Queue + Horizon (Redis dashboard, batching, rate limits)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Symfony Messenger (Command/Query/Event buses across AMQP, Redis, SQS, Doctrine)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">API &amp; Serialization Tooling</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Eloquent API Resources, JSON:API support, Sanctum &amp; Passport OAuth2</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Symfony Serializer + API Platform 4 (OpenAPI 3.1, JSON-LD/Hydra, GraphQL)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Admin &amp; Back-Office Ecosystem</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Filament PHP, Laravel Nova, Livewire 3 / Inertia.js</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">EasyAdmin, SonataAdmin, Symfony UX (Twig Components + Stimulus/LiveComponent)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">High-Concurrency Worker Mode</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Laravel Octane (FrankenPHP, RoadRunner, Swoole)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Symfony Runtime Component (FrankenPHP Worker Mode, RoadRunner, Swoole)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Downstream Platform Adoption</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">October CMS, Winter CMS, Statamic, Bagisto, Lunar Commerce</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Drupal 10/11, Shopware 6, PrestaShop, Sylius, TYPO3 &amp; Laravel core HTTP</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="persistence-architecture-eloquent-active-record-vs-doctrine-data-mapper" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. Persistence Layer Trade-Offs: Eloquent Active Record vs. Doctrine Data Mapper</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In day-to-day domain modeling, the contrast between Laravel’s Eloquent ORM and Symfony’s default Doctrine ORM 3 defines how business invariants are protected. Under Eloquent’s Active Record pattern, each model class extends Illuminate\Database\Eloquent\Model, combining column attributes, relationship queries, and save()/update() persistence methods on a single object. Enabling Model::shouldBeStrict(!app()-&gt;isProduction()) in Laravel 13 immediately blocks lazy-loading N+1 queries, silently discarded mass-assigned fields, and typos on missing attributes.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Under Doctrine ORM 3’s Data Mapper and Unit-of-Work pattern, domain entities are pure Plain Old PHP Objects (POPOs) annotated with PHP 8 #[ORM\Entity] attributes. An entity has zero knowledge of SQL connections; it cannot call $this-&gt;save(). Instead, domain methods mutate private properties while enforcing business rules, and EntityManager::flush() computes the minimal transactional INSERT/UPDATE/DELETE delta across the Identity Map in a single atomic commit.</p>
+
+                <div id="eloquent-strict-model-code" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Eloquent ORM Strict Mode &amp; Scoped Eager Loading in Laravel 13
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Notice below how booting Model::shouldBeStrict() in AppServiceProvider turns hidden N+1 relationship loops into immediate MissingAttributeException / LazyLoadingViolationException alerts during local development and CI tests, while Eloquent’s withSum() pushes invoice aggregation directly into SQL.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">app/Models/VendorContract.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+/**
+ * Enable Model::shouldBeStrict(! $this-&gt;app-&gt;isProduction()) in AppServiceProvider::boot()
+ */
+final class VendorContract extends Model
+{
+    use HasUuids;
+
+    protected $fillable = ['reference_code', 'entity_name', 'ceiling_sar', 'status'];
+
+    public function milestones(): HasMany
+    {
+        return $this-&gt;hasMany(ContractMilestone::class);
+    }
+
+    public function scopeActiveWithApprovedTotals(Builder $query): Builder
+    {
+        return $query
+            -&gt;where('status', 'ACTIVE')
+            -&gt;with(['milestones' =&gt; fn ($q) =&gt; $q-&gt;where('approved', true)])
+            -&gt;withSum(['milestones as approved_sar_total' =&gt; fn ($q) =&gt; $q-&gt;where('approved', true)], 'amount_sar');
+    }
+}</code></pre>
+                </div>
+                </div>
+
+                <div id="doctrine-data-mapper-entity-code" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Doctrine ORM 3 Pure Domain Entity &amp; Unit-of-Work Encapsulation in Symfony
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Contrast that with a Doctrine ORM 3 entity in Symfony. There are no public setters and no inherited persistence methods—external controllers cannot accidentally set an invalid contract status or bypass ceiling checks. State transitions happen exclusively through approveMilestone(), and EntityManager::flush() persists the entire aggregate atomically.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/Domain/Contract/VendorContract.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Domain\Contract;
+
+use Doctrine\ORM\Mapping as ORM;
+use DomainException;
+use Symfony\Component\Uid\Uuid;
+
+#[ORM\Entity]
+#[ORM\Table(name: 'vendor_contracts')]
+class VendorContract
+{
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    private Uuid $id;
+
+    #[ORM\Column(length: 64, unique: true)]
+    private string $referenceCode;
+
+    #[ORM\Column(type: 'bigint')]
+    private int $ceilingHalalas;
+
+    #[ORM\Column(type: 'bigint')]
+    private int $allocatedHalalas = 0;
+
+    public function __construct(string $referenceCode, int $ceilingHalalas)
+    {
+        $this-&gt;id = Uuid::v7();
+        $this-&gt;referenceCode = $referenceCode;
+        $this-&gt;ceilingHalalas = $ceilingHalalas;
+    }
+
+    public function allocateMilestoneBudget(int $amountHalalas): void
+    {
+        if (($this-&gt;allocatedHalalas + $amountHalalas) &gt; $this-&gt;ceilingHalalas) {
+            throw new DomainException('Milestone allocation exceeds contract ceiling.');
+        }
+
+        $this-&gt;allocatedHalalas += $amountHalalas;
+    }
+}</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="async-queues-and-persistent-worker-servers" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. Asynchronous Queues &amp; Persistent Worker Performance (Horizon, Messenger &amp; FrankenPHP)</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Enterprise workloads rarely finish inside a 50ms HTTP request: generating digitally signed PDF tender volumes, syncing ERP ledgers, and dispatching webhook notifications all belong on asynchronous background queues. Laravel Horizon provides an out-of-the-box real-time Redis queue supervisor with job batching, tag metrics, and auto-scaling worker pools—ideal when Redis is your primary broker.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Symfony Messenger shines when your enterprise architecture spans heterogeneous brokers (RabbitMQ AMQP, Apache Kafka, Amazon SQS, Redis Streams, or transactional outbox tables in PostgreSQL). Messenger cleanly separates immutable Message DTOs from #[AsMessageHandler] services, complete with exponential backoff retry multipliers and dead-letter failure transports.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">For raw HTTP throughput, both frameworks now shatter traditional PHP-FPM boot costs via persistent worker runtimes. Running Laravel Octane or Symfony’s native FrankenPHP / RoadRunner runtime keeps the framework kernel and compiled DI container warm in RAM across thousands of requests—routinely cutting median response latency from 18–30ms down to 2–4ms.</p>
+
+                <div id="frankenphp-worker-reset-hygiene-code" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Preventing Stateful Memory Leaks in Persistent Workers (Symfony ResetInterface)
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">When running either Laravel Octane or Symfony in FrankenPHP worker mode, request-scoped state stored in singleton services will leak across subsequent users unless explicitly cleared. Symfony solves this cleanly via ResetInterface, which automatically invokes reset() after every HTTP response handled by the worker.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/Security/TenantContextHolder.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+
+declare(strict_types=1);
+
+namespace App\Security;
+
+use Symfony\Contracts\Service\ResetInterface;
+
+final class TenantContextHolder implements ResetInterface
+{
+    private ?string $currentTenantId = null;
+
+    public function setTenantId(string $tenantId): void
+    {
+        $this-&gt;currentTenantId = $tenantId;
+    }
+
+    public function getTenantId(): ?string
+    {
+        return $this-&gt;currentTenantId;
+    }
+
+    public function reset(): void
+    {
+        // Automatically called by Symfony Runtime / FrankenPHP worker after each request:
+        $this-&gt;currentTenantId = null;
+    }
+}</code></pre>
+                </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ Enterprise PHP Framework Selection &amp; Production Readiness Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Align framework choice with contractual SLA length: choose Symfony 7.4 LTS when 4-year uninterrupted security support (until Nov 2029) is mandated, or budget annual minor/major upgrades on Laravel 13.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Enable Model::shouldBeStrict() in Laravel or PHPStan Doctrine rules in Symfony CI pipelines to catch N+1 queries and type mismatches before staging.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Compile autoloaders in production Docker images via composer install --no-dev --classmap-authoritative and enable Zend OPcache preloading.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Audit singleton services for cross-request tenant state leaks before enabling FrankenPHP, RoadRunner, or Swoole worker mode.</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="executive-decision-matrix-when-to-pick-laravel-vs-symfony" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Executive Decision Matrix: Choosing Between Laravel and Symfony</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choose Laravel 13 when time-to-market, cohesive full-stack productivity, and integrated first-party tooling are paramount. For B2B SaaS products, custom ERP/CRM portals (especially paired with Filament PHP, Livewire, or Inertia + React/Vue), e-commerce backends, and rapid enterprise MVPs, Laravel delivers extraordinary velocity without sacrificing clean architecture—provided your team enforces strict Eloquent discipline and FormRequest/Action boundaries.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choose Symfony 8.1 or Symfony 7.4 LTS when building long-lived core banking, healthcare, government Etimad-scale procurement platforms, high-compliance microservices, or hypermedia/OpenAPI ecosystems powered by API Platform 4. Where domain invariants require Data-Mapper separation (Doctrine ORM), multi-broker AMQP/SQS event buses (Messenger), and a four-year LTS security guarantee, Symfony’s explicit component architecture pays compounding dividends over a five-to-ten-year lifecycle.</p>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Leaving Eloquent Lazy Loading Unrestricted in Large Laravel Codebases</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Without <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Model::preventLazyLoading()</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Model::shouldBeStrict()</code>, Blade/JSON resource loops silently trigger hundreds of N+1 SQL queries per request under production data volumes.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Calling <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">EntityManager::flush()</code> Inside Domain Loops in Symfony + Doctrine</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Invoking <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">flush()</code> on every iteration recomputes the entire Doctrine Unit-of-Work Identity Map O(N²) times. Batch entities and flush once per transaction—or call <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">$em-&gt;clear()</code> during chunked CLI imports.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Choosing Standard Non-LTS Symfony Minors for Frozen-Scope Government Contracts</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Standard Symfony minor releases (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">8.0</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">8.1</code>) carry an 8-month maintenance window. Multi-year public-sector deployments with infrequent upgrade windows should target <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.4</code> LTS releases (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Symfony 7.4 LTS</code>).</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Storing Per-Request Auth or Tenant State in Static Properties Under Octane / FrankenPHP</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Static class properties and un-reset container singletons persist across HTTP requests in worker mode, risking severe cross-tenant data leakage unless cleared via Octane listeners or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ResetInterface</code>.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Treating Facades as an Excuse to Put SQL Queries Inside Controllers</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Whether using Laravel or Symfony, coupling HTTP controllers directly to ORM query builders makes unit testing painful and duplicates business validation rules across web, API, and CLI entry points.</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">What are the latest stable versions and PHP requirements for Laravel and Symfony?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Laravel 13 (released March 17, 2026) requires PHP 8.3 minimum and supports PHP 8.3 through 8.5, with security fixes until March 17, 2028. On the Symfony track, Symfony 8.1 (released May 2026) requires PHP 8.4.0+, while Symfony 7.4 LTS (released November 2025) requires PHP 8.2.0+ and provides security patches until November 2029.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Does Laravel use Symfony components under the hood?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Yes. Laravel builds upon several foundational Symfony packages—including <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">symfony/http-foundation</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">symfony/console</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">symfony/Routing</code> concepts, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">symfony/mailer</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">symfony/finder</code>, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">symfony/process</code>—while providing its own IoC container, Eloquent ORM, queue/Horizon layer, and developer tooling.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Which is faster in production: Laravel or Symfony?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Both achieve single-digit millisecond latency when deployed with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">composer --classmap-authoritative</code>, Zend OPcache, and persistent worker servers (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Laravel Octane</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Symfony Runtime</code> on FrankenPHP/RoadRunner). Symfony’s ahead-of-time compiled DI container uses slightly less cold-boot reflection under classic PHP-FPM, while database indexing and ORM query discipline dominate real-world response times.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Can you use Doctrine ORM in Laravel or Eloquent in Symfony?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Technically yes (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">laravel-doctrine/orm</code> bridges Doctrine into Laravel, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">illuminate/database</code> can run inside Symfony), but swimming against each framework’s native conventions forfeits first-party ecosystem integrations such as Laravel Sanctum/Filament or Symfony MakerBundle/API Platform.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Which PHP framework is better for multi-year government and enterprise tenders?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">If the tender RFP mandates a 3-to-4-year Long-Term Support (LTS) security SLA on a single major/minor branch or strict Domain-Driven Design separation, Symfony 7.4 LTS is purpose-built for that requirement. If rapid full-stack portal delivery, integrated admin dashboards, and annual upgrade agility are prioritized, Laravel 13 excels.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Final Architectural Verdict: Velocity Conventions vs. Long-Term Modular Governance</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Laravel 13 and Symfony 8.1 / 7.4 LTS represent the pinnacle of modern, strictly typed PHP engineering. Teams that embrace Laravel gain an integrated full-stack platform where authentication, queues, WebSockets, admin panels, and testing ergonomics work harmoniously out of the box.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Teams that embrace Symfony gain an industrial-grade modular architecture backed by ahead-of-time compiled Dependency Injection, Doctrine Data-Mapper domain isolation, multi-broker Messenger pipelines, and four-year LTS security guarantees. Match the framework to your domain complexity, team structure, and contractual maintenance horizon.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · PHP &amp; Backend</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert PHP &amp; Backend Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated Backend Architecture &amp; API Development service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/backend-development.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore Backend Architecture &amp; API Development →</a>
+                <a href="/en/services/custom-software-development.html" class="btn-emerald text-xs py-2.5 px-5">Custom Software Development</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://laravel.com/docs/releases" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Laravel Official Documentation — Release Notes &amp; Support Policy (Laravel 13) ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Laravel Holdings Inc.</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://symfony.com/releases" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Symfony Official Releases &amp; Long-Term Support Roadmap (Symfony 8.1 &amp; Symfony 7.4 LTS) ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Symfony SAS</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://www.doctrine-project.org/projects/doctrine-orm/en/current/index.html" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Doctrine ORM 3 Official Documentation — Architecture, Entities &amp; Unit of Work ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Doctrine Project</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://frankenphp.dev/docs/worker/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">FrankenPHP Official Documentation — Worker Mode for Laravel Octane &amp; Symfony Runtime ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Les-Tilleuls.coop / FrankenPHP</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in PHP &amp; Backend</h2>
+                <a href="/en/articles/index.html?track=php" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/drupal-for-enterprise-websites.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">Drupal · 9 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Drupal for Enterprise Websites: Role-Based Access Control and Multi-Site Architecture</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/drupal-security-best-practices.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">Drupal · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Drupal Security Hardening Guide: Drupal Security Team Standards, Composer Audits &amp; NCA Compliance</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/prisma-vs-drizzle-orm-typescript-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">JS &amp; TS Ecosystem · 14 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Prisma vs. Drizzle ORM in TypeScript &amp; Node.js: Architecture, SQL Control, Latest Releases &amp; Migration Guide</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/how-to-write-a-technical-proposal.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">Tenders &amp; Etimad · 9 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">How to Write a Professional Technical Proposal for Government &amp; IT Tenders</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">Backend Architecture &amp; API Development</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/backend-development.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/custom-software-development.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Custom Software Development</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

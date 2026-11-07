@@ -1,0 +1,1142 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fix WordPress White Screen of Death (WSOD) – Step-by-Step Guide | Youssef Ghamry</title>
+    <meta name="description" content="Resolve the WordPress White Screen of Death (WSOD) fast using safe WP_DEBUG_LOG tracing, WP-CLI plugin isolation, PHP memory tuning, and cache recovery." />
+    <meta name="keywords" content="wordpress white screen of death, fix wordpress white screen of death, wordpress critical error troubleshooting, wp_debug_log production debugging, wp-cli deactivate plugins recovery, wordpress php memory limit exhaustion, wordpress recovery mode fatal error handler" />
+    <link rel="canonical" href="/en/articles/how-to-fix-wordpress-white-screen-of-death.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/how-to-fix-wordpress-white-screen-of-death.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/how-to-fix-wordpress-white-screen-of-death.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/how-to-fix-wordpress-white-screen-of-death.html" />
+    <meta property="og:title" content="Fix WordPress White Screen of Death (WSOD) – Step-by-Step Guide | Youssef Ghamry" />
+    <meta property="og:description" content="Resolve the WordPress White Screen of Death (WSOD) fast using safe WP_DEBUG_LOG tracing, WP-CLI plugin isolation, PHP memory tuning, and cache recovery." />
+    <meta property="og:image" content="/assets/images/articles/how-to-fix-wordpress-white-screen-of-death-featured.jpg" />
+    <meta property="og:image:alt" content="Architectural visualization of WordPress PHP fatal error recovery transforming a fractured dark browser pane into a restored structured web grid" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="WordPress" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fix WordPress White Screen of Death (WSOD) – Step-by-Step Guide | Youssef Ghamry" />
+    <meta name="twitter:description" content="Resolve the WordPress White Screen of Death (WSOD) fast using safe WP_DEBUG_LOG tracing, WP-CLI plugin isolation, PHP memory tuning, and cache recovery." />
+    <meta name="twitter:image" content="/assets/images/articles/how-to-fix-wordpress-white-screen-of-death-featured.jpg" />
+    <meta name="twitter:image:alt" content="Architectural visualization of WordPress PHP fatal error recovery transforming a fractured dark browser pane into a restored structured web grid" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "WordPress",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=wordpress"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "How to Fix the WordPress White Screen of Death (WSOD): Complete Root-Cause Diagnostic & Recovery Guide",
+          "item": "https://youssefghamry.com/en/articles/how-to-fix-wordpress-white-screen-of-death.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How to Fix the WordPress White Screen of Death (WSOD): Complete Root-Cause Diagnostic & Recovery Guide",
+      "description": "Resolve the WordPress White Screen of Death (WSOD) fast using safe WP_DEBUG_LOG tracing, WP-CLI plugin isolation, PHP memory tuning, and cache recovery.",
+      "image": "https://youssefghamry.com/assets/images/articles/how-to-fix-wordpress-white-screen-of-death-featured.jpg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "WordPress",
+      "keywords": "wordpress white screen of death, fix wordpress white screen of death, wordpress critical error troubleshooting, wp_debug_log production debugging, wp-cli deactivate plugins recovery, wordpress php memory limit exhaustion, wordpress recovery mode fatal error handler",
+      "citation": [
+        "https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/",
+        "https://developer.wordpress.org/cli/commands/plugin/deactivate/",
+        "https://www.php.net/manual/en/ini.core.php#ini.memory-limit"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/how-to-fix-wordpress-white-screen-of-death.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why does my WordPress website show a completely blank white screen with no error message at all?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A totally blank screen occurs either when PHP crashes before WordPress’s Fatal Error Handler initializes (with display_errors disabled in php.ini) or when the active theme outputs an HTTP 200 header with an empty template buffer. Checking HTTP headers with curl -I and enabling private WP_DEBUG_LOG tracing immediately reveals which case applies."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I fix the WordPress White Screen of Death if I am locked out of /wp-admin/?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You do not need dashboard access to recover from WSOD. Connect via SSH (using WP-CLI with --skip-plugins --skip-themes) or SFTP (editing wp-config.php to log the exact error and temporarily renaming /wp-content/plugins/ or switching themes) to restore access within minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did upgrading to PHP 8.2, 8.3, or 8.4 trigger a critical error on my WordPress site?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PHP 8+ converted many legacy warnings—such as passing null to string functions, invalid count() arguments, or removed create_function() calls—into fatal Uncaught TypeError exceptions. Outdated plugins or custom child-theme functions written for PHP 7.4 must be updated before switching the production PHP runtime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much PHP memory should a modern WordPress or WooCommerce site have to prevent WSOD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard corporate WordPress sites run reliably with 256M allocated to WP_MEMORY_LIMIT, while WooCommerce storefronts, multilingual WPML/Polylang portals, and heavy visual builders should configure 256M frontend memory and 512M for WP_MAX_MEMORY_LIMIT backed by matching php.ini ceilings."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my WordPress site still white after I fixed the broken plugin or PHP error?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Persistent blank screens after a verified code fix are almost always caused by cached responses—either PHP OPcache holding stale compiled bytecode, a corrupted Redis/Memcached object-cache drop-in, or an upstream CDN/reverse proxy caching error responses. Reload PHP-FPM, flush object cache, and purge your CDN."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/how-to-fix-wordpress-white-screen-of-death.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/how-to-fix-wordpress-white-screen-of-death.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=wordpress" class="hover:text-[#E5C78B]">WordPress</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">How to Fix the WordPress White Screen of Death (WSOD): Complete Root-Cause Diagnostic &amp; Recovery Guide</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>WordPress Production Troubleshooting</span>
+              </span>
+              <span class="badge-emerald">⏱️ 12 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              How to Fix the WordPress White Screen of Death (WSOD): Complete Root-Cause Diagnostic &amp; Recovery Guide
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              A deterministic, production-safe runbook for diagnosing and fixing the WordPress White Screen of Death (WSOD)—covering silent HTTP 500 PHP fatal crashes, empty HTTP 200 template buffers, private WP_DEBUG_LOG tracing, WP-CLI plugin/theme isolation, PHP 8.x TypeError incompatibilities, and memory exhaustion.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/how-to-fix-wordpress-white-screen-of-death.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/how-to-fix-wordpress-white-screen-of-death-featured.jpg" alt="Architectural visualization of WordPress PHP fatal error recovery transforming a fractured dark browser pane into a restored structured web grid" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: WordPress</span>
+                <a href="/en/services/wordpress-development.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#understanding-wsod-mechanics" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. Why WordPress Renders a Blank Screen: Fatal Crashes vs. Empty Output Buffers
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#inspect-http-response-headers" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">1.1 Inspecting Raw HTTP Status Codes Before Editing Files</a><a href="#when-recovery-mode-emails-fail" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">1.2 Why WordPress Recovery Mode Emails Often Never Arrive</a>
+              </div>
+              <a href="#enable-safe-wp-debug-logging" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. Capturing the Exact Stack Trace Safely with WP_DEBUG_LOG
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#reading-php-fatal-stack-trace" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">2.1 Reading the Culprit Path in debug.log or PHP-FPM Error Logs</a>
+              </div>
+              <a href="#isolate-plugins-and-themes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. Isolating Faulty Plugins, MU-Plugins, and Active Themes
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#wp-cli-plugin-isolation" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">3.1 Rapid Plugin Isolation via WP-CLI (With --skip-plugins)</a><a href="#sftp-folder-rename-fallback" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">3.2 SFTP Directory Rename Method (When SSH/WP-CLI Is Unavailable)</a><a href="#switching-broken-active-theme" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">3.3 Recovering from a Broken Theme functions.php or Child Theme Override</a>
+              </div>
+              <a href="#php-memory-and-version-compatibility" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. Fixing PHP Memory Exhaustion and PHP 8.x Compatibility Crashes
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#php-8-fatal-type-errors" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">4.1 Resolving PHP 8.x Uncaught TypeError After Hosting Upgrades</a><a href="#corrupted-core-and-htaccess-recovery" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">4.2 Verifying Core Checksums, Stuck .maintenance Files, and .htaccess Rules</a>
+              </div>
+              <a href="#wsod-diagnostic-comparison-matrix" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Quick-Reference Diagnostic Matrix: Symptom vs. Root Cause vs. Resolution
+              </a>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Few production incidents disrupt revenue and editorial operations faster than the WordPress White Screen of Death (WSOD). One moment your storefront or corporate portal is serving traffic normally; the next—often right after a plugin update, a PHP version switch, or a traffic spike—visitors face either an empty white browser window or WordPress’s generic &quot;There has been a critical error on this website&quot; screen.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Guessing at fixes on a live server—such as deleting plugins at random, restoring outdated database snapshots, or turning on public error output—frequently worsens downtime and exposes sensitive server paths. This guide walks through a deterministic, production-safe diagnostic protocol that isolates the exact offending file, line number, or memory ceiling and restores full site availability in under fifteen minutes.</p>
+            </div>
+            <section id="understanding-wsod-mechanics" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. Why WordPress Renders a Blank Screen: Fatal Crashes vs. Empty Output Buffers</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Before touching a single file on your server, classify what the web server is actually returning. Although administrators group every blank response under &quot;White Screen of Death,&quot; two fundamentally different failure mechanisms produce a white viewport in modern WordPress installations.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Since WordPress 5.2, core includes a built-in Fatal Error Handler (class WP_Fatal_Error_Handler) that intercepts uncaught E_ERROR, E_PARSE, and E_COMPILE_ERROR exceptions. When it catches a crash on the frontend, it returns an HTTP 500 status code with a minimal critical-error notice and attempts to email a temporary Recovery Mode login token to the site administrator. However, when PHP runs out of memory mid-buffer, when output buffering is prematurely cleared by a faulty theme callback, or when php.ini suppresses display_errors before WordPress finishes bootstrapping, the browser still receives a completely blank white screen.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/wordpress-wsod-diagnostic-flow.svg"
+                    alt="Five-stage WordPress White Screen of Death diagnostic workflow showing HTTP header inspection, safe WP_DEBUG_LOG setup, WP-CLI plugin isolation, PHP memory tuning, and cache verification"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Deterministic 5-stage WSOD triage pipeline: classify HTTP headers first, capture private stack traces via WP_DEBUG_LOG, isolate extensions cleanly, verify PHP memory/version compatibility, and purge stale bytecode caches.
+                  </figcaption>
+                </figure>
+
+                <div id="inspect-http-response-headers" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    1.1 Inspecting Raw HTTP Status Codes Before Editing Files
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Run a lightweight header check from your terminal to distinguish an unhandled PHP fatal crash (HTTP 500), an upstream PHP-FPM worker timeout (HTTP 502/504), or a silent empty theme render (HTTP 200 with zero-byte content-length). Testing both the public homepage and /wp-admin/ immediately tells you whether the failure affects only the active frontend theme or the entire WordPress bootstrap.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">terminal — HTTP Header &amp; Byte-Length Triage</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">bash</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code># Check status code, caching headers, and payload size on frontend vs wp-admin
+curl -sI https://example.com/ | grep -E &quot;HTTP/|Content-Length|X-Cache|cf-cache-status&quot;
+curl -sI https://example.com/wp-admin/ | grep -E &quot;HTTP/|Location&quot;</code></pre>
+                </div>
+                </div>
+
+                <div id="when-recovery-mode-emails-fail" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    1.2 Why WordPress Recovery Mode Emails Often Never Arrive
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Many site owners wait for the automated WordPress Recovery Mode link only to discover it never reaches their inbox. If your site relies on an SMTP plugin that fails to load during a fatal boot error—or if the default server wp_mail() PHP mailer lacks SPF/DKIM alignment—the recovery email is silently dropped. Relying on server-side logs and SFTP/SSH gives you immediate control without waiting on email delivery.</p>
+                  
+                </div>
+              </div>
+            </section>
+
+            <section id="enable-safe-wp-debug-logging" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. Capturing the Exact Stack Trace Safely with WP_DEBUG_LOG</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">The single fastest way to eliminate guesswork is reading the exact PHP fatal stack trace. Never set WP_DEBUG_DISPLAY to true on a live public website: doing so prints full filesystem paths, database table prefixes, and plugin versions directly into visitor browsers and search engine caches.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Instead, connect via SSH or SFTP, open wp-config.php in your WordPress root directory, and configure WordPress to write errors exclusively to a private log file while keeping screen output disabled.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">wp-config.php — Production-Safe Private Error Logging</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>// Place BEFORE &quot;/* That's all, stop editing! Happy publishing. */&quot;
+define( 'WP_DEBUG', true );
+
+// Write PHP notices, warnings, and fatal stack traces to /wp-content/debug.log
+define( 'WP_DEBUG_LOG', '/var/log/wordpress-debug.log' ); // Or true for wp-content/debug.log
+
+// NEVER expose raw PHP errors to site visitors in production
+define( 'WP_DEBUG_DISPLAY', false );
+@ini_set( 'display_errors', 0 );
+
+// Optional: temporarily bypass WordPress Fatal Error Handler if it masks raw stack traces
+// define( 'WP_DISABLE_FATAL_ERROR_HANDLER', true );</code></pre>
+                </div>
+
+                <div id="reading-php-fatal-stack-trace" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    2.1 Reading the Culprit Path in debug.log or PHP-FPM Error Logs
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">After saving wp-config.php, reload the broken URL once to trigger the crash, then tail the last thirty lines of your log file. Look specifically for &quot;PHP Fatal error:&quot; or &quot;Uncaught Error:&quot;—the file path immediately following &quot;in /var/www/...&quot; pinpoints whether the failure lives inside /wp-content/plugins/&lt;plugin-name&gt;/, /wp-content/themes/&lt;theme-name&gt;/, or a custom mu-plugin.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">terminal — Inspecting Fatal Stack Traces</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">bash</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code># Inspect WordPress debug log and web-server PHP-FPM error log
+tail -n 40 /var/log/wordpress-debug.log
+# Fallback if WordPress crashes before wp-config.php finishes loading:
+sudo tail -n 40 /var/log/php8.3-fpm.log</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="isolate-plugins-and-themes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. Isolating Faulty Plugins, MU-Plugins, and Active Themes</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Incompatible or partially updated plugins account for the majority of WordPress WSOD incidents—especially after automated background updates or PHP runtime upgrades. Notice a subtle trap when using WP-CLI during a fatal crash: a standard wp plugin list command loads every active plugin first, meaning WP-CLI itself will crash with the exact same fatal error unless you pass the --skip-plugins and --skip-themes flags.</p>
+
+                <div id="wp-cli-plugin-isolation" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    3.1 Rapid Plugin Isolation via WP-CLI (With --skip-plugins)
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">If your stack trace already named a single plugin directory, deactivate just that plugin immediately. If no single culprit appeared in the log (for example, a circular hook loop exhausting memory), export your active plugin list to a text backup, deactivate all plugins cleanly, confirm the site renders HTTP 200, and reactivate in halves to isolate the conflicting extension.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">terminal — Safe WP-CLI Plugin Isolation &amp; Recovery</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">bash</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code># 1. Save current active plugin state before changing anything
+wp plugin list --status=active --field=name --skip-plugins --skip-themes &gt; ~/active-plugins-backup.txt
+
+# 2. Deactivate a known crashing plugin directly
+wp plugin deactivate faulty-plugin-slug --skip-plugins --skip-themes
+
+# 3. Or deactivate all plugins to verify immediate core recovery
+wp plugin deactivate --all --skip-plugins --skip-themes</code></pre>
+                </div>
+                </div>
+
+                <div id="sftp-folder-rename-fallback" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    3.2 SFTP Directory Rename Method (When SSH/WP-CLI Is Unavailable)
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">On managed or shared hosting without SSH access, navigate to /wp-content/ via SFTP and rename the plugins folder to plugins_disabled. Reload your homepage: if the site comes back online, rename plugins_disabled back to plugins—WordPress will keep all plugins deactivated in the database until you re-enable them individually inside /wp-admin/plugins.php. Also inspect /wp-content/mu-plugins/ and drop-ins such as object-cache.php or advanced-cache.php, which execute even when regular plugins are disabled.</p>
+                  
+                </div>
+
+                <div id="switching-broken-active-theme" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    3.3 Recovering from a Broken Theme functions.php or Child Theme Override
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">When /wp-admin/ loads normally but the public frontend returns a blank white HTTP 200 page, the active theme is almost always responsible. A missing closing statement in functions.php, a deleted WooCommerce template partial, or an unguarded call to a deactivated plugin’s helper function (for example calling get_field() without checking function_exists(&quot;get_field&quot;)) halts template rendering mid-stream. Switch temporarily to a clean default core theme such as twentytwentyfive via WP-CLI (wp theme activate twentytwentyfive --skip-plugins --skip-themes) to confirm.</p>
+                  
+                </div>
+              </div>
+            </section>
+
+            <section id="php-memory-and-version-compatibility" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. Fixing PHP Memory Exhaustion and PHP 8.x Compatibility Crashes</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Two server-level bottlenecks routinely masquerade as mysterious intermittent white screens: PHP per-worker memory exhaustion (&quot;Allowed memory size of X bytes exhausted&quot;) and strict type enforcement introduced across PHP 8.0 through PHP 8.5.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Heavy page builders, WooCommerce product variations, multilingual string tables, and unindexed postmeta queries can easily spike a request past a restrictive 64M or 128M PHP memory ceiling. Raising WordPress memory requires aligning both WordPress constants and the underlying php.ini / PHP-FPM pool limit—setting WP_MEMORY_LIMIT higher than PHP’s own memory_limit has zero effect because PHP enforces the hard ceiling.</p>
+
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">wp-config.php &amp; php.ini — Aligning WordPress and PHP-FPM Memory Ceilings</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>// In wp-config.php: allocate 256M for frontend requests and 512M for wp-admin tasks
+define( 'WP_MEMORY_LIMIT', '256M' );
+define( 'WP_MAX_MEMORY_LIMIT', '512M' );
+
+// Verify your server php.ini or /etc/php/8.3/fpm/pool.d/www.conf matches or exceeds 512M:
+// php_admin_value[memory_limit] = 512M</code></pre>
+                </div>
+
+                <div id="php-8-fatal-type-errors" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    4.1 Resolving PHP 8.x Uncaught TypeError After Hosting Upgrades
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Legacy plugins and custom themes written for PHP 7.4 frequently pass null or false into built-in string and array functions such as count(), trim(), strlen(), or array_merge(). While PHP 7.4 emitted a non-blocking warning and continued rendering the page, PHP 8.x throws an immediate fatal Uncaught TypeError—causing an instant WSOD. Audit custom theme code before upgrading PHP versions, or step down temporarily to a supported branch (such as PHP 8.3) on staging while refactoring legacy hooks.</p>
+                  
+                </div>
+
+                <div id="corrupted-core-and-htaccess-recovery" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    4.2 Verifying Core Checksums, Stuck .maintenance Files, and .htaccess Rules
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Interrupted core updates can leave half-written files inside wp-includes/ or leave a stale .maintenance file in the document root. Verify WordPress core integrity against official WordPress.org cryptographic checksums and regenerate clean rewrite rules.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">terminal — Core Checksum Audit &amp; Clean Rewrite Restoration</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">bash</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code># Remove stale update lock if older than 10 minutes
+rm -f /var/www/html/.maintenance
+
+# Verify core files against official WordPress.org checksums &amp; reinstall clean core if needed
+wp core verify-checksums --skip-plugins --skip-themes
+wp core download --force --skip-content
+
+# Flush object cache and regenerate permalinks cleanly
+wp cache flush --skip-plugins --skip-themes
+wp rewrite flush --hard</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="wsod-diagnostic-comparison-matrix" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Quick-Reference Diagnostic Matrix: Symptom vs. Root Cause vs. Resolution</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Use the matrix below during live incident triage to map your observed browser behavior and HTTP headers directly to the highest-probability root cause and recovery action.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">Table 1 — WordPress White Screen of Death (WSOD) Incident Classification Matrix</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Observed Symptom</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">HTTP Status</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Primary Root Cause</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Fastest Production Fix</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">&quot;There has been a critical error on this website&quot; on all pages</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">HTTP 500</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Uncaught PHP Fatal Error or TypeError inside an active plugin or mu-plugin</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Check debug.log line path; run wp plugin deactivate &lt;slug&gt; --skip-plugins</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Completely blank white frontend, but /wp-admin/ loads normally</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">HTTP 200 (0 bytes)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Fatal syntax/function call inside active theme templates or empty output buffer</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Activate fallback core theme via WP-CLI or check unguarded helper functions in theme</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Frontend works for logged-out users, crashes only in /wp-admin/ or Checkout</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">HTTP 500</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">PHP memory_limit exhaustion on uncached dynamic admin/WooCommerce queries</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Raise WP_MEMORY_LIMIT to 256M and WP_MAX_MEMORY_LIMIT / php.ini memory_limit to 512M</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">&quot;Briefly unavailable for scheduled maintenance&quot; persists &gt; 10 minutes</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">HTTP 503</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Interrupted plugin/core update left an orphaned .maintenance file in web root</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Delete .maintenance in web root and run wp core verify-checksums</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Fix applied in code, yet visitors still receive blank or broken response</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">HTTP 200 / 500 (Cached)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Stale PHP OPcache bytecode, corrupted Redis object-cache.php, or CDN caching 500s</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Reload PHP-FPM service, run wp cache flush, and purge edge CDN cache</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">&quot;Error establishing a database connection&quot; or intermittent blank load spikes</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">HTTP 500 / 502</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Invalid DB credentials in wp-config.php, crashed MySQL table, or max_connections saturation</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Verify DB host/socket via wp db check and inspect MySQL slow query log</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ Post-Recovery Hardening &amp; Cleanup Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Set WP_DEBUG and WP_DEBUG_LOG back to false in wp-config.php once root cause is resolved.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Delete any publicly reachable /wp-content/debug.log file or block .log access at the Nginx/Apache layer.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Reload PHP-FPM (systemctl reload php8.3-fpm) and purge Redis/Memcached + CDN edge caches.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Pin plugin updates through a staging environment with automated HTTP 200 smoke checks before production deploys.</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Enabling WP_DEBUG_DISPLAY on a Live Production Domain</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Setting WP_DEBUG_DISPLAY to true prints full server file paths, SQL queries, and plugin versions directly to public visitors—creating an immediate reconnaissance risk and polluting indexed pages if crawlers visit during the outage.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Leaving /wp-content/debug.log Publicly Readable After Fixing the Crash</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">By default, /wp-content/debug.log is a plain-text file accessible to anyone who requests https://yourdomain.com/wp-content/debug.log. Always store debug logs outside the public web root or delete the file immediately after triage.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Deleting a Plugin Folder Permanently Instead of Deactivating or Renaming</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Removing plugin files outright via FTP can trigger uninstall routines or orphan custom database tables and rewrite rules. Rename temporarily or use wp plugin deactivate --skip-plugins so database settings remain intact.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Raising WP_MEMORY_LIMIT Without Checking php.ini or PHP-FPM Pool Caps</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Defining WP_MEMORY_LIMIT as 512M inside wp-config.php does nothing if your host’s php_admin_value[memory_limit] is hard-capped at 128M. Confirm effective limits via php -i or Site Health Info.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Forgetting Must-Use Plugins (/wp-content/mu-plugins/) and Drop-Ins</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Deactivating standard plugins will not disable object-cache.php, advanced-cache.php, db.php, or scripts inside mu-plugins/. Always inspect those files when a WSOD persists with all regular plugins disabled.</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Why does my WordPress website show a completely blank white screen with no error message at all?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">A totally blank screen occurs either when PHP crashes before WordPress’s Fatal Error Handler initializes (with display_errors disabled in php.ini) or when the active theme outputs an HTTP 200 header with an empty template buffer. Checking HTTP headers with curl -I and enabling private WP_DEBUG_LOG tracing immediately reveals which case applies.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Can I fix the WordPress White Screen of Death if I am locked out of /wp-admin/?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Yes. You do not need dashboard access to recover from WSOD. Connect via SSH (using WP-CLI with --skip-plugins --skip-themes) or SFTP (editing wp-config.php to log the exact error and temporarily renaming /wp-content/plugins/ or switching themes) to restore access within minutes.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Why did upgrading to PHP 8.2, 8.3, or 8.4 trigger a critical error on my WordPress site?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">PHP 8+ converted many legacy warnings—such as passing null to string functions, invalid count() arguments, or removed create_function() calls—into fatal Uncaught TypeError exceptions. Outdated plugins or custom child-theme functions written for PHP 7.4 must be updated before switching the production PHP runtime.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">How much PHP memory should a modern WordPress or WooCommerce site have to prevent WSOD?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Standard corporate WordPress sites run reliably with 256M allocated to WP_MEMORY_LIMIT, while WooCommerce storefronts, multilingual WPML/Polylang portals, and heavy visual builders should configure 256M frontend memory and 512M for WP_MAX_MEMORY_LIMIT backed by matching php.ini ceilings.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Why is my WordPress site still white after I fixed the broken plugin or PHP error?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Persistent blank screens after a verified code fix are almost always caused by cached responses—either PHP OPcache holding stale compiled bytecode, a corrupted Redis/Memcached object-cache drop-in, or an upstream CDN/reverse proxy caching error responses. Reload PHP-FPM, flush object cache, and purge your CDN.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Summary: Turning WSOD Recovery Into a Repeatable 15-Minute Engineering Protocol</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Resolving the WordPress White Screen of Death never requires guesswork or destructive rollbacks when you follow a disciplined sequence: inspect HTTP status headers first, log the exact stack trace privately via WP_DEBUG_LOG, isolate plugins and themes cleanly with WP-CLI or SFTP, align PHP memory and runtime compatibility, and flush bytecode and edge caches before closing the incident.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">To prevent recurring outages, pair automated staging smoke tests with version-controlled deployments so plugin updates and PHP upgrades are validated before they ever touch live customer traffic.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · WordPress</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert WordPress Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated WordPress Website Development service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/wordpress-development.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore WordPress Website Development →</a>
+                <a href="/en/services/website-maintenance.html" class="btn-emerald text-xs py-2.5 px-5">Website Maintenance &amp; Technical Support</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Debugging in WordPress — Official Advanced Administration Handbook ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">WordPress.org Developer Resources</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://developer.wordpress.org/cli/commands/plugin/deactivate/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">WP-CLI wp plugin deactivate Command &amp; Global --skip-plugins Flag Reference ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">WordPress.org CLI Handbook</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://www.php.net/manual/en/ini.core.php#ini.memory-limit" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">PHP Runtime Configuration: memory_limit &amp; Error Handling Directives ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">PHP.net Official Documentation</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in WordPress</h2>
+                <a href="/en/articles/index.html?track=wordpress" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/wordpress-security-and-maintenance.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">WordPress · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">WordPress Security and Maintenance: Enterprise Hardening Protocols and Disaster Recovery</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/wordpress-speed-optimization.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">WordPress · 10 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">WordPress Speed Optimization: Achieving Sub-Second Load Times and 99+ Core Web Vitals</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/wordpress-website-development.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">WordPress · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">WordPress Website Development: Engineering Bespoke Themes vs Commercial Templates</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/essential-wordpress-plugins.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">WordPress · 7 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Essential WordPress Plugins for Enterprise Performance, Security &amp; SEO (Zero-Bloat Stack)</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">WordPress Website Development</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/wordpress-development.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/website-maintenance.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Website Maintenance &amp; Technical Support</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/how-to-fix-wordpress-white-screen-of-death.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

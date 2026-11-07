@@ -1,0 +1,33 @@
+{
+  "id": "/yg/",
+  "name": "Youssef Ghamry | Tender Specialist & Web Engineering",
+  "short_name": "YG Platform",
+  "description": "Official Professional Platform of Youssef Ghamry — Tender & Proposal Specialist, Bid QA & Full-Stack Web Architecture.",
+  "start_url": "/yg/index.html",
+  "scope": "/yg/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#050806",
+  "theme_color": "#07130D",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/yg/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yg/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/yg/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

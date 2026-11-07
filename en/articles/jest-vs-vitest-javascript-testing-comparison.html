@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vitest 4 vs Jest &amp; Playwright vs Cypress: JS Testing Guide | Youssef Ghamry</title>
+    <meta name="description" content="Complete JavaScript QA guide comparing Vitest 4 vs Jest, Playwright vs Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha, and Jasmine." />
+    <meta name="keywords" content="jest vs vitest typescript testing comparison, vitest 4 browser mode vs jest esm, playwright vs cypress e2e sharding trace viewer, testing library storybook interaction tests, puppeteer webdriverio mocha jasmine comparison" />
+    <link rel="canonical" href="/en/articles/jest-vs-vitest-javascript-testing-comparison.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/jest-vs-vitest-javascript-testing-comparison.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/jest-vs-vitest-javascript-testing-comparison.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/jest-vs-vitest-javascript-testing-comparison.html" />
+    <meta property="og:title" content="Vitest 4 vs Jest &amp; Playwright vs Cypress: JS Testing Guide | Youssef Ghamry" />
+    <meta property="og:description" content="Complete JavaScript QA guide comparing Vitest 4 vs Jest, Playwright vs Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha, and Jasmine." />
+    <meta property="og:image" content="/assets/images/articles/jest-vs-vitest-javascript-testing-comparison-featured.svg" />
+    <meta property="og:image:alt" content="JavaScript Testing Trophy architecture comparing Vitest 4 native ESM unit tests, Testing Library and Storybook component tests, and Playwright vs Cypress E2E suites" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="JS &amp; TS Ecosystem" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Vitest 4 vs Jest &amp; Playwright vs Cypress: JS Testing Guide | Youssef Ghamry" />
+    <meta name="twitter:description" content="Complete JavaScript QA guide comparing Vitest 4 vs Jest, Playwright vs Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha, and Jasmine." />
+    <meta name="twitter:image" content="/assets/images/articles/jest-vs-vitest-javascript-testing-comparison-featured.svg" />
+    <meta name="twitter:image:alt" content="JavaScript Testing Trophy architecture comparing Vitest 4 native ESM unit tests, Testing Library and Storybook component tests, and Playwright vs Cypress E2E suites" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JS & TS Ecosystem",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=javascript"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "JavaScript Testing & E2E Automation Guide: Vitest 4 vs. Jest, Playwright vs. Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha & Jasmine",
+          "item": "https://youssefghamry.com/en/articles/jest-vs-vitest-javascript-testing-comparison.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "JavaScript Testing & E2E Automation Guide: Vitest 4 vs. Jest, Playwright vs. Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha & Jasmine",
+      "description": "Complete JavaScript QA guide comparing Vitest 4 vs Jest, Playwright vs Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha, and Jasmine.",
+      "image": "https://youssefghamry.com/assets/images/articles/jest-vs-vitest-javascript-testing-comparison-featured.svg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "JS & TS Ecosystem",
+      "keywords": "jest vs vitest typescript testing comparison, vitest 4 browser mode vs jest esm, playwright vs cypress e2e sharding trace viewer, testing library storybook interaction tests, puppeteer webdriverio mocha jasmine comparison",
+      "citation": [
+        "https://vitest.dev/guide/",
+        "https://playwright.dev/docs/best-practices",
+        "https://testing-library.com/docs/queries/about/"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/jest-vs-vitest-javascript-testing-comparison.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why is Vitest faster than Jest on modern TypeScript and Vite projects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vitest executes native ES Modules through Vite’s shared esbuild/SWC transform pipeline and module graph rather than spinning up isolated CommonJS VM contexts and separate Babel/ts-jest compilers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should we choose Playwright or Cypress for new enterprise E2E suites?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Playwright is recommended for most new enterprise E2E pipelines because it natively tests Chromium, Firefox, and Safari WebKit, handles multi-tab OAuth/SSO flows effortlessly, executes faster out-of-process, and includes free native CI sharding (`--shard`) plus Trace Viewer artifacts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When do we still need Puppeteer or WebdriverIO if we use Playwright?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use Puppeteer inside production Node.js backend services when generating PDF invoices or OpenGraph screenshots without shipping a full test runner. Use WebdriverIO when your QA team needs a single TypeScript framework driving both web browsers and real iOS/Android mobile apps via Appium."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Vitest Browser Mode replace Playwright E2E tests?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No—they complement each other. Vitest Browser Mode mounts isolated UI components in a real headless browser in milliseconds (replacing inaccurate jsdom mocks), while Playwright E2E tests verify full-stack routing, auth cookies, APIs, and database persistence end to end."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/jest-vs-vitest-javascript-testing-comparison.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/jest-vs-vitest-javascript-testing-comparison.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=javascript" class="hover:text-[#E5C78B]">JS &amp; TS Ecosystem</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">JavaScript Testing &amp; E2E Automation Guide: Vitest 4 vs. Jest, Playwright vs. Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha &amp; Jasmine</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>JS Testing &amp; E2E Automation</span>
+              </span>
+              <span class="badge-emerald">⏱️ 14 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              JavaScript Testing &amp; E2E Automation Guide: Vitest 4 vs. Jest, Playwright vs. Cypress, Testing Library, Storybook, Puppeteer, WebdriverIO, Mocha &amp; Jasmine
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              An end-to-end engineering blueprint covering every major JavaScript testing tool—Vitest 4, Jest, Mocha, Jasmine, Testing Library, Storybook, Playwright, Cypress, Puppeteer, and WebdriverIO—with practical migration and zero-flake CI configurations.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/jest-vs-vitest-javascript-testing-comparison.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/jest-vs-vitest-javascript-testing-comparison-featured.svg" alt="JavaScript Testing Trophy architecture comparing Vitest 4 native ESM unit tests, Testing Library and Storybook component tests, and Playwright vs Cypress E2E suites" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: JS &amp; TS Ecosystem</span>
+                <a href="/en/services/custom-software-development.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#vitest-vs-jest-mocha-jasmine" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. Unit &amp; Integration Runners: Vitest 4 vs. Jest (Plus Mocha &amp; Jasmine)
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#vitest-testing-library-msw" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Accessible User-Centric Component Testing with Vitest, Testing Library &amp; MSW</a>
+              </div>
+              <a href="#playwright-vs-cypress-puppeteer-webdriverio" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. Browser E2E &amp; Automation: Playwright vs. Cypress, Puppeteer &amp; WebdriverIO
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#playwright-multi-context-trace-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Multi-User Isolated Browser Contexts &amp; Trace Capture in Playwright</a>
+              </div>
+              <a href="#storybook-interaction-testing" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. Storybook 8+ &amp; Vitest Browser Mode: Closing the jsdom Gap
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#storybook-play-function-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Executable Storybook Interaction Test Story</a>
+              </div>
+              <a href="#js-testing-tools-comparison-table" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. Complete 10-Tool JavaScript Testing &amp; Automation Matrix
+              </a>
+              <a href="#jest-to-vitest-migration-steps" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Incremental Migration Playbook: Jest to Vitest &amp; Zero-Flake CI
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#vitest-hoisted-mock-pattern" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Handling Hoisted ESM Module Mocks Cleanly with vi.hoisted()</a>
+              </div>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Flaky, slow test suites silently destroy engineering velocity. Teams frequently confuse test runners (Vitest, Jest, Mocha, Jasmine), DOM/component query utilities (Testing Library, Storybook), browser E2E test frameworks (Playwright, Cypress, WebdriverIO), and low-level browser automation libraries (Puppeteer). Placing each tool at the right layer of the &quot;Testing Trophy&quot; turns a 28-minute brittle CI pipeline into a deterministic 3-minute release gate.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Two milestones reshaped JavaScript QA in 2025: Vitest 3 and Vitest 4.0 (released October 2025) graduated Browser Mode and visual <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">toMatchScreenshot</code> assertions to first-class stability while sharing Vite’s native ESM module pipeline, and Playwright solidified cross-browser multi-tab E2E leadership with trace sharding and W3C WebDriver BiDi advancements.</p>
+            </div>
+            <section id="vitest-vs-jest-mocha-jasmine" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. Unit &amp; Integration Runners: Vitest 4 vs. Jest (Plus Mocha &amp; Jasmine)</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Jest pioneered batteries-included snapshot, coverage, and parallel worker testing for React and Node.js, but its architecture predates native ES Modules (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&quot;type&quot;: &quot;module&quot;</code>). Running modern ESM-only npm packages in Jest requires complex <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">transformIgnorePatterns</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ts-jest</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@swc/jest</code> glue, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">--experimental-vm-modules</code> flags—duplicating module resolution rules separately from your Vite or bundler config.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Vitest reuses your exact <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vite.config.ts</code> aliases, plugins, and instant HMR dependency graph while providing a 95% Jest-compatible API (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">describe</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">it</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">expect</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vi.fn()</code>). Watch-mode re-runs execute in 30–80ms because only invalidated ESM graph edges re-evaluate. Meanwhile, Mocha (often paired with Chai and Sinon in classic Node.js libraries) and Jasmine (longtime default in Angular/Karma projects) remain reliable in established suites, though even Angular CLI now offers modern Vite/Vitest and Web Test Runner paths.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/jest-vs-vitest-javascript-testing-comparison-diagram.svg"
+                    alt="Modern JavaScript Testing Trophy comparing Vitest 4, Jest, Testing Library, Storybook, and MSW against Playwright, Cypress, Puppeteer, and WebdriverIO"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Layered JavaScript QA pipeline: native ESM unit/component isolation (Vitest 4 + Testing Library + MSW) paired with sharded Playwright E2E traces.
+                  </figcaption>
+                </figure>
+
+                <div id="vitest-testing-library-msw" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Accessible User-Centric Component Testing with Vitest, Testing Library &amp; MSW
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Testing Library deliberately discourages querying internal state or CSS class names. Instead, tests interact via accessible ARIA roles (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">getByRole</code>) while Mock Service Worker (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">msw</code>) intercepts real <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">fetch</code> calls at the network layer.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/features/auth/__tests__/OtpVerifyForm.test.tsx</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">tsx</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { describe, it, expect, beforeAll, afterEach, afterAll } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
+import { OtpVerifyForm } from '../OtpVerifyForm';
+
+const apiServer = setupServer(
+  http.post('/api/auth/verify-otp', async ({ request }) =&gt; {
+    const body = (await request.json()) as { code: string };
+    return body.code === '482910'
+      ? HttpResponse.json({ sessionId: 'sess_live_99' })
+      : HttpResponse.json({ message: 'Invalid verification code' }, { status: 401 });
+  })
+);
+
+beforeAll(() =&gt; apiServer.listen({ onUnhandledRequest: 'error' }));
+afterEach(() =&gt; apiServer.resetHandlers());
+afterAll(() =&gt; apiServer.close());
+
+describe('OtpVerifyForm', () =&gt; {
+  it('announces accessible alert when an expired OTP code is submitted', async () =&gt; {
+    const user = userEvent.setup();
+    render(&lt;OtpVerifyForm /&gt;);
+
+    await user.type(screen.getByLabelText(/6-digit security code/i), '000000');
+    await user.click(screen.getByRole('button', { name: /verify &amp; continue/i }));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(/invalid verification code/i);
+  });
+});</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="playwright-vs-cypress-puppeteer-webdriverio" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. Browser E2E &amp; Automation: Playwright vs. Cypress, Puppeteer &amp; WebdriverIO</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Cypress revolutionized developer ergonomics with its interactive time-travel runner, but because Cypress executes tests *inside* a browser iframe loop, testing multi-tab flows (such as clicking an email magic link), third-party OAuth SSO redirects across multiple domains, or Safari WebKit carries architectural friction—and parallel CI sharding historically required paid cloud orchestration or third-party forks.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Playwright drives real Chromium, Firefox, and WebKit browser engines out-of-process over CDP/BiDi protocols. Creating three isolated <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">BrowserContext</code> instances to test a buyer, seller, and admin interacting over live WebSockets takes 40 milliseconds, built-in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">--shard=1/4</code> CI parallelism is completely free, and failed CI runs emit downloadable Trace Viewer <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.zip</code> archives containing full DOM snapshots, network HARs, and console logs.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Where do Puppeteer and WebdriverIO fit? Puppeteer is a low-level Chromium/Firefox browser automation library (not a test runner)—making it the gold standard for server-side HTML-to-PDF invoice rendering, OG screenshot generation, and authenticated crawling. WebdriverIO (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">wdio</code>) shines when a single TypeScript QA team must automate both web browsers (via W3C WebDriver BiDi) AND native iOS/Android mobile apps on real devices via Appium.</p>
+
+                <div id="playwright-multi-context-trace-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Multi-User Isolated Browser Contexts &amp; Trace Capture in Playwright
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Notice how Playwright verifies real-time permission revocation across an Admin session and an Operator session inside a single deterministic test.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">e2e/rbac-live-revocation.spec.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { test, expect } from '@playwright/test';
+
+test('revoking operator role immediately disables export action in active session', async ({ browser }) =&gt; {
+  const adminCtx = await browser.newContext({ storageState: 'e2e/.auth/admin.json' });
+  const operatorCtx = await browser.newContext({ storageState: 'e2e/.auth/operator.json' });
+
+  const adminPage = await adminCtx.newPage();
+  const operatorPage = await operatorCtx.newPage();
+
+  await operatorPage.goto('/portal/financial-exports');
+  await expect(operatorPage.getByRole('button', { name: 'Download Ledger CSV' })).toBeEnabled();
+
+  await adminPage.goto('/portal/team-permissions');
+  await adminPage.getByRole('row', { name: /sara.operator@/i }).getByRole('switch', { name: 'Export Access' }).click();
+
+  // Auto-retrying web-first assertion without brittle waitForTimeout() sleeps!
+  await expect(operatorPage.getByRole('button', { name: 'Download Ledger CSV' })).toBeDisabled({ timeout: 5000 });
+
+  await adminCtx.close();
+  await operatorCtx.close();
+});</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="storybook-interaction-testing" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. Storybook 8+ &amp; Vitest Browser Mode: Closing the jsdom Gap</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Simulated Node DOM environments (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">jsdom</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">happy-dom</code>) cannot measure real CSS flexbox overflow, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">IntersectionObserver</code> scroll thresholds, canvas pixels, or native browser focus-visible rings. Pairing Storybook <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">play()</code> interaction functions with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@storybook/experimental-addon-test</code> (powered by Vitest Browser Mode on Playwright) turns every documented design-system story into a real-browser component test automatically.</p>
+
+                <div id="storybook-play-function-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Executable Storybook Interaction Test Story
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Writing assertions inside <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">play</code> verifies keyboard accessibility visually during development and headlessly in CI.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/components/DateRangeFilter.stories.tsx</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">tsx</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import type { Meta, StoryObj } from '@storybook/react';
+import { within, userEvent, expect } from '@storybook/test';
+import { DateRangeFilter } from './DateRangeFilter';
+
+const meta: Meta&lt;typeof DateRangeFilter&gt; = {
+  title: 'Analytics/DateRangeFilter',
+  component: DateRangeFilter
+};
+export default meta;
+
+export const RejectsInvertedRange: StoryObj&lt;typeof DateRangeFilter&gt; = {
+  play: async ({ canvasElement }) =&gt; {
+    const canvas = within(canvasElement);
+    await userEvent.type(canvas.getByLabelText('Start date'), '2026-10-20');
+    await userEvent.type(canvas.getByLabelText('End date'), '2026-10-05');
+    await userEvent.click(canvas.getByRole('button', { name: 'Apply Range' }));
+
+    await expect(canvas.getByRole('alert')).toHaveTextContent('End date must be on or after start date');
+  }
+};</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="js-testing-tools-comparison-table" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. Complete 10-Tool JavaScript Testing &amp; Automation Matrix</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Reference every JavaScript testing runner, DOM library, component workshop, and browser automation engine side by side.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">JavaScript Testing Frameworks, Component Tools &amp; Browser Engines</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Tool</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Exact Classification</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Execution Environment</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Primary Strength</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Ideal Layer in QA Stack</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Vitest 4</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">ESM-Native Test Framework</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Node Workers + Real Browser Mode</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Instant Vite HMR graph + Jest parity</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Default unit, integration &amp; browser component tests</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Jest</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Unit &amp; Snapshot Test Runner</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Node VM + Babel/SWC transforms</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Mature ecosystem &amp; legacy React Native</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Existing CJS/React Native repos; migrate Vite apps to Vitest</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Testing Library</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">User-Centric DOM Query Suite</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Any runner (Vitest/Jest/Browser)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Enforces accessible ARIA role queries</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">React, Vue, Svelte &amp; Angular component assertions</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Storybook</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Isolated UI Workshop &amp; Test Harness</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Real Browser + Vitest addon</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Living design docs + play() visual QA</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Design system component catalog &amp; visual regression</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Playwright</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Cross-Browser E2E Framework</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Chromium, Firefox, WebKit (Out-of-process)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Multi-tab contexts, Trace Viewer, free sharding</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Primary E2E &amp; API integration gate in CI/CD</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Cypress</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">In-Browser E2E &amp; Component Runner</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Browser iframe command loop</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Visual interactive debugging UX</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Single-origin SPA E2E &amp; visual team workflows</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Puppeteer</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Browser Automation Library (Not Runner)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Chromium / Firefox via CDP &amp; BiDi</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Lightweight programmatic headless control</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Server-side PDF generation, screenshots &amp; scraping</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">WebdriverIO</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">WebDriver BiDi &amp; Mobile E2E Framework</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Browsers + iOS/Android via Appium</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Unified web + native mobile device QA</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Cross-platform web + native mobile enterprise QA</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Mocha</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Minimalist Node Test Runner</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Node.js (pair w/ Chai &amp; Sinon)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Zero-magic async stream/socket testing</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Low-level Node CLI/driver libraries</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Jasmine</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Batteries-Included BDD Suite</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Node or Karma Browser Runner</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Zero external assertion/spy dependencies</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Established Angular enterprise test suites</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="jest-to-vitest-migration-steps" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Incremental Migration Playbook: Jest to Vitest &amp; Zero-Flake CI</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Migrating a 1,500-test TypeScript repository from Jest to Vitest typically takes less than one sprint: replace <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">jest.mock()</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">jest.fn()</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">jest.useFakeTimers()</code> with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vi.mock()</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vi.fn()</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vi.useFakeTimers()</code> (Note: <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vi.mock</code> factories are hoisted to the top of the file just like <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">jest.mock</code>, or use <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vi.hoisted()</code> when referencing local variables), move setup scripts into <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vitest.config.ts -&gt; test.setupFiles</code>, and delete redundant Babel test presets.</p>
+
+                <div id="vitest-hoisted-mock-pattern" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Handling Hoisted ESM Module Mocks Cleanly with vi.hoisted()
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Because ESM static <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">import</code> statements evaluate before top-level variables initialize, wrap shared spy references inside <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">const mocks = vi.hoisted(() =&gt; ({ send: vi.fn() }))</code> when mocking external SDKs in Vitest.</p>
+                  
+                </div>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ Zero-Flake JavaScript CI Pipeline Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Ban arbitrary page.waitForTimeout(2000) calls—use Playwright auto-retrying expect(locator) assertions</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Mock external third-party HTTP APIs via MSW instead of monkey-patching global.fetch manually</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Configure Playwright trace: &quot;on-first-retry&quot; and retries: 1 in CI to capture instant root-cause ZIPs</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Prefer Vitest Browser Mode over jsdom when testing layout, focus traps, canvas, or ResizeObserver</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Using Puppeteer as an End-to-End Test Runner Without Auto-Waiting</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Puppeteer is an automation library, not a test runner: writing raw page.click() assertions without Playwright’s actionability auto-waiting and isolated fixtures produces chronically flaky CI builds.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Mocking Internal Child Components Instead of Network Boundaries</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Heavily mocking child components passes green in unit tests while props break in production. Render real component subtrees with Testing Library and mock only network I/O via MSW.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Querying by data-testid or CSS Selectors When ARIA Roles Exist</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Using container.querySelector(&quot;.btn-submit&quot;) misses broken button labels and disabled states. Query via getByRole(&quot;button&quot;, { name: /submit/i }) so accessibility and behavior are verified together.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Sharing Mutable Database State Across Parallel Playwright Shards</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">When 4 Playwright workers run concurrently against one staging tenant, tests overwrite each other’s rows. Provision isolated tenant/user fixtures per worker index.</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Why is Vitest faster than Jest on modern TypeScript and Vite projects?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Vitest executes native ES Modules through Vite’s shared esbuild/SWC transform pipeline and module graph rather than spinning up isolated CommonJS VM contexts and separate Babel/ts-jest compilers.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Should we choose Playwright or Cypress for new enterprise E2E suites?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Playwright is recommended for most new enterprise E2E pipelines because it natively tests Chromium, Firefox, and Safari WebKit, handles multi-tab OAuth/SSO flows effortlessly, executes faster out-of-process, and includes free native CI sharding (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">--shard</code>) plus Trace Viewer artifacts.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">When do we still need Puppeteer or WebdriverIO if we use Playwright?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Use Puppeteer inside production Node.js backend services when generating PDF invoices or OpenGraph screenshots without shipping a full test runner. Use WebdriverIO when your QA team needs a single TypeScript framework driving both web browsers and real iOS/Android mobile apps via Appium.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Does Vitest Browser Mode replace Playwright E2E tests?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">No—they complement each other. Vitest Browser Mode mounts isolated UI components in a real headless browser in milliseconds (replacing inaccurate jsdom mocks), while Playwright E2E tests verify full-stack routing, auth cookies, APIs, and database persistence end to end.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Summary: Fast ESM Unit Feedback + Deterministic Browser Traces</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Combining Vitest 4 + Testing Library + MSW for sub-second unit/component verification, Storybook for visual design-system governance, and sharded Playwright for critical user journeys delivers maximum confidence with minimal CI runtime.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Treat test flakiness as a P1 architecture defect: eliminate arbitrary sleeps, query accessible ARIA semantics, and leverage real browser contexts where DOM fidelity matters.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · JS &amp; TS Ecosystem</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert JS &amp; TS Ecosystem Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated Custom Software Development service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/custom-software-development.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore Custom Software Development →</a>
+                <a href="/en/services/frontend-development.html" class="btn-emerald text-xs py-2.5 px-5">Frontend Engineering &amp; Interactive UI</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://vitest.dev/guide/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Vitest Official Documentation — Configuration, Mocking &amp; Browser Mode ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Vitest Core Team (vitest.dev)</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://playwright.dev/docs/best-practices" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Playwright Official Documentation — Best Practices, Trace Viewer &amp; CI Sharding ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Microsoft / Playwright Team</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://testing-library.com/docs/queries/about/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Testing Library Official Guiding Principles &amp; Priority of Queries ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Testing Library Open Source</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in JS &amp; TS Ecosystem</h2>
+                <a href="/en/articles/index.html?track=javascript" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/reactjs-testing-strategy.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">React.js · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Enterprise React Testing Strategy: Vitest, React Testing Library, MSW v2 &amp; Playwright</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/angular-testing-best-practices.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">Angular · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Angular Testing Strategy: Component Harnesses, Jest/Vitest Unit Tests &amp; Playwright E2E</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/reactjs-design-system-and-storybook.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">React.js · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Building Accessible Bilingual React Design Systems with Radix Primitives, Tailwind CSS &amp; Storybook 8</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">Custom Software Development</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/custom-software-development.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/frontend-development.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Frontend Engineering &amp; Interactive UI</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/jest-vs-vitest-javascript-testing-comparison.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

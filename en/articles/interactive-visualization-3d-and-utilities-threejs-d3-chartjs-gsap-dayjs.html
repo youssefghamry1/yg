@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zod 4, Ajv, ECharts, D3, Three.js, GSAP &amp; JS Utilities Guide | Youssef Ghamry</title>
+    <meta name="description" content="Master essential JS libraries: Zod 4, Yup, Joi, and Ajv; ECharts, Chart.js, Highcharts, and D3; Three.js, GSAP, Motion, Anime.js, Axios, RxJS, and Day.js." />
+    <meta name="keywords" content="threejs d3js chartjs gsap animation and js utilities, zod 4 vs yup vs joi vs ajv schema validation, apache echarts vs chartjs vs highcharts vs d3js, threejs webgl gsap motion framer animejs, axios rxjs lodash dayjs date-fns momentjs migration" />
+    <link rel="canonical" href="/en/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" />
+    <meta property="og:title" content="Zod 4, Ajv, ECharts, D3, Three.js, GSAP &amp; JS Utilities Guide | Youssef Ghamry" />
+    <meta property="og:description" content="Master essential JS libraries: Zod 4, Yup, Joi, and Ajv; ECharts, Chart.js, Highcharts, and D3; Three.js, GSAP, Motion, Anime.js, Axios, RxJS, and Day.js." />
+    <meta property="og:image" content="/assets/images/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs-featured.svg" />
+    <meta property="og:image:alt" content="Engineering architecture matrix for JavaScript runtime validation (Zod 4, Ajv, Yup, Joi), data visualization (ECharts, Chart.js, Highcharts, D3.js), WebGL/Motion (Three.js, GSAP, Motion, Anime.js), and core utilities" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="JS &amp; TS Ecosystem" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Zod 4, Ajv, ECharts, D3, Three.js, GSAP &amp; JS Utilities Guide | Youssef Ghamry" />
+    <meta name="twitter:description" content="Master essential JS libraries: Zod 4, Yup, Joi, and Ajv; ECharts, Chart.js, Highcharts, and D3; Three.js, GSAP, Motion, Anime.js, Axios, RxJS, and Day.js." />
+    <meta name="twitter:image" content="/assets/images/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs-featured.svg" />
+    <meta name="twitter:image:alt" content="Engineering architecture matrix for JavaScript runtime validation (Zod 4, Ajv, Yup, Joi), data visualization (ECharts, Chart.js, Highcharts, D3.js), WebGL/Motion (Three.js, GSAP, Motion, Anime.js), and core utilities" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JS & TS Ecosystem",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=javascript"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Production JavaScript Libraries Guide: Zod 4, Yup, Joi & Ajv Validation, ECharts, Chart.js, Highcharts & D3.js, Three.js, GSAP, Motion, Anime.js, Axios, RxJS & Date/Utility Toolkits",
+          "item": "https://youssefghamry.com/en/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Production JavaScript Libraries Guide: Zod 4, Yup, Joi & Ajv Validation, ECharts, Chart.js, Highcharts & D3.js, Three.js, GSAP, Motion, Anime.js, Axios, RxJS & Date/Utility Toolkits",
+      "description": "Master essential JS libraries: Zod 4, Yup, Joi, and Ajv; ECharts, Chart.js, Highcharts, and D3; Three.js, GSAP, Motion, Anime.js, Axios, RxJS, and Day.js.",
+      "image": "https://youssefghamry.com/assets/images/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs-featured.svg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "JS & TS Ecosystem",
+      "keywords": "threejs d3js chartjs gsap animation and js utilities, zod 4 vs yup vs joi vs ajv schema validation, apache echarts vs chartjs vs highcharts vs d3js, threejs webgl gsap motion framer animejs, axios rxjs lodash dayjs date-fns momentjs migration",
+      "citation": [
+        "https://zod.dev/",
+        "https://echarts.apache.org/handbook/en/how-to/cross-platform/server/",
+        "https://threejs.org/docs/#manual/en/introduction/How-to-dispose-of-objects",
+        "https://ajv.js.org/"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do Zod 4 and Ajv differ, and when should we use each?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Zod 4 is TypeScript-first: you write one concise TS schema and infer static types plus friendly form/API error messages. Ajv compiles standard JSON Schema documents into ultra-fast standalone validation code—ideal for Fastify 5, OpenAPI gateways, and polyglot microservices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which JavaScript charting library is best for 50,000+ real-time data points?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Apache ECharts (using CanvasRenderer and progressive/lttb downsampling) or Canvas-based Chart.js with decimation plugins handle 50,000+ points smoothly, whereas pure SVG chart libraries bog down DOM layout."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should we choose Motion (Framer Motion) vs. GSAP vs. Anime.js?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Choose Motion for React component mount/unmount transitions and layout springs; choose GSAP for complex multi-stage timelines, ScrollTrigger pinned sections, and cross-framework choreography; and choose Anime.js when you want a tiny (~17 kB) timeline engine for SVG paths and DOM staggered effects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do we still need Axios in 2026 now that browsers and Node.js have native fetch()?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Native fetch() is great for simple requests or inside TanStack Query, but Axios (or lightweight ky) remains valuable when you want built-in request/response interceptors for OAuth refresh-token queuing, automatic JSON error throwing on 4xx/5xx statuses, and upload progress events."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=javascript" class="hover:text-[#E5C78B]">JS &amp; TS Ecosystem</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">Production JavaScript Libraries Guide: Zod 4, Yup, Joi &amp; Ajv Validation, ECharts, Chart.js, Highcharts &amp; D3.js, Three.js, GSAP, Motion, Anime.js, Axios, RxJS &amp; Date/Utility Toolkits</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>Validation, Viz, 3D &amp; Motion</span>
+              </span>
+              <span class="badge-emerald">⏱️ 15 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              Production JavaScript Libraries Guide: Zod 4, Yup, Joi &amp; Ajv Validation, ECharts, Chart.js, Highcharts &amp; D3.js, Three.js, GSAP, Motion, Anime.js, Axios, RxJS &amp; Date/Utility Toolkits
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              An encyclopedic production guide to specialized JavaScript libraries across four pillars: Runtime Schema Validation (Zod 4, Ajv, Yup, Joi), Data Visualization (Apache ECharts, Chart.js, Highcharts, D3.js), 3D WebGL &amp; 60fps Animation (Three.js, GSAP, Motion/Framer Motion, Anime.js), and Core HTTP/Reactive/Date/Collection Utilities (Axios, RxJS, Lodash, Underscore, Day.js, date-fns, Moment.js, and jQuery).
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs-featured.svg" alt="Engineering architecture matrix for JavaScript runtime validation (Zod 4, Ajv, Yup, Joi), data visualization (ECharts, Chart.js, Highcharts, D3.js), WebGL/Motion (Three.js, GSAP, Motion, Anime.js), and core utilities" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: JS &amp; TS Ecosystem</span>
+                <a href="/en/services/frontend-development.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#schema-validation-zod4-ajv-yup-joi" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. Runtime Boundary Validation: Zod 4 vs. Ajv vs. Yup vs. Joi
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#zod4-vs-ajv-validation-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Zero-Trust Webhook Parsing with Zod 4 &amp; Axios Refresh-Token Interceptors</a>
+              </div>
+              <a href="#data-visualization-echarts-chartjs-highcharts-d3" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. Data Visualization Engines: Apache ECharts vs. Chart.js vs. Highcharts vs. D3.js
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#echarts-modular-treeshaken-setup" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Tree-Shaking Apache ECharts from 1MB Down to ~140kB via echarts/core</a>
+              </div>
+              <a href="#webgl-3d-and-animation-threejs-gsap-motion-animejs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. 3D WebGL &amp; 60fps Motion: Three.js, GSAP, Motion (Framer Motion) &amp; Anime.js
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#threejs-vram-cleanup-hook" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Deterministic GPU Memory Disposal When Unmounting Three.js Scenes</a>
+              </div>
+              <a href="#js-libraries-master-comparison-table" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. Complete 20-Library Validation, Visualization, 3D, Motion &amp; Utility Matrix
+              </a>
+              <a href="#legacy-moment-lodash-jquery-cleanup" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Bundle Diet: Retiring Moment.js, Full Lodash, Underscore &amp; Legacy jQuery
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#rxjs-cancellation-vs-promises" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">When RxJS switchMap &amp; retry Beat Raw Promises in Live Telemetry UIs</a>
+              </div>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Real-world enterprise JavaScript platforms depend heavily on specialized domain libraries sitting alongside your UI or backend framework: schema validators guarding untrusted JSON boundaries, Canvas/SVG/WebGL engines rendering financial telemetry and 3D product configurators, timeline animation engines running at 60–120fps, and reactive HTTP/date utilities.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Uncontrolled selection in this layer routinely adds 400+ kB of main-thread bloat (for example, importing Moment.js locales, full non-tree-shaken Lodash, and SVG charts choking on 25,000 points). This guide establishes clear selection criteria, bundle discipline, and memory-safety patterns across all twenty specialized libraries.</p>
+            </div>
+            <section id="schema-validation-zod4-ajv-yup-joi" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. Runtime Boundary Validation: Zod 4 vs. Ajv vs. Yup vs. Joi</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">TypeScript <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">interface</code> declarations evaporate completely at runtime—they never stop malformed webhook payloads or tampered API bodies. Zod 4 (released in 2025 with dramatically faster parsing, a smaller core bundle, and lower <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">tsc</code> type-instantiation cost) leads full-stack TypeScript apps because a single runtime schema infers static types automatically (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">z.infer&lt;typeof Schema&gt;</code>) across React Hook Form, Server Actions, and tRPC.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Each alternative excels in a distinct niche: Ajv (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Another JSON Schema Validator</code>) JIT-compiles standard JSON Schema Draft-2020-12 into raw JavaScript functions—making it the fastest validator on Earth and the engine inside Fastify 5 and OpenAPI gateways. Yup remains popular in client form libraries (Formik / VeeValidate), while Joi (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">hapi/joi</code>) provides expressive server-side Node.js payload validation rules.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs-diagram.svg"
+                    alt="Architecture diagram comparing JavaScript validation libraries, Canvas/SVG/WebGL charting engines, 60fps animation toolkits, and HTTP/Date utilities"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Boundary validation (Zod 4 / Ajv), rendering surface thresholds (SVG vs. Canvas vs. WebGL), and lightweight utility replacements.
+                  </figcaption>
+                </figure>
+
+                <div id="zod4-vs-ajv-validation-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Zero-Trust Webhook Parsing with Zod 4 &amp; Axios Refresh-Token Interceptors
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Combining Axios response interceptors (for single-flight OAuth token refresh) with strict Zod runtime parsing prevents silent <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">undefined</code> NaN bugs inside financial dashboards.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/lib/httpVerifiedClient.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import axios from 'axios';
+import { z } from 'zod';
+
+export const apiClient = axios.create({
+  baseURL: '/api/v1',
+  timeout: 10_000
+});
+
+const KpiSummarySchema = z.object({
+  period: z.string(),
+  grossRevenueSar: z.number().nonnegative(),
+  conversionRatePct: z.number().min(0).max(100),
+  series: z.array(z.object({ ts: z.string(), value: z.number() }))
+});
+
+export type KpiSummary = z.infer&lt;typeof KpiSummarySchema&gt;;
+
+export async function fetchVerifiedKpiSummary(period: string): Promise&lt;KpiSummary&gt; {
+  const { data } = await apiClient.get('/analytics/kpi', { params: { period } });
+  // Guarantees backend contract drift fails loudly &amp; predictably at the boundary
+  return KpiSummarySchema.parse(data);
+}</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="data-visualization-echarts-chartjs-highcharts-d3" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. Data Visualization Engines: Apache ECharts vs. Chart.js vs. Highcharts vs. D3.js</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choosing a charting library requires respecting DOM vs. GPU/Canvas physics: SVG creates a real DOM node per bar, line segment, or scatter dot—meaning SVG charts freeze mobile scrolling above ~2,500 elements, whereas HTML5 Canvas and WebGL rasterize 100,000+ points at 60fps.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Chart.js (~65 kB, tree-shakeable Canvas engine) is the fastest path to clean, responsive bar/line/doughnut dashboards. Apache ECharts excels in enterprise BI, geospatial heatmaps, candlestick financial terminals, and 100k-point streaming datasets with switchable Canvas/SVG renderers and modular <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">echarts/core</code> tree-shaking. Highcharts is the commercial enterprise gold standard for regulated banking and government portals requiring out-of-the-box WCAG screen-reader keyboard navigation, stock technical indicators, and Gantt modules (note: Highcharts requires a commercial license for for-profit apps). Finally, D3.js is NOT a prebuilt chart widget library—it is a modular mathematical geometry, scale (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">d3-scale</code>), force-layout (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">d3-force</code>), and projection toolkit ideally paired with React/Vue SVG or Canvas rendering.</p>
+
+                <div id="echarts-modular-treeshaken-setup" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Tree-Shaking Apache ECharts from 1MB Down to ~140kB via echarts/core
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Never write <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">import * as echarts from &quot;echarts&quot;</code>; register only the exact chart types, grid components, and CanvasRenderer your dashboard actually renders.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/charts/echartsCoreSetup.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import * as echarts from 'echarts/core';
+import { LineChart, BarChart } from 'echarts/charts';
+import { GridComponent, TooltipComponent, DatasetComponent } from 'echarts/components';
+import { CanvasRenderer } from 'echarts/renderers';
+
+echarts.use([LineChart, BarChart, GridComponent, TooltipComponent, DatasetComponent, CanvasRenderer]);
+
+export { echarts };</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="webgl-3d-and-animation-threejs-gsap-motion-animejs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. 3D WebGL &amp; 60fps Motion: Three.js, GSAP, Motion (Framer Motion) &amp; Anime.js</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Three.js powers spatial 3D product configurators, architectural walkthroughs, and WebGL/WebGPU shader scenes. Its #1 production rule: JavaScript’s garbage collector does NOT free GPU VRAM automatically! Whenever unmounting a Three.js scene in an SPA, explicitly call <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">geometry.dispose()</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">material.dispose()</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">texture.dispose()</code>, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">renderer.dispose()</code>.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">For 2D UI and scroll choreography, three libraries lead: Motion (formerly Framer Motion) provides declarative React layout FLIP animations (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">layoutId</code>), spring physics, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;AnimatePresence&gt;</code> exit transitions; GSAP (GreenSock Animation Platform) dominates complex multi-element timelines, SVG morphing, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ScrollTrigger</code> pinned storytelling across any framework; and Anime.js (~17 kB, revitalized in v4) offers a crisp, lightweight timeline API for staggered SVG line-drawing, CSS transforms, and numeric counter animations.</p>
+
+                <div id="threejs-vram-cleanup-hook" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Deterministic GPU Memory Disposal When Unmounting Three.js Scenes
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Traversing every mesh and disposing GPU buffers prevents mobile Safari tabs from crashing after three route transitions.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/webgl/disposeThreeScene.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import * as THREE from 'three';
+
+export function disposeThreeScene(scene: THREE.Scene, renderer: THREE.WebGLRenderer) {
+  scene.traverse((obj) =&gt; {
+    if (obj instanceof THREE.Mesh) {
+      obj.geometry?.dispose();
+      const materials = Array.isArray(obj.material) ? obj.material : [obj.material];
+      for (const mat of materials) {
+        for (const val of Object.values(mat)) {
+          if (val instanceof THREE.Texture) val.dispose();
+        }
+        mat.dispose();
+      }
+    }
+  });
+  renderer.dispose();
+}</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="js-libraries-master-comparison-table" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. Complete 20-Library Validation, Visualization, 3D, Motion &amp; Utility Matrix</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Reference all twenty specialized JavaScript libraries—including RxJS, Lodash/Underscore, Day.js/date-fns/Moment.js, and jQuery—with exact upgrade guidance.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">Specialized JavaScript Libraries Reference Matrix (Validation, Charts, 3D, Motion &amp; Utilities)</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Library Group</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Libraries Covered</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Precise Technical Role</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Production Guidance (2026)</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">TS/Schema Validation</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Zod 4, Yup, Joi, Ajv</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Runtime payload parsing &amp; static type inference</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Use Zod 4 for TS apps, Ajv for Fastify/OpenAPI JSON Schema</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Enterprise Charting</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Apache ECharts, Chart.js, Highcharts</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Canvas/SVG responsive BI &amp; financial charts</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Chart.js for lean UIs, ECharts for 50k+ pts, Highcharts for WCAG finance</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Custom Viz &amp; 3D</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">D3.js, Three.js</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Low-level scales/layouts (D3) &amp; WebGL/WebGPU 3D (Three)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Tree-shake d3-* submodules; always dispose Three.js GPU buffers</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">UI &amp; Scroll Motion</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Motion (Framer), GSAP, Anime.js</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Spring layout transitions &amp; timeline choreography</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Animate transform &amp; opacity only; respect prefers-reduced-motion</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">HTTP &amp; Streams</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Axios, RxJS</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Interceptor HTTP client &amp; Observable stream operators</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Use Axios or native fetch + ky; RxJS excels in Angular &amp; complex event streams</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Date &amp; Time</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">date-fns, Day.js, Moment.js</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Immutable date math, timezones &amp; formatting</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Use date-fns (tree-shaken) or Day.js (2kB); migrate off mutable Moment.js</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Collections &amp; DOM</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Lodash, Underscore.js, jQuery</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Object/array utilities &amp; legacy DOM manipulation</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Replace Underscore/jQuery with native ES2025; import lodash-es per function</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="legacy-moment-lodash-jquery-cleanup" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Bundle Diet: Retiring Moment.js, Full Lodash, Underscore &amp; Legacy jQuery</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Moment.js is officially in maintenance mode by its own authors: its mutable <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">moment.add(1, &quot;day&quot;)</code> API mutates dates in place and bundles hundreds of kilobytes of locales. Replace it with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">date-fns</code> v4 (pure functions with first-class timezones) or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Day.js</code> (2 kB Moment-compatible immutable API). Similarly, replace <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">import _ from &quot;lodash&quot;</code> (72 kB) and legacy <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Underscore.js</code> with native <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Object.groupBy()</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">structuredClone()</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Array.prototype.toSorted()</code>, or cherry-picked <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">lodash-es</code> functions—and upgrade any remaining legacy <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">jQuery</code> plugins to jQuery 4.x to patch historical XSS <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">htmlPrefilter</code> vectors.</p>
+
+                <div id="rxjs-cancellation-vs-promises" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    When RxJS switchMap &amp; retry Beat Raw Promises in Live Telemetry UIs
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">For rapid typeahead inputs, WebSocket multiplexing, and cancellable polling streams, RxJS <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">switchMap</code> automatically aborts superseded in-flight requests so slow earlier responses never overwrite newer results.</p>
+                  
+                </div>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ JavaScript Library Performance &amp; Accessibility Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Animate only compositor-friendly transform and opacity properties—never top, left, width, or height</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Honor window.matchMedia(&quot;(prefers-reduced-motion: reduce)&quot;) in GSAP, Motion, and Anime.js</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Tree-shake ECharts (echarts/core), D3 (d3-scale, d3-shape), and Lodash (lodash-es)</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Dispose Three.js geometries, materials, textures, and GSAP ScrollTriggers on component unmount</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Importing Entire echarts, lodash, or d3 Root Barrels Into Client Bundles</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Writing import * as echarts from &quot;echarts&quot; or import _ from &quot;lodash&quot; adds 300kB–900kB of unused modules to your initial JavaScript payload. Always import modular subpaths.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Mutating Shared Moment.js Instances Across React Props</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Calling startDate.add(7, &quot;days&quot;) on a Moment object mutates the original reference in place, corrupting parent component state. Migrate to immutable date-fns or Day.js.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Forgetting Highcharts Commercial Licensing in SaaS Products</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Unlike MIT/Apache-2.0 licensed Chart.js, Apache ECharts, and D3.js, Highcharts is free only for non-commercial/personal use and requires a commercial OEM/SaaS license in business apps.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Leaking RxJS Subscriptions &amp; Three.js WebGL Contexts on Route Changes</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Failing to complete RxJS subscriptions (via takeUntilDestroyed / AbortController) or dispose Three.js WebGLRenderers exhausts browser memory and hits Chrome’s max active WebGL context limit.</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">How do Zod 4 and Ajv differ, and when should we use each?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Zod 4 is TypeScript-first: you write one concise TS schema and infer static types plus friendly form/API error messages. Ajv compiles standard JSON Schema documents into ultra-fast standalone validation code—ideal for Fastify 5, OpenAPI gateways, and polyglot microservices.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Which JavaScript charting library is best for 50,000+ real-time data points?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Apache ECharts (using CanvasRenderer and progressive/lttb downsampling) or Canvas-based Chart.js with decimation plugins handle 50,000+ points smoothly, whereas pure SVG chart libraries bog down DOM layout.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">When should we choose Motion (Framer Motion) vs. GSAP vs. Anime.js?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Choose Motion for React component mount/unmount transitions and layout springs; choose GSAP for complex multi-stage timelines, ScrollTrigger pinned sections, and cross-framework choreography; and choose Anime.js when you want a tiny (~17 kB) timeline engine for SVG paths and DOM staggered effects.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Do we still need Axios in 2026 now that browsers and Node.js have native fetch()?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Native fetch() is great for simple requests or inside TanStack Query, but Axios (or lightweight ky) remains valuable when you want built-in request/response interceptors for OAuth refresh-token queuing, automatic JSON error throwing on 4xx/5xx statuses, and upload progress events.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Summary: Validate Every Boundary, Respect GPU &amp; Bundle Budgets</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Specialized JavaScript libraries unlock extraordinary product polish when governed with discipline: Zod 4 and Ajv harden untrusted payloads, modular ECharts/Chart.js/D3/Highcharts turn complex metrics into clear visual insight, and Three.js, GSAP, Motion, and Anime.js deliver fluid 60fps experiences.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Audit bundle treemaps regularly, retire legacy Moment.js and monolithic Lodash imports, and enforce deterministic memory cleanup across WebGL and reactive streams.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · JS &amp; TS Ecosystem</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert JS &amp; TS Ecosystem Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated Frontend Engineering &amp; Interactive UI service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/frontend-development.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore Frontend Engineering &amp; Interactive UI →</a>
+                <a href="/en/services/speed-optimization.html" class="btn-emerald text-xs py-2.5 px-5">Website Speed &amp; Core Web Vitals Optimization</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://zod.dev/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Zod Official Documentation — Schema Parsing, Type Inference &amp; Zod 4 Performance ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Colin McDonnell / Zod Open Source</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://echarts.apache.org/handbook/en/how-to/cross-platform/server/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Apache ECharts Official Handbook — Canvas vs. SVG Renderers &amp; Bundle Tree-Shaking ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Apache Software Foundation</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://threejs.org/docs/#manual/en/introduction/How-to-dispose-of-objects" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Three.js Official Manual — How to Dispose of Objects &amp; Prevent WebGL Memory Leaks ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Three.js Project</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://ajv.js.org/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Ajv JSON Schema Validator &amp; date-fns Official Documentation ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Ajv Open Source</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in JS &amp; TS Ecosystem</h2>
+                <a href="/en/articles/index.html?track=javascript" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/reactjs-performance-optimization.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">React.js · 8 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">React Performance Optimization: Virtualization, Code Splitting, Composition &amp; Core Web Vitals</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/angular-signals-and-reactivity-guide.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">Angular · 9 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Angular Signals &amp; Fine-Grained Reactivity: Architecture Patterns for Zoneless Performance</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/prisma-vs-drizzle-orm-typescript-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">JS &amp; TS Ecosystem · 14 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Prisma vs. Drizzle ORM in TypeScript &amp; Node.js: Architecture, SQL Control, Latest Releases &amp; Migration Guide</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">Frontend Engineering &amp; Interactive UI</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/frontend-development.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/speed-optimization.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Website Speed &amp; Core Web Vitals Optimization</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/interactive-visualization-3d-and-utilities-threejs-d3-chartjs-gsap-dayjs.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="1200" height="540" role="img" aria-labelledby="rvTitle rvDesc">
+  <title id="rvTitle">React 19 + React Compiler vs. Vue 3.5 Fine-Grained Reactivity Execution Pipeline</title>
+  <desc id="rvDesc">Side-by-side architectural comparison of React 19 Fiber reconciliation with React Compiler automatic memoization versus Vue 3.5 Proxy-based fine-grained dependency tracking and Vapor compilation.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040907" />
+      <stop offset="50%" stop-color="#07130D" />
+      <stop offset="100%" stop-color="#050806" />
+    </linearGradient>
+    <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C6A15B" stop-opacity="0.7" />
+      <stop offset="50%" stop-color="#E5C78B" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#C6A15B" stop-opacity="0.7" />
+    </linearGradient>
+    <linearGradient id="reactAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#07130D" stop-opacity="0.92" />
+    </linearGradient>
+    <linearGradient id="vueAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.24" />
+      <stop offset="100%" stop-color="#07130D" stop-opacity="0.92" />
+    </linearGradient>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38BDF8" />
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34D399" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="540" rx="20" fill="url(#bgGrad)" />
+  <rect x="16" y="16" width="1168" height="508" rx="16" fill="none" stroke="url(#goldBorder)" stroke-width="1.5" opacity="0.45" />
+
+  <!-- Header -->
+  <text x="600" y="52" text-anchor="middle" fill="#E5C78B" font-family="Georgia, serif" font-size="21" font-weight="bold">
+    Frontend Reactivity &amp; Rendering Architecture: React 19.3 vs. Vue 3.5+
+  </text>
+  <text x="600" y="76" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="12">
+    UI View Library + Compiler-Memoized Fiber Tree  ·  vs.  ·  Progressive Framework + Proxy Dependency Graph
+  </text>
+
+  <!-- LEFT PANEL: REACT 19.3 + REACT COMPILER -->
+  <g transform="translate(40, 100)">
+    <rect width="540" height="398" rx="14" fill="url(#reactAccent)" stroke="#38BDF8" stroke-opacity="0.4" stroke-width="1.2" />
+    <text x="24" y="34" fill="#38BDF8" font-family="monospace" font-size="13" font-weight="bold">REACT 19.3 + REACT COMPILER 1.0 (UI LIBRARY)</text>
+    <line x1="24" y1="48" x2="516" y2="48" stroke="#38BDF8" stroke-opacity="0.2" />
+
+    <!-- Step 1 -->
+    <rect x="24" y="66" width="492" height="58" rx="10" fill="#050B09" stroke="#38BDF8" stroke-opacity="0.35" />
+    <text x="42" y="90" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">1. State Transition / Action (useState · useActionState · Zustand)</text>
+    <text x="42" y="110" fill="#CBD5E1" font-family="monospace" font-size="11">Immutable state snapshot schedules a concurrent Fiber lane update</text>
+
+    <line x1="270" y1="124" x2="270" y2="146" stroke="#38BDF8" stroke-width="1.6" marker-end="url(#arrowCyan)" />
+
+    <!-- Step 2 -->
+    <rect x="24" y="150" width="492" height="64" rx="10" fill="#050B09" stroke="#E5C78B" stroke-opacity="0.45" />
+    <text x="42" y="175" fill="#E5C78B" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">2. React Compiler Build-Time Memoization Cache (useMemoCache)</text>
+    <text x="42" y="195" fill="#CBD5E1" font-family="monospace" font-size="11">Compiler auto-skips unchanged JSX subtrees without manual useMemo()</text>
+
+    <line x1="270" y1="214" x2="270" y2="236" stroke="#38BDF8" stroke-width="1.6" marker-end="url(#arrowCyan)" />
+
+    <!-- Step 3 -->
+    <rect x="24" y="240" width="492" height="58" rx="10" fill="#050B09" stroke="#38BDF8" stroke-opacity="0.35" />
+    <text x="42" y="264" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">3. Concurrent Fiber Reconciliation &amp; Suspense Streaming</text>
+    <text x="42" y="284" fill="#CBD5E1" font-family="monospace" font-size="11">Interruptible work-in-progress tree diffing + RSC Server Payload</text>
+
+    <line x1="270" y1="298" x2="270" y2="320" stroke="#38BDF8" stroke-width="1.6" marker-end="url(#arrowCyan)" />
+
+    <!-- Step 4 -->
+    <rect x="24" y="324" width="492" height="54" rx="10" fill="#071914" stroke="#38BDF8" stroke-opacity="0.5" />
+    <text x="42" y="347" fill="#38BDF8" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">4. Commit Phase -&gt; Minimal Host DOM / React Native Mutations</text>
+    <text x="42" y="366" fill="#94A3B8" font-family="monospace" font-size="11">Stack Pair: Next.js App Router · TanStack Query · Zustand · Shadcn UI</text>
+  </g>
+
+  <!-- RIGHT PANEL: VUE 3.5+ FINE-GRAINED REACTIVITY -->
+  <g transform="translate(620, 100)">
+    <rect width="540" height="398" rx="14" fill="url(#vueAccent)" stroke="#34D399" stroke-opacity="0.4" stroke-width="1.2" />
+    <text x="24" y="34" fill="#34D399" font-family="monospace" font-size="13" font-weight="bold">VUE 3.5+ &amp; VAPOR MODE (PROGRESSIVE FRAMEWORK)</text>
+    <line x1="24" y1="48" x2="516" y2="48" stroke="#34D399" stroke-opacity="0.2" />
+
+    <!-- Step 1 -->
+    <rect x="24" y="66" width="492" height="58" rx="10" fill="#050B09" stroke="#34D399" stroke-opacity="0.35" />
+    <text x="42" y="90" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">1. Reactive Signal Mutation (ref · shallowRef · Pinia Store)</text>
+    <text x="42" y="110" fill="#CBD5E1" font-family="monospace" font-size="11">ES6 Proxy / Ref setter triggers exact subscriber Doubly-Linked List</text>
+
+    <line x1="270" y1="124" x2="270" y2="146" stroke="#34D399" stroke-width="1.6" marker-end="url(#arrowEmerald)" />
+
+    <!-- Step 2 -->
+    <rect x="24" y="150" width="492" height="64" rx="10" fill="#050B09" stroke="#E5C78B" stroke-opacity="0.45" />
+    <text x="42" y="175" fill="#E5C78B" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">2. Fine-Grained Dependency Graph (Zero Stale-Closure Arrays)</text>
+    <text x="42" y="195" fill="#CBD5E1" font-family="monospace" font-size="11">computed() &amp; watchEffect() track dependencies automatically at runtime</text>
+
+    <line x1="270" y1="214" x2="270" y2="236" stroke="#34D399" stroke-width="1.6" marker-end="url(#arrowEmerald)" />
+
+    <!-- Step 3 -->
+    <rect x="24" y="240" width="492" height="58" rx="10" fill="#050B09" stroke="#34D399" stroke-opacity="0.35" />
+    <text x="42" y="264" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">3. SFC Template PatchFlags &amp; Block Tree (or Vapor Direct Ops)</text>
+    <text x="42" y="284" fill="#CBD5E1" font-family="monospace" font-size="11">SFC compiler hoists static nodes &amp; patches only dynamic bindings</text>
+
+    <line x1="270" y1="298" x2="270" y2="320" stroke="#34D399" stroke-width="1.6" marker-end="url(#arrowEmerald)" />
+
+    <!-- Step 4 -->
+    <rect x="24" y="324" width="492" height="54" rx="10" fill="#071914" stroke="#34D399" stroke-opacity="0.5" />
+    <text x="42" y="347" fill="#34D399" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">4. Targeted Component Update -&gt; Sub-Millisecond DOM Patch</text>
+    <text x="42" y="366" fill="#94A3B8" font-family="monospace" font-size="11">Official Cohesive Stack: Vue Router · Pinia v4 · Nuxt (Nitro) · VueUse</text>
+  </g>
+</svg>

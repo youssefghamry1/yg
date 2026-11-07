@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="CodeIgniter 4, CakePHP 5 &amp; Yii2/Yii3 + Slim 4, Laminas, Nette, Spiral &amp; Hyperf">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040806"/>
+      <stop offset="55%" stop-color="#07150F"/>
+      <stop offset="100%" stop-color="#050B08"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="78%" cy="28%" r="52%">
+      <stop offset="0%" stop-color="#E5C78B" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#040806" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="18%" cy="82%" r="48%">
+      <stop offset="0%" stop-color="#C6A15B" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#040806" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C6A15B" stop-opacity="0.85"/>
+      <stop offset="50%" stop-color="#E5C78B" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#C6A15B" stop-opacity="0.25"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#10B981" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <!-- Architectural Isometric Frame Right -->
+  <g transform="translate(930, 130)" opacity="0.95">
+    <polygon points="280,20 540,150 280,280 20,150" fill="#071911" stroke="#C6A15B" stroke-width="2" stroke-opacity="0.65"/>
+    <polygon points="280,120 540,250 280,380 20,250" fill="#06140E" stroke="#E5C78B" stroke-width="2" stroke-opacity="0.55"/>
+    <polygon points="280,220 540,350 280,480 20,350" fill="#040C08" stroke="#E5C78B" stroke-width="1.5" stroke-opacity="0.45"/>
+    <line x1="280" y1="20" x2="280" y2="480" stroke="#C6A15B" stroke-dasharray="6 6" stroke-opacity="0.5"/>
+    <circle cx="280" cy="150" r="10" fill="#E5C78B"/>
+    <circle cx="280" cy="250" r="10" fill="#E5C78B"/>
+    <circle cx="280" cy="350" r="10" fill="#C6A15B"/>
+  </g>
+
+  <!-- Outer Editorial Hairline -->
+  <rect x="56" y="56" width="1488" height="788" rx="28" fill="none" stroke="#10B981" stroke-opacity="0.26" stroke-width="1.5"/>
+  <line x1="110" y1="158" x2="860" y2="158" stroke="url(#goldLine)" stroke-width="2"/>
+
+  <!-- Eyebrow -->
+  <text x="110" y="134" fill="#E5C78B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="21" font-weight="700" letter-spacing="3">
+    FULL-SPECTRUM PHP FRAMEWORKS ARCHITECTURE
+  </text>
+
+  <!-- Main Display Title -->
+  <text x="110" y="255" fill="#F8FAFC" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="56" font-weight="700">
+    CodeIgniter 4, CakePHP 5 &amp; Yii2/Yii3
+  </text>
+  <text x="110" y="328" fill="#D1FAE5" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="48" font-weight="700">
+    + Slim 4, Laminas, Nette, Spiral &amp; Hyperf
+  </text>
+
+  <!-- 4 Architectural Pillar Cards -->
+  <g transform="translate(110, 405)">
+        <rect width="388" height="98" rx="16" fill="#07150F" fill-opacity="0.92" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.5"/>
+        <text x="24" y="36" fill="#C6A15B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">01 · ARCHITECTURE LAYER</text>
+        <text x="24" y="70" fill="#F1F5F9" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="600">CodeIgniter 4 &amp; CakePHP 5 MVC</text>
+      </g>
+  <g transform="translate(520, 405)">
+        <rect width="388" height="98" rx="16" fill="#07150F" fill-opacity="0.92" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.5"/>
+        <text x="24" y="36" fill="#C6A15B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">02 · ARCHITECTURE LAYER</text>
+        <text x="24" y="70" fill="#F1F5F9" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="600">Yii2 Portals &amp; Strict PSR Yii3</text>
+      </g>
+  <g transform="translate(110, 527)">
+        <rect width="388" height="98" rx="16" fill="#07150F" fill-opacity="0.92" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.5"/>
+        <text x="24" y="36" fill="#C6A15B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">03 · ARCHITECTURE LAYER</text>
+        <text x="24" y="70" fill="#F1F5F9" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="600">Slim 4, Laminas/Mezzio &amp; Nette</text>
+      </g>
+  <g transform="translate(520, 527)">
+        <rect width="388" height="98" rx="16" fill="#07150F" fill-opacity="0.92" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.5"/>
+        <text x="24" y="36" fill="#C6A15B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" font-weight="700">04 · ARCHITECTURE LAYER</text>
+        <text x="24" y="70" fill="#F1F5F9" font-family="system-ui, -apple-system, sans-serif" font-size="21" font-weight="600">Phalcon, Spiral, Hyperf &amp; Lumen Exit</text>
+      </g>
+
+  <!-- Bottom Metrics Strip -->
+  <g transform="translate(110, 705)">
+    <rect width="1380" height="84" rx="16" fill="#050D09" stroke="#C6A15B" stroke-opacity="0.35" stroke-width="1.2"/>
+    <text x="36" y="50" fill="#E5C78B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="600">Sub-4MB Micro-MVC Footprint</text>
+    <text x="515" y="50" fill="#A7F3D0" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="600">PSR-7 / PSR-15 Middleware</text>
+    <text x="985" y="50" fill="#F8FAFC" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19" font-weight="600">Coroutine &amp; RoadRunner Engines</text>
+  </g>
+</svg>

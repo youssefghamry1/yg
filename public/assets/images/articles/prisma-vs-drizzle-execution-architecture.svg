@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">Prisma ORM v7.10 vs Drizzle ORM v0.45 Execution &amp; Type-Inference Architecture</title>
+  <desc id="svg-desc">Side-by-side engineering diagram comparing Prisma schema-first code generation and client query planner against Drizzle ORM zero-codegen TypeScript SQL AST builder and codec pipeline.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050806" />
+      <stop offset="55%" stop-color="#07130D" />
+      <stop offset="100%" stop-color="#040B08" />
+    </linearGradient>
+    <linearGradient id="goldStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C6A15B" />
+      <stop offset="50%" stop-color="#F0D9A2" />
+      <stop offset="100%" stop-color="#C6A15B" />
+    </linearGradient>
+    <linearGradient id="emeraldCard" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B1F16" />
+      <stop offset="100%" stop-color="#06110C" />
+    </linearGradient>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#E5C78B" />
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34D399" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="620" rx="22" fill="url(#bgGrad)" stroke="#143828" stroke-width="2" />
+
+  <!-- Header Banner -->
+  <rect x="32" y="24" width="1136" height="64" rx="14" fill="#081610" stroke="url(#goldStroke)" stroke-width="1.2" />
+  <text x="600" y="52" text-anchor="middle" fill="#F0D9A2" font-family="Georgia, serif" font-size="20" font-weight="bold">
+    TypeScript ORM Execution Pipeline: Prisma ORM v7.10.1 vs. Drizzle ORM v0.45.4
+  </text>
+  <text x="600" y="74" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="12">
+    Compile-Time Type Safety · Query Compilation · Driver Adapters · PostgreSQL / MySQL Connection Pooling
+  </text>
+
+  <!-- LEFT PANEL: PRISMA ORM v7.10 -->
+  <rect x="32" y="106" width="552" height="482" rx="16" fill="url(#emeraldCard)" stroke="#C6A15B" stroke-opacity="0.55" stroke-width="1.5" />
+  <rect x="52" y="124" width="235" height="28" rx="8" fill="#1A160B" stroke="#C6A15B" stroke-width="1" />
+  <text x="169" y="143" text-anchor="middle" fill="#F0D9A2" font-family="monospace" font-size="12" font-weight="bold">
+    PRISMA ORM v7.10.1 (SCHEMA-FIRST)
+  </text>
+
+  <!-- Step P1 -->
+  <rect x="56" y="168" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="76" y="193" fill="#E5C78B" font-family="monospace" font-size="13" font-weight="bold">1. Declarative PSL Schema (prisma/schema.prisma)</text>
+  <text x="76" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="12">Models, relations, enums &amp; indexes parsed by prisma generate CLI step</text>
+  <text x="76" y="229" fill="#94A3B8" font-family="monospace" font-size="11">Requires regeneration on schema edits · P3025 shadow DB safety guard</text>
+
+  <line x1="308" y1="236" x2="308" y2="258" stroke="#E5C78B" stroke-width="2" marker-end="url(#arrowGold)" />
+
+  <!-- Step P2 -->
+  <rect x="56" y="262" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="76" y="287" fill="#E5C78B" font-family="monospace" font-size="13" font-weight="bold">2. Generated PrismaClient &amp; Nested Relation API</text>
+  <text x="76" y="308" fill="#CBD5E1" font-family="sans-serif" font-size="12">prisma.order.findMany({ include: { items: true } }) -&gt; Deep DTO types</text>
+  <text x="76" y="323" fill="#94A3B8" font-family="monospace" font-size="11">Isolated nested $transaction({ maxWait, timeout }) (v7.10.1 P2028 fix)</text>
+
+  <line x1="308" y1="330" x2="308" y2="352" stroke="#E5C78B" stroke-width="2" marker-end="url(#arrowGold)" />
+
+  <!-- Step P3 -->
+  <rect x="56" y="356" width="504" height="68" rx="12" fill="#050B08" stroke="#C6A15B" stroke-opacity="0.7" stroke-width="1.3" />
+  <text x="76" y="381" fill="#F0D9A2" font-family="monospace" font-size="13" font-weight="bold">3. TypeScript Query Planner &amp; JS Driver Adapters</text>
+  <text x="76" y="402" fill="#CBD5E1" font-family="sans-serif" font-size="12">Prisma v7 TS query compiler + @prisma/adapter-pg / @prisma/adapter-neon</text>
+  <text x="76" y="417" fill="#94A3B8" font-family="monospace" font-size="11">relationLoadStrategy: "join" (LATERAL JSON) or "query" (batched SELECTs)</text>
+
+  <line x1="308" y1="424" x2="308" y2="446" stroke="#E5C78B" stroke-width="2" marker-end="url(#arrowGold)" />
+
+  <!-- Step P4 -->
+  <rect x="56" y="450" width="504" height="58" rx="12" fill="#091D14" stroke="#34D399" stroke-opacity="0.5" stroke-width="1.2" />
+  <text x="76" y="475" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">4. PostgreSQL / MySQL / SQLite / MariaDB 3.5+</text>
+  <text x="76" y="495" fill="#CBD5E1" font-family="sans-serif" font-size="12">Governed via prisma migrate deploy &amp; deterministic migration SQL history</text>
+
+  <!-- Prisma Footer Summary -->
+  <rect x="56" y="522" width="504" height="48" rx="10" fill="#121008" stroke="#C6A15B" stroke-opacity="0.4" stroke-width="1" />
+  <text x="308" y="544" text-anchor="middle" fill="#F0D9A2" font-family="sans-serif" font-size="12" font-weight="bold">
+    Best Fit: Domain-Rich SaaS, Rapid CRUD Velocity &amp; Cross-Team Schema Governance
+  </text>
+  <text x="308" y="561" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="11">
+    Higher abstraction comfort · Explicit codegen step in CI/CD
+  </text>
+
+  <!-- RIGHT PANEL: DRIZZLE ORM v0.45 -->
+  <rect x="616" y="106" width="552" height="482" rx="16" fill="url(#emeraldCard)" stroke="#34D399" stroke-opacity="0.55" stroke-width="1.5" />
+  <rect x="636" y="124" width="255" height="28" rx="8" fill="#072318" stroke="#34D399" stroke-width="1" />
+  <text x="763" y="143" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="12" font-weight="bold">
+    DRIZZLE ORM v0.45.4 (ZERO-CODEGEN)
+  </text>
+
+  <!-- Step D1 -->
+  <rect x="640" y="168" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="660" y="193" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">1. Pure TypeScript Table Definitions (src/db/schema.ts)</text>
+  <text x="660" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="12">pgTable(), relations(), $inferSelect — instant IDE types without CLI build</text>
+  <text x="660" y="229" fill="#94A3B8" font-family="monospace" font-size="11">Co-located with Zod schemas (drizzle-zod) &amp; monorepo shared packages</text>
+
+  <line x1="892" y1="236" x2="892" y2="258" stroke="#34D399" stroke-width="2" marker-end="url(#arrowEmerald)" />
+
+  <!-- Step D2 -->
+  <rect x="640" y="262" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="660" y="287" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">2. Dual Query Surface: SQL-Like Builder + Relational API</text>
+  <text x="660" y="308" fill="#CBD5E1" font-family="sans-serif" font-size="12">db.select().from().leftJoin() CTEs/window funcs OR db.query.orders.findMany()</text>
+  <text x="660" y="323" fill="#94A3B8" font-family="monospace" font-size="11">Guaranteed 1 SQL query per relational call · db.$replica read routing</text>
+
+  <line x1="892" y1="330" x2="892" y2="352" stroke="#34D399" stroke-width="2" marker-end="url(#arrowEmerald)" />
+
+  <!-- Step D3 -->
+  <rect x="640" y="356" width="504" height="68" rx="12" fill="#050B08" stroke="#34D399" stroke-opacity="0.7" stroke-width="1.3" />
+  <text x="660" y="381" fill="#A7F3D0" font-family="monospace" font-size="13" font-weight="bold">3. Thin AST Parameterizer &amp; v0.45 Codec Pipeline</text>
+  <text x="660" y="402" fill="#CBD5E1" font-family="sans-serif" font-size="12">~7.4kB min+gzip footprint · Overhauled codec system (~25–30% lower latency)</text>
+  <text x="660" y="417" fill="#94A3B8" font-family="monospace" font-size="11">paramsInErrors: false default redacts PII from DrizzleQueryError logs</text>
+
+  <line x1="892" y1="424" x2="892" y2="446" stroke="#34D399" stroke-width="2" marker-end="url(#arrowEmerald)" />
+
+  <!-- Step D4 -->
+  <rect x="640" y="450" width="504" height="58" rx="12" fill="#091D14" stroke="#34D399" stroke-opacity="0.5" stroke-width="1.2" />
+  <text x="660" y="475" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">4. Native Drivers (node-postgres, postgres.js, Neon, LibSQL, D1)</text>
+  <text x="660" y="495" fill="#CBD5E1" font-family="sans-serif" font-size="12">Schema diffs &amp; SQL migrations generated via drizzle-kit generate / migrate</text>
+
+  <!-- Drizzle Footer Summary -->
+  <rect x="640" y="522" width="504" height="48" rx="10" fill="#061A12" stroke="#34D399" stroke-opacity="0.4" stroke-width="1" />
+  <text x="892" y="544" text-anchor="middle" fill="#6EE7B7" font-family="sans-serif" font-size="12" font-weight="bold">
+    Best Fit: Serverless/Edge Cold Starts, Complex SQL Analytics &amp; Strict Query Control
+  </text>
+  <text x="892" y="561" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="11">
+    Zero codegen · Direct SQL mental model · Minimal memory overhead
+  </text>
+</svg>

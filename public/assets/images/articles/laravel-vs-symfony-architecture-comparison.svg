@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" role="img" aria-labelledby="ls-title ls-desc">
+  <title id="ls-title">Laravel 13 vs Symfony 8.1 &amp; 7.4 LTS Enterprise PHP Request &amp; Persistence Architecture</title>
+  <desc id="ls-desc">Side-by-side architectural blueprint comparing Laravel 13 IoC Service Container, Eloquent Active Record, Horizon Redis queues, and Octane workers against Symfony 8.1 / 7.4 LTS Compiled DependencyInjection, Doctrine Data-Mapper ORM, and Messenger Event Bus.</desc>
+  <defs>
+    <linearGradient id="bgGradLs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050806" />
+      <stop offset="50%" stop-color="#07130D" />
+      <stop offset="100%" stop-color="#040B08" />
+    </linearGradient>
+    <linearGradient id="goldBorderLs" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C6A15B" />
+      <stop offset="50%" stop-color="#F0D9A2" />
+      <stop offset="100%" stop-color="#C6A15B" />
+    </linearGradient>
+    <linearGradient id="cardGradLs" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B1F16" />
+      <stop offset="100%" stop-color="#06110C" />
+    </linearGradient>
+    <marker id="arrGoldLs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#E5C78B" />
+    </marker>
+    <marker id="arrEmLs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34D399" />
+    </marker>
+  </defs>
+
+  <rect width="1200" height="620" rx="22" fill="url(#bgGradLs)" stroke="#143828" stroke-width="2" />
+
+  <!-- Top Header -->
+  <rect x="32" y="24" width="1136" height="64" rx="14" fill="#081610" stroke="url(#goldBorderLs)" stroke-width="1.2" />
+  <text x="600" y="52" text-anchor="middle" fill="#F0D9A2" font-family="Georgia, serif" font-size="20" font-weight="bold">
+    Enterprise PHP Request Lifecycle: Laravel 13 vs. Symfony 8.1 &amp; 7.4 LTS
+  </text>
+  <text x="600" y="74" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="12">
+    Dependency Injection · Active Record vs. Data Mapper · Async Message Queues · Persistent Worker Runtimes
+  </text>
+
+  <!-- LEFT PANEL: LARAVEL 13 -->
+  <rect x="32" y="106" width="552" height="482" rx="16" fill="url(#cardGradLs)" stroke="#C6A15B" stroke-opacity="0.55" stroke-width="1.5" />
+  <rect x="52" y="124" width="275" height="28" rx="8" fill="#1A160B" stroke="#C6A15B" stroke-width="1" />
+  <text x="189" y="143" text-anchor="middle" fill="#F0D9A2" font-family="monospace" font-size="12" font-weight="bold">
+    LARAVEL 13 (PHP 8.3–8.5 · COHESIVE DX)
+  </text>
+
+  <!-- L1 -->
+  <rect x="56" y="168" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="76" y="193" fill="#E5C78B" font-family="monospace" font-size="13" font-weight="bold">1. HTTP Kernel, Middleware &amp; Runtime IoC Container</text>
+  <text x="76" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="12">Reflection-driven contextual binding, ServiceProviders &amp; Facades</text>
+  <text x="76" y="229" fill="#94A3B8" font-family="monospace" font-size="11">PHP 8.3+ required · Security support through March 2028</text>
+
+  <line x1="308" y1="236" x2="308" y2="258" stroke="#E5C78B" stroke-width="2" marker-end="url(#arrGoldLs)" />
+
+  <!-- L2 -->
+  <rect x="56" y="262" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="76" y="287" fill="#E5C78B" font-family="monospace" font-size="13" font-weight="bold">2. Eloquent ORM (Active Record Pattern)</text>
+  <text x="76" y="308" fill="#CBD5E1" font-family="sans-serif" font-size="12">Models encapsulate state + persistence · Model::shouldBeStrict() N+1 guard</text>
+  <text x="76" y="323" fill="#94A3B8" font-family="monospace" font-size="11">JSON:API resources, Sanctum/Passport auth &amp; Laravel 13 AI vector helpers</text>
+
+  <line x1="308" y1="330" x2="308" y2="352" stroke="#E5C78B" stroke-width="2" marker-end="url(#arrGoldLs)" />
+
+  <!-- L3 -->
+  <rect x="56" y="356" width="504" height="68" rx="12" fill="#050B08" stroke="#C6A15B" stroke-opacity="0.7" stroke-width="1.3" />
+  <text x="76" y="381" fill="#F0D9A2" font-family="monospace" font-size="13" font-weight="bold">3. First-Party Ecosystem: Horizon, Reverb &amp; Pulse</text>
+  <text x="76" y="402" fill="#CBD5E1" font-family="sans-serif" font-size="12">Redis job queues (Horizon), WebSockets (Reverb) &amp; Filament admin panels</text>
+  <text x="76" y="417" fill="#94A3B8" font-family="monospace" font-size="11">Unified convention across auth, billing (Cashier), search (Scout) &amp; storage</text>
+
+  <line x1="308" y1="424" x2="308" y2="446" stroke="#E5C78B" stroke-width="2" marker-end="url(#arrGoldLs)" />
+
+  <!-- L4 -->
+  <rect x="56" y="450" width="504" height="58" rx="12" fill="#091D14" stroke="#34D399" stroke-opacity="0.5" stroke-width="1.2" />
+  <text x="76" y="475" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">4. Execution: PHP-FPM + OPcache or Laravel Octane</text>
+  <text x="76" y="495" fill="#CBD5E1" font-family="sans-serif" font-size="12">Persistent in-memory workers via FrankenPHP, RoadRunner, or Swoole</text>
+
+  <!-- Laravel Footer -->
+  <rect x="56" y="522" width="504" height="48" rx="10" fill="#121008" stroke="#C6A15B" stroke-opacity="0.4" stroke-width="1" />
+  <text x="308" y="544" text-anchor="middle" fill="#F0D9A2" font-family="sans-serif" font-size="12" font-weight="bold">
+    Best Fit: Rapid SaaS Delivery, Full-Stack B2B Platforms &amp; Cohesive Product Teams
+  </text>
+  <text x="308" y="561" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="11">
+    Unmatched first-party tooling · Convention over configuration
+  </text>
+
+  <!-- RIGHT PANEL: SYMFONY 8.1 & 7.4 LTS -->
+  <rect x="616" y="106" width="552" height="482" rx="16" fill="url(#cardGradLs)" stroke="#34D399" stroke-opacity="0.55" stroke-width="1.5" />
+  <rect x="636" y="124" width="310" height="28" rx="8" fill="#072318" stroke="#34D399" stroke-width="1" />
+  <text x="791" y="143" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="12" font-weight="bold">
+    SYMFONY 8.1 / 7.4 LTS (MODULAR DDD)
+  </text>
+
+  <!-- S1 -->
+  <rect x="640" y="168" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="660" y="193" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">1. HttpKernel &amp; Ahead-of-Time Compiled DI Container</text>
+  <text x="660" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="12">Zero-reflection cached PHP container graph · PHP 8.4+ (v8.1) / 8.2+ (v7.4 LTS)</text>
+  <text x="660" y="229" fill="#94A3B8" font-family="monospace" font-size="11">Symfony 7.4 LTS security patches guaranteed until November 2029</text>
+
+  <line x1="892" y1="236" x2="892" y2="258" stroke="#34D399" stroke-width="2" marker-end="url(#arrEmLs)" />
+
+  <!-- S2 -->
+  <rect x="640" y="262" width="504" height="68" rx="12" fill="#050B08" stroke="#285943" stroke-width="1.2" />
+  <text x="660" y="287" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">2. Doctrine ORM 3 (Data Mapper &amp; Unit of Work)</text>
+  <text x="660" y="308" fill="#CBD5E1" font-family="sans-serif" font-size="12">Pure POPO domain entities decoupled from SQL · PHP 8 Attributes mapping</text>
+  <text x="660" y="323" fill="#94A3B8" font-family="monospace" font-size="11">Transactional EntityManager::flush() · Identity Map &amp; DQL optimization</text>
+
+  <line x1="892" y1="330" x2="892" y2="352" stroke="#34D399" stroke-width="2" marker-end="url(#arrEmLs)" />
+
+  <!-- S3 -->
+  <rect x="640" y="356" width="504" height="68" rx="12" fill="#050B08" stroke="#34D399" stroke-opacity="0.7" stroke-width="1.3" />
+  <text x="660" y="381" fill="#A7F3D0" font-family="monospace" font-size="13" font-weight="bold">3. Composable Components: Messenger, Voters &amp; API Platform</text>
+  <text x="660" y="402" fill="#CBD5E1" font-family="sans-serif" font-size="12">AMQP/RabbitMQ/Kafka/SQS Command &amp; Event buses · Fine-grained Security Voters</text>
+  <text x="660" y="417" fill="#94A3B8" font-family="monospace" font-size="11">Foundation powering Drupal 10/11, Shopware 6, PrestaShop &amp; Laravel HTTP core</text>
+
+  <line x1="892" y1="424" x2="892" y2="446" stroke="#34D399" stroke-width="2" marker-end="url(#arrEmLs)" />
+
+  <!-- S4 -->
+  <rect x="640" y="450" width="504" height="58" rx="12" fill="#091D14" stroke="#34D399" stroke-opacity="0.5" stroke-width="1.2" />
+  <text x="660" y="475" fill="#6EE7B7" font-family="monospace" font-size="13" font-weight="bold">4. Execution: Symfony Runtime + FrankenPHP / RoadRunner</text>
+  <text x="660" y="495" fill="#CBD5E1" font-family="sans-serif" font-size="12">Stateless ResetInterface services prevent memory leaks in worker loops</text>
+
+  <!-- Symfony Footer -->
+  <rect x="640" y="522" width="504" height="48" rx="10" fill="#061A12" stroke="#34D399" stroke-opacity="0.4" stroke-width="1" />
+  <text x="892" y="544" text-anchor="middle" fill="#6EE7B7" font-family="sans-serif" font-size="12" font-weight="bold">
+    Best Fit: Multi-Year Regulated Gov/FinTech Core Systems, DDD &amp; 4-Year LTS SLAs
+  </text>
+  <text x="892" y="561" text-anchor="middle" fill="#94A3B8" font-family="monospace" font-size="11">
+    Strict architectural boundaries · PSR standard compliance
+  </text>
+</svg>

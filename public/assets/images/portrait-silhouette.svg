@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 620" width="100%" height="100%">
+  <defs>
+    <!-- Background Aura Gradients -->
+    <radialGradient id="haloGlow" cx="50%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#064E3B" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#050806" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Metallic Gold Gradient -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0D9A2"/>
+      <stop offset="45%" stop-color="#C6A15B"/>
+      <stop offset="85%" stop-color="#E5C78B"/>
+      <stop offset="100%" stop-color="#9A7B38"/>
+    </linearGradient>
+
+    <!-- Emerald Mesh Gradient -->
+    <linearGradient id="emeraldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="50%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+
+    <!-- Suit Fabric Shadow Gradient -->
+    <linearGradient id="suitFabric" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#182A20"/>
+      <stop offset="50%" stop-color="#0B1A12"/>
+      <stop offset="100%" stop-color="#050E09"/>
+    </linearGradient>
+
+    <!-- Tie & Accent Gradient -->
+    <linearGradient id="tieGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5C78B"/>
+      <stop offset="60%" stop-color="#C6A15B"/>
+      <stop offset="100%" stop-color="#785B22"/>
+    </linearGradient>
+
+    <!-- Glowing Filter -->
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Backdrop Glow -->
+  <rect width="500" height="620" fill="url(#haloGlow)" />
+
+  <!-- Geometric Luxury Ring Frame -->
+  <circle cx="250" cy="240" r="170" fill="none" stroke="url(#goldGradient)" stroke-width="1.5" stroke-dasharray="4 8" opacity="0.6"/>
+  <circle cx="250" cy="240" r="190" fill="none" stroke="url(#emeraldGradient)" stroke-width="1" opacity="0.4"/>
+  <polygon points="250,50 410,240 250,430 90,240" fill="none" stroke="url(#goldGradient)" stroke-width="0.75" opacity="0.35"/>
+
+  <!-- Executive Silhouette Body -->
+  <!-- Shoulders & Coat Torso -->
+  <path d="M 90,620 C 95,500 130,420 190,390 L 250,410 L 310,390 C 370,420 405,500 410,620 Z" fill="url(#suitFabric)" stroke="#0E3321" stroke-width="2"/>
+
+  <!-- Left Suit Lapel -->
+  <path d="M 190,390 L 235,490 L 195,530 L 160,420 Z" fill="#12251B" stroke="url(#goldGradient)" stroke-width="1.2"/>
+  <!-- Right Suit Lapel -->
+  <path d="M 310,390 L 265,490 L 305,530 L 340,420 Z" fill="#12251B" stroke="url(#goldGradient)" stroke-width="1.2"/>
+
+  <!-- Crisp Shirt V-Neck Area -->
+  <polygon points="230,370 270,370 250,450" fill="#E2E8F0" opacity="0.9"/>
+
+  <!-- Luxury Gold Executive Tie -->
+  <polygon points="246,375 254,375 258,470 250,510 242,470" fill="url(#tieGradient)" stroke="#5A4215" stroke-width="0.75"/>
+  <polygon points="244,373 256,373 253,390 247,390" fill="url(#goldGradient)"/>
+
+  <!-- Suit Pocket & Gold Pocket Square / Lapel Pin -->
+  <line x1="160" y1="475" x2="195" y2="470" stroke="url(#goldGradient)" stroke-width="1.5"/>
+  <polygon points="172,468 180,458 188,468" fill="url(#goldGradient)" filter="url(#goldGlow)"/>
+
+  <!-- Collar & Neck -->
+  <path d="M 225,350 L 275,350 L 270,380 L 230,380 Z" fill="#0A1811" stroke="#163825" stroke-width="1"/>
+
+  <!-- Head & Hair Executive Silhouette -->
+  <!-- Jaw & Head Base -->
+  <path d="M 215,220 C 215,160 285,160 285,220 C 285,270 270,320 250,335 C 230,320 215,270 215,220 Z" fill="#09150E" stroke="url(#emeraldGradient)" stroke-width="1.5"/>
+
+  <!-- Professional Hair Contour -->
+  <path d="M 210,210 C 210,145 230,135 250,135 C 275,135 292,148 290,210 C 285,190 270,165 245,165 C 230,165 218,185 210,210 Z" fill="#050C08" stroke="url(#goldGradient)" stroke-width="1"/>
+
+  <!-- Abstract Facial Architecture Lines (Respecting identity constraint) -->
+  <line x1="240" y1="230" x2="260" y2="230" stroke="url(#goldGradient)" stroke-width="1" opacity="0.4"/>
+  <path d="M 248,220 L 250,255 L 244,260" fill="none" stroke="url(#goldGradient)" stroke-width="1" opacity="0.45"/>
+  <line x1="242" y1="280" x2="258" y2="280" stroke="url(#goldGradient)" stroke-width="1" opacity="0.4"/>
+
+  <!-- Gold Lapel Emblem: Tender & Proposal Specialist Symbol -->
+  <circle cx="205" cy="425" r="9" fill="#050806" stroke="url(#goldGradient)" stroke-width="1.5"/>
+  <polygon points="205,419 211,429 199,429" fill="url(#goldGradient)"/>
+</svg>

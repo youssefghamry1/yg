@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next.js vs Nuxt.js: Full-Stack SSR, RSC &amp; Nitro Engine Guide | Youssef Ghamry</title>
+    <meta name="description" content="Compare Next.js App Router (React 19 Server Components) and Nuxt (Vue 3.5 + Nitro engine) across hybrid SSR/ISR caching, server routes, hydration, and self-hosting." />
+    <meta name="keywords" content="nextjs vs nuxtjs fullstack comparison, nextjs app router vs nuxt nitro engine, react server components vs nuxt server islands, hybrid ssr isr route rules caching, self hosting nextjs docker vs nuxt nitro, server actions vs h3 event handlers" />
+    <link rel="canonical" href="/en/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" />
+    <meta property="og:title" content="Next.js vs Nuxt.js: Full-Stack SSR, RSC &amp; Nitro Engine Guide | Youssef Ghamry" />
+    <meta property="og:description" content="Compare Next.js App Router (React 19 Server Components) and Nuxt (Vue 3.5 + Nitro engine) across hybrid SSR/ISR caching, server routes, hydration, and self-hosting." />
+    <meta property="og:image" content="/assets/images/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison-featured.jpg" />
+    <meta property="og:image:alt" content="Isometric engineering visualization comparing Next.js React Server Components streaming architecture with Nuxt Nitro universal rendering pipelines" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="JS &amp; TS Ecosystem" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Next.js vs Nuxt.js: Full-Stack SSR, RSC &amp; Nitro Engine Guide | Youssef Ghamry" />
+    <meta name="twitter:description" content="Compare Next.js App Router (React 19 Server Components) and Nuxt (Vue 3.5 + Nitro engine) across hybrid SSR/ISR caching, server routes, hydration, and self-hosting." />
+    <meta name="twitter:image" content="/assets/images/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison-featured.jpg" />
+    <meta name="twitter:image:alt" content="Isometric engineering visualization comparing Next.js React Server Components streaming architecture with Nuxt Nitro universal rendering pipelines" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JS & TS Ecosystem",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=javascript"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Next.js App Router vs. Nuxt (Nitro Engine): React Server Components, Hybrid Edge Caching & Full-Stack SSR Architecture",
+          "item": "https://youssefghamry.com/en/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Next.js App Router vs. Nuxt (Nitro Engine): React Server Components, Hybrid Edge Caching & Full-Stack SSR Architecture",
+      "description": "Compare Next.js App Router (React 19 Server Components) and Nuxt (Vue 3.5 + Nitro engine) across hybrid SSR/ISR caching, server routes, hydration, and self-hosting.",
+      "image": "https://youssefghamry.com/assets/images/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison-featured.jpg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "JS & TS Ecosystem",
+      "keywords": "nextjs vs nuxtjs fullstack comparison, nextjs app router vs nuxt nitro engine, react server components vs nuxt server islands, hybrid ssr isr route rules caching, self hosting nextjs docker vs nuxt nitro, server actions vs h3 event handlers",
+      "citation": [
+        "https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns",
+        "https://nuxt.com/docs/guide/concepts/rendering",
+        "https://nitro.build/guide"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are Next.js and Nuxt frameworks or libraries?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both Next.js and Nuxt are full-stack TypeScript Meta-Frameworks. Next.js builds on top of the React UI library, while Nuxt builds on top of the Vue.js progressive UI framework and the UnJS Nitro server engine."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is easier to self-host on Docker or Kubernetes: Next.js or Nuxt?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nuxt is simpler to self-host out of the box because Nitro compiles into a tiny standalone .output directory with built-in Redis unstorage drivers for multi-pod caching. Next.js also self-hosts reliably via output: \"standalone\", provided you wire a shared Redis cacheHandler for multi-replica ISR coherency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Nuxt support zero-JavaScript server components like Next.js?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. While standard Nuxt pages use universal SSR + Vue hydration, enabling experimental componentIslands lets you create *.server.vue components and Nuxt Islands that render HTML on the server with zero client-side component JavaScript."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Next.js or Nuxt replace a separate Express or Laravel backend?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For BFF (Backend-for-Frontend) layers, SaaS portals, and content/e-commerce storefronts, Next.js Route Handlers/Server Actions and Nuxt Nitro h3 APIs easily handle full-stack duties. For heavy asynchronous queues, complex ERP domain logic, or multi-client public APIs, pairing them with NestJS, Laravel, or Symfony remains an industry best practice."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=javascript" class="hover:text-[#E5C78B]">JS &amp; TS Ecosystem</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">Next.js App Router vs. Nuxt (Nitro Engine): React Server Components, Hybrid Edge Caching &amp; Full-Stack SSR Architecture</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>Full-Stack Meta-Frameworks</span>
+              </span>
+              <span class="badge-emerald">⏱️ 14 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              Next.js App Router vs. Nuxt (Nitro Engine): React Server Components, Hybrid Edge Caching &amp; Full-Stack SSR Architecture
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              An objective architectural comparison between Next.js (App Router + React 19 Server Components) and Nuxt (Vue 3.5+ + UnJS Nitro server engine), covering per-route SSR/ISR caching, zero-bundle server trees, RPC data mutations, and multi-cloud self-hosting.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison-featured.jpg" alt="Isometric engineering visualization comparing Next.js React Server Components streaming architecture with Nuxt Nitro universal rendering pipelines" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: JS &amp; TS Ecosystem</span>
+                <a href="/en/services/frontend-development.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#rendering-and-server-engines" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. Core Rendering Architecture: React Flight Streaming vs. UnJS Nitro Universal SSR
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#nextjs-rsc-server-actions" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Next.js App Router: Async Server Components &amp; Tag-Based Cache Revalidation</a><a href="#nuxt-nitro-h3-pipeline" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Nuxt + Nitro: Declarative Route Rules &amp; Typed h3 Server Endpoints</a>
+              </div>
+              <a href="#caching-and-self-hosting" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. Self-Hosting, Multi-Node Cache Coherency &amp; Cloud Portability
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#nextjs-custom-redis-cache-handler" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Wiring Shared Redis Cache Coherency for Self-Hosted Next.js Clusters</a>
+              </div>
+              <a href="#comparison-matrix-next-nuxt" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. Head-to-Head Architectural Matrix: Next.js vs. Nuxt
+              </a>
+              <a href="#seo-cwv-and-i18n" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. Technical SEO, Bilingual RTL/LTR Routing &amp; Core Web Vitals
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#cwv-inp-hydration-tuning" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Protecting Interaction to Next Paint (INP) During Hydration</a>
+              </div>
+              <a href="#decision-framework-next-nuxt" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Enterprise Decision Matrix: Which Meta-Framework Fits Your Roadmap?
+              </a>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Selecting between Next.js and Nuxt is first and foremost a commitment to a full-stack execution model—not merely a preference between JSX and Vue Single-File Components. Remember the taxonomic distinction: React.js is a UI view library and Vue.js is a progressive UI framework, whereas Next.js and Nuxt are full-stack TypeScript meta-frameworks that orchestrate file-based routing, server-side HTML streaming, API endpoints, asset bundling, and edge/CDN cache invalidation.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">In modern production deployments, the two meta-frameworks solve client JavaScript bloat from fundamentally different angles. Next.js App Router centers on React Server Components (RSC) and Flight payload streaming so database-driven subtrees ship zero JavaScript to the browser. Nuxt pairs Vue 3.5+ fine-grained reactivity with the UnJS Nitro server engine—compiling your entire application into a portable, zero-cold-start bundle with declarative per-URL rendering rules (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ssr</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">swr</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">isr</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">prerender</code>) that run identically on Node.js, Cloudflare Workers, Bun, Deno, or Kubernetes containers.</p>
+            </div>
+            <section id="rendering-and-server-engines" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. Core Rendering Architecture: React Flight Streaming vs. UnJS Nitro Universal SSR</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Next.js App Router treats every route segment (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">page.tsx</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">layout.tsx</code>) as a Server Component by default. Server Components execute exclusively on the server, can <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">await</code> PostgreSQL queries or internal microservices directly without exposing credentials, and serialize their rendered output into the compact RSC Flight format. Only interactive leaf components marked with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&quot;use client&quot;</code> are bundled for browser hydration, dramatically cutting Total Blocking Time (TBT) on content-heavy commerce and B2B portals.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Nuxt takes a cohesive universal-SSR approach powered by Nitro and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">h3</code>. While Nuxt also supports Server-Only Components (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">*.server.vue</code> / Nuxt Islands) for zero-JS HTML fragments, standard Nuxt pages execute once on the server to produce complete SEO-ready HTML plus a serialized <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">devalue</code> payload, then hydrate cleanly on the client using Vue 3.5’s lightweight Proxy reactivity. Crucially, when <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useFetch</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">$fetch</code> runs during SSR inside Nuxt, Nitro invokes the matching <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">/server/api/*</code> handler via direct in-memory function execution rather than opening a redundant loopback TCP socket.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison-diagram.svg"
+                    alt="Next.js App Router RSC Flight streaming compared against Nuxt Nitro universal SSR and Route Rules"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Request lifecycle comparison: Next.js Server Component Flight streaming and selective client leaves vs. Nuxt Nitro Route Rules and direct in-memory h3 API invocation.
+                  </figcaption>
+                </figure>
+
+                <div id="nextjs-rsc-server-actions" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Next.js App Router: Async Server Components &amp; Tag-Based Cache Revalidation
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In Next.js, data fetching and mutations converge around <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">async</code> Server Components, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">unstable_cache</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&quot;use cache&quot;</code> directives, and Server Actions (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&quot;use server&quot;</code>). Below is a production B2B catalog route that queries data on the server, streams a skeleton via <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;Suspense&gt;</code>, and invalidates granular cache tags upon mutation without shipping ORM or validation code to the browser.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">app/catalog/[category]/page.tsx</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">tsx</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { Suspense } from 'react';
+import { revalidateTag } from 'next/cache';
+import { z } from 'zod';
+import { db } from '@/lib/db';
+import { FilterDrawerClient } from './FilterDrawerClient';
+
+const PriceUpdateSchema = z.object({
+  skuId: z.string().uuid(),
+  unitPriceCents: z.coerce.number().int().positive()
+});
+
+export async function updateSkuPriceAction(formData: FormData) {
+  'use server';
+  const parsed = PriceUpdateSchema.parse(Object.fromEntries(formData));
+  await db.sku.update({
+    where: { id: parsed.skuId },
+    data: { unitPriceCents: parsed.unitPriceCents }
+  });
+  // Purges cached catalog views across cluster nodes sharing a Redis cache handler
+  revalidateTag('catalog-pricing');
+}
+
+export default async function CatalogCategoryPage({
+  params
+}: {
+  params: Promise&lt;{ category: string }&gt;;
+}) {
+  const { category } = await params;
+  const items = await db.sku.findMany({
+    where: { categorySlug: category, active: true },
+    orderBy: { updatedAt: 'desc' },
+    take: 40
+  });
+
+  return (
+    &lt;section className=&quot;grid grid-cols-12 gap-6&quot;&gt;
+      &lt;aside className=&quot;col-span-12 lg:col-span-3&quot;&gt;
+        &lt;FilterDrawerClient initialCategory={category} /&gt;
+      &lt;/aside&gt;
+      &lt;Suspense fallback={&lt;div className=&quot;col-span-9 animate-pulse h-96&quot; /&gt;}&gt;
+        &lt;div className=&quot;col-span-12 lg:col-span-9&quot;&gt;
+          {items.map((sku) =&gt; (
+            &lt;article key={sku.id}&gt;{sku.title} — {(sku.unitPriceCents / 100).toFixed(2)}&lt;/article&gt;
+          ))}
+        &lt;/div&gt;
+      &lt;/Suspense&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+                </div>
+                </div>
+
+                <div id="nuxt-nitro-h3-pipeline" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Nuxt + Nitro: Declarative Route Rules &amp; Typed h3 Server Endpoints
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Nuxt centralizes hybrid rendering inside <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">nuxt.config.ts</code> via <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">routeRules</code> and pairs seamlessly with typed <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">server/api/</code> handlers built on <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">h3</code>.Notice how marketing routes can be statically prerendered, product listings served with Stale-While-Revalidate (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">swr: 300</code>), and authenticated <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">/portal/**</code> dashboards rendered purely client-side (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ssr: false</code>)—all in ten lines of declarative configuration.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">nuxt.config.ts &amp; server/api/skus/[category].get.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>// 1. nuxt.config.ts — Hybrid rendering per URL pattern + portable Nitro preset
+export default defineNuxtConfig({
+  compatibilityDate: '2025-01-15',
+  experimental: { componentIslands: true },
+  nitro: {
+    preset: 'node-server', // Swap to 'cloudflare-pages', 'bun', or 'vercel' with zero code edits
+    storage: {
+      cache: { driver: 'redis', host: process.env.REDIS_HOST || '127.0.0.1' }
+    }
+  },
+  routeRules: {
+    '/': { prerender: true },
+    '/catalog/**': { swr: 300 },
+    '/portal/**': { ssr: false },
+    '/api/**': { cors: true, headers: { 'cache-control': 'no-store' } }
+  }
+});
+
+// 2. server/api/skus/[category].get.ts — Cached h3 handler with automatic TS inference in useFetch()
+import { z } from 'zod';
+
+export default defineCachedEventHandler(
+  async (event) =&gt; {
+    const { category } = await getValidatedRouterParams(
+      event,
+      z.object({ category: z.string().min(2) }).parse
+    );
+    const rows = await useDrizzle().query.skus.findMany({
+      where: (t, { eq, and }) =&gt; and(eq(t.categorySlug, category), eq(t.active, true)),
+      limit: 40
+    });
+    return { category, count: rows.length, rows };
+  },
+  { maxAge: 300, name: 'catalog-category', getKey: (e) =&gt; getRouterParam(e, 'category') || 'all' }
+);</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="caching-and-self-hosting" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. Self-Hosting, Multi-Node Cache Coherency &amp; Cloud Portability</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Enterprise infrastructure architects frequently evaluate how each meta-framework behaves outside proprietary managed platforms when deployed inside Kubernetes, AWS ECS, or sovereign cloud VMs (such as Saudi NCA-compliant data centers). Out of the box, Next.js <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">output: &quot;standalone&quot;</code> produces a self-contained Node.js server, but multi-replica horizontal scaling requires wiring a custom <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">cacheHandler</code> backed by Redis so <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">revalidateTag()</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">revalidatePath()</code> synchronize across all pods rather than mutating local container disk.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Nuxt’s Nitro engine was designed from day one around UnJS <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">unstorage</code> drivers and zero vendor lock-in. Mounting Redis, S3, Cloudflare KV, or PostgreSQL as your Nitro <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">cache</code> storage takes three configuration lines, and the compiled <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.output/</code> directory averages just a few megabytes with zero <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">node_modules</code> dependency sprawl at runtime.</p>
+
+                <div id="nextjs-custom-redis-cache-handler" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Wiring Shared Redis Cache Coherency for Self-Hosted Next.js Clusters
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">When running three or more Next.js <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">standalone</code> containers behind Nginx or Envoy, always configure <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">cacheHandler</code> in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">next.config.ts</code> so ISR and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">revalidateTag</code> purge stale entries cluster-wide.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">next.config.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import type { NextConfig } from 'next';
+
+const nextConfig: NextConfig = {
+  output: 'standalone',
+  reactStrictMode: true,
+  // Ensures multi-pod Kubernetes deployments share ISR &amp; tag invalidation state in Redis
+  cacheHandler:
+    process.env.NODE_ENV === 'production'
+      ? require.resolve('./lib/redis-next-cache-handler.cjs')
+      : undefined,
+  cacheMaxMemorySize: 0 // Disable per-pod in-memory split-brain cache
+};
+
+export default nextConfig;</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="comparison-matrix-next-nuxt" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. Head-to-Head Architectural Matrix: Next.js vs. Nuxt</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">The table below contrasts Next.js App Router and Nuxt across ten engineering dimensions that govern build speed, hydration weight, developer ergonomics, and DevOps portability.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">Next.js (App Router + React 19) vs. Nuxt (Vue 3.5+ + Nitro Engine)</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Engineering Dimension</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Next.js (App Router)</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Nuxt (Vue 3.5+ / Nitro)</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Underlying UI Layer</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">React 19.x UI Library (JSX/TSX)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Vue 3.5+ Progressive Framework (SFCs)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Zero-JS Server Rendering</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Default via React Server Components (RSC)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Opt-in via Nuxt Server Components / Islands</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Server Engine &amp; Portability</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Next.js Node Server / Edge Runtime (OpenNext for Workers)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">UnJS Nitro (18+ zero-code presets: Node, Bun, CF, Deno)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Hybrid Route Caching</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Segment configs + &quot;use cache&quot; + revalidateTag()</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Centralized routeRules (ssr, swr, isr, prerender) + unstorage</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Data Fetching &amp; RPC</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Async RSC + Server Actions (&quot;use server&quot;)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">useFetch / useAsyncData + typed h3 /server/api routes</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Bundler Pipeline</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Turbopack (Rust) &amp; Webpack 5</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Vite 6+ (Rollup / Rolldown Rust roadmap)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">State Management Pairing</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Zustand, TanStack Query, Jotai, Redux Toolkit</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">First-party Pinia + useState SSR-safe composables</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Auto-Imports &amp; Conventions</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Explicit ES imports (strict lexical clarity)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Optional typed auto-imports for composables &amp; components</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Ecosystem &amp; Hiring Pool</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Largest global React/Shadcn/Radix library ecosystem</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Highly cohesive Nuxt Modules (Nuxt UI, Content, Auth, Image)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Self-Hosted Docker Footprint</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Standalone Node output + custom Redis cacheHandler</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Compact .output/ Nitro bundle + built-in Redis unstorage</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="seo-cwv-and-i18n" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. Technical SEO, Bilingual RTL/LTR Routing &amp; Core Web Vitals</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">For multilingual portals serving English and Arabic audiences, both meta-frameworks deliver full HTML crawlability, canonical/hreflang control, and structured JSON-LD injection, yet their ergonomic trade-offs differ. Next.js provides the statically typed <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">generateMetadata()</code> API and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">next/og</code> (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ImageResponse</code>) for dynamic social cards, while requiring explicit middleware + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">[locale]</code> dynamic segments (typically paired with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">next-intl</code>).</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Nuxt pairs <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@nuxtjs/i18n</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@nuxtjs/seo</code> with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useSeoMeta()</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useSchemaOrg()</code>, automatically generating localized route trees, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">hreflang</code> sitemaps, and directionality (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">dir=&quot;rtl&quot;</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">dir=&quot;ltr&quot;</code>) attributes on <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;html&gt;</code> without custom middleware plumbing.</p>
+
+                <div id="cwv-inp-hydration-tuning" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Protecting Interaction to Next Paint (INP) During Hydration
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In Next.js, keep <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&quot;use client&quot;</code> boundaries as low in the component tree as possible—never place <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&quot;use client&quot;</code> at the top of a page layout or you forfeit RSC bundle savings for every child import unless passed as <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">children</code> slots. In Nuxt, leverage Lazy Hydration (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;LazyChartWidget hydrate-on-visible /&gt;</code>) built natively into Nuxt so below-the-fold interactive widgets never block initial main-thread interactivity.</p>
+                  
+                </div>
+              </div>
+            </section>
+
+            <section id="decision-framework-next-nuxt" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Enterprise Decision Matrix: Which Meta-Framework Fits Your Roadmap?</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choose Next.js when your organization standardizes on React, shares domain hooks and design tokens with React Native mobile apps, relies heavily on Shadcn UI / Radix primitives, or builds content-and-data-dense pages where React Server Components eliminate tens of kilobytes of client-side markdown, syntax-highlighting, and formatting libraries.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choose Nuxt when your engineering team values Vue’s Single-File Component velocity, requires frictionless multi-cloud deployment portability (switching between Kubernetes Node pods, Cloudflare Workers, and edge PoPs via Nitro presets), or wants official plug-and-play modules for i18n, content collections, and hybrid SWR route caching.</p>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ Pre-Production Meta-Framework Architecture Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Configure Redis-backed shared cache invalidation before scaling beyond 1 container replica</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Enforce Zod runtime validation inside every Next.js Server Action and Nuxt h3 handler</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Audit client bundle chunks to ensure server secrets and ORM clients never cross into browser code</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Verify canonical, hreflang, OpenGraph, and JSON-LD output via curl on raw SSR HTML responses</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Placing &quot;use client&quot; at High-Level Layout Roots in Next.js</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Marking a top-level wrapper with &quot;use client&quot; pulls all directly imported child modules into the browser bundle. Isolate interactivity into leaf components and pass Server Components through React children props.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Calling Raw fetch() Inside Vue Setup Instead of Nuxt useFetch / useAsyncData</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Using bare window/undici fetch() directly in &lt;script setup&gt; executes twice—once during SSR and again during browser hydration—causing network waterfalls and hydration mismatches.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Trusting Next.js Server Action Arguments Without Schema Validation</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Every &quot;use server&quot; function compiles to a public HTTP POST endpoint. Always authenticate the session and parse inputs with Zod before touching your database.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Running Multi-Pod Next.js Standalone Without a Shared Cache Handler</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Default filesystem ISR caches live inside each container’s ephemeral disk, causing users on round-robin load balancers to see inconsistent stale pages after revalidateTag().</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Are Next.js and Nuxt frameworks or libraries?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Both Next.js and Nuxt are full-stack TypeScript Meta-Frameworks. Next.js builds on top of the React UI library, while Nuxt builds on top of the Vue.js progressive UI framework and the UnJS Nitro server engine.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Which is easier to self-host on Docker or Kubernetes: Next.js or Nuxt?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Nuxt is simpler to self-host out of the box because Nitro compiles into a tiny standalone .output directory with built-in Redis unstorage drivers for multi-pod caching. Next.js also self-hosts reliably via output: &quot;standalone&quot;, provided you wire a shared Redis cacheHandler for multi-replica ISR coherency.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Does Nuxt support zero-JavaScript server components like Next.js?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Yes. While standard Nuxt pages use universal SSR + Vue hydration, enabling experimental componentIslands lets you create *.server.vue components and Nuxt Islands that render HTML on the server with zero client-side component JavaScript.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Can Next.js or Nuxt replace a separate Express or Laravel backend?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">For BFF (Backend-for-Frontend) layers, SaaS portals, and content/e-commerce storefronts, Next.js Route Handlers/Server Actions and Nuxt Nitro h3 APIs easily handle full-stack duties. For heavy asynchronous queues, complex ERP domain logic, or multi-client public APIs, pairing them with NestJS, Laravel, or Symfony remains an industry best practice.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Architectural Verdict: RSC Tree Compression vs. Nitro Multi-Cloud Cohesion</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Next.js and Nuxt represent the two most mature full-stack meta-frameworks on the web. Next.js excels when pushing rendering and heavy dependencies exclusively to the server via React Server Components while tapping into the vast React/Shadcn ecosystem.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Nuxt shines when architectural clarity, declarative hybrid route caching, and effortless deployment portability across Node.js, containers, and edge runtimes are top priorities. Evaluate your team’s React vs. Vue fluency and hosting topology to make a durable five-year choice.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · JS &amp; TS Ecosystem</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert JS &amp; TS Ecosystem Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated Frontend Engineering &amp; Interactive UI service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/frontend-development.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore Frontend Engineering &amp; Interactive UI →</a>
+                <a href="/en/services/speed-optimization.html" class="btn-emerald text-xs py-2.5 px-5">Website Speed &amp; Core Web Vitals Optimization</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Next.js Official App Router Documentation — Server &amp; Client Composition Patterns ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Vercel / Next.js Core Team</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://nuxt.com/docs/guide/concepts/rendering" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Nuxt Official Documentation — Hybrid Rendering, Route Rules &amp; Nitro Server Engine ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Nuxt Core Team (nuxt.com)</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://nitro.build/guide" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">UnJS Nitro Server Engine — Deployment Presets &amp; Storage Layer ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">UnJS Open Source Collective</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in JS &amp; TS Ecosystem</h2>
+                <a href="/en/articles/index.html?track=javascript" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">JS &amp; TS Ecosystem · 15 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">React.js vs. Vue.js in Production: Fine-Grained Reactivity, Virtual DOM, Pinia/Zustand &amp; Team Velocity Comparison</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/reactjs-server-components-nextjs.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">React.js · 9 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">React Server Components (RSC) &amp; Next.js App Router: Streaming SSR &amp; Hybrid Architecture</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/prisma-vs-drizzle-orm-typescript-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">JS &amp; TS Ecosystem · 14 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Prisma vs. Drizzle ORM in TypeScript &amp; Node.js: Architecture, SQL Control, Latest Releases &amp; Migration Guide</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">Frontend Engineering &amp; Interactive UI</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/frontend-development.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/speed-optimization.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Website Speed &amp; Core Web Vitals Optimization</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/nextjs-vs-nuxtjs-fullstack-ssr-comparison.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

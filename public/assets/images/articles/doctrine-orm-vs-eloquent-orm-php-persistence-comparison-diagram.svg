@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" aria-label="FIG 1 · DATA MAPPER UNIT-OF-WORK VS. ACTIVE RECORD &amp; WORKER-SAFE PHP ORMS">
+  <defs>
+    <linearGradient id="dbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040806"/>
+      <stop offset="100%" stop-color="#07140E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" rx="20" fill="url(#dbg)" stroke="#10B981" stroke-opacity="0.32" stroke-width="1.5"/>
+
+  <!-- Top Header -->
+  <rect x="28" y="24" width="1144" height="58" rx="12" fill="#071811" stroke="#C6A15B" stroke-opacity="0.4" stroke-width="1"/>
+  <text x="52" y="60" fill="#E5C78B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="700">FIG 1 · DATA MAPPER UNIT-OF-WORK VS. ACTIVE RECORD &amp; WORKER-SAFE PHP ORMS</text>
+  <text x="1148" y="60" text-anchor="end" fill="#6EE7B7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15">PHP PERSISTENCE LAYERS</text>
+
+  <!-- Left Architecture Column -->
+  <g transform="translate(28, 102)">
+    <rect width="546" height="326" rx="16" fill="#06120D" stroke="#10B981" stroke-opacity="0.38" stroke-width="1.4"/>
+    <text x="26" y="40" fill="#F8FAFC" font-family="Georgia, serif" font-size="22" font-weight="700">Data Mapper &amp; Worker-Safe Persistence</text>
+    <text x="26" y="66" fill="#6EE7B7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">Doctrine ORM 3 · Cycle ORM · Atlas ORM</text>
+    <g transform="translate(24, 86)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">1. Pure POPO Domain Entities Free of Database Base Classes</text>
+    </g>
+    <g transform="translate(24, 142)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">2. Identity Map + Unit of Work Computes Atomic Commit Diffs</text>
+    </g>
+    <g transform="translate(24, 198)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">3. Cycle ORM Isolates Entity Heaps Across RoadRunner Workers</text>
+    </g>
+    <g transform="translate(24, 254)">
+      <rect width="498" height="44" rx="9" fill="#081B13" stroke="#10B981" stroke-opacity="0.25"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">4. Atlas ORM Explicit Table-Data-Gateway Predictable SQL</text>
+    </g>
+  </g>
+
+  <!-- Center Connector -->
+  <g transform="translate(578, 240)">
+    <line x1="0" y1="25" x2="44" y2="25" stroke="#C6A15B" stroke-width="2.5" stroke-dasharray="4 4"/>
+    <circle cx="22" cy="25" r="14" fill="#071811" stroke="#E5C78B" stroke-width="2"/>
+    <text x="22" y="30" text-anchor="middle" fill="#E5C78B" font-family="ui-monospace, monospace" font-size="12" font-weight="700">VS</text>
+  </g>
+
+  <!-- Right Architecture Column -->
+  <g transform="translate(626, 102)">
+    <rect width="546" height="326" rx="16" fill="#06120D" stroke="#C6A15B" stroke-opacity="0.42" stroke-width="1.4"/>
+    <text x="26" y="40" fill="#F8FAFC" font-family="Georgia, serif" font-size="22" font-weight="700">Active Record &amp; Lightweight PDO Layers</text>
+    <text x="26" y="66" fill="#E5C78B" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="13">Eloquent ORM · Propel · Medoo · RedBeanPHP · PDO</text>
+    <g transform="translate(24, 86)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">1. Eloquent Model Combines State, Scopes &amp; Relation Fluency</text>
+    </g>
+    <g transform="translate(24, 142)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">2. Model::shouldBeStrict() Blocks N+1 &amp; Unfillable Bugs</text>
+    </g>
+    <g transform="translate(24, 198)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">3. Cursor/Chunk Streaming Processes Millions of SQL Rows</text>
+    </g>
+    <g transform="translate(24, 254)">
+      <rect width="498" height="44" rx="9" fill="#0B1711" stroke="#C6A15B" stroke-opacity="0.28"/>
+      <text x="18" y="28" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500">4. Medoo &amp; Prepared PDO Power Ultra-Lean Reporting Queries</text>
+    </g>
+  </g>
+
+  <!-- Bottom Decision Strip -->
+  <rect x="28" y="446" width="1144" height="50" rx="12" fill="#050F0A" stroke="#10B981" stroke-opacity="0.28"/>
+  <text x="52" y="477" fill="#CBD5E1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">Decision Rule: Choose Doctrine 3 or Cycle ORM for complex DDD &amp; persistent workers; choose strict-mode Eloquent for high-velocity SaaS.</text>
+</svg>

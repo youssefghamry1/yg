@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" fill="none" role="img" aria-labelledby="wsodFlowTitle wsodFlowDesc">
+  <title id="wsodFlowTitle">WordPress White Screen of Death (WSOD) 5-Stage Diagnostic Decision Tree</title>
+  <desc id="wsodFlowDesc">Step-by-step engineering isolation workflow from safe WP_DEBUG_LOG inspection through WP-CLI plugin/theme isolation, PHP memory_limit verification, and OPcache/object-cache recovery.</desc>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#050806"/>
+      <stop offset="55%" stop-color="#07130D"/>
+      <stop offset="100%" stop-color="#050806"/>
+    </linearGradient>
+    <linearGradient id="goldBorder" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E5C78B"/>
+      <stop offset="100%" stop-color="#9A7638"/>
+    </linearGradient>
+    <linearGradient id="emeraldGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#07130D" stop-opacity="0.92"/>
+    </linearGradient>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#C6A15B"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="520" rx="24" fill="url(#bgGrad)" stroke="#143828" stroke-width="2"/>
+
+  <!-- Subtle architectural grid lines -->
+  <g stroke="#0D281C" stroke-width="1">
+    <line x1="0" y1="90" x2="1200" y2="90"/>
+    <line x1="0" y1="440" x2="1200" y2="440"/>
+    <line x1="240" y1="90" x2="240" y2="440"/>
+    <line x1="480" y1="90" x2="480" y2="440"/>
+    <line x1="720" y1="90" x2="720" y2="440"/>
+    <line x1="960" y1="90" x2="960" y2="440"/>
+  </g>
+
+  <!-- Header Bar -->
+  <text x="44" y="46" fill="#E5C78B" font-family="monospace" font-size="13" font-weight="700" letter-spacing="2">PRODUCTION INCIDENT TRIAGE WORKFLOW</text>
+  <text x="44" y="72" fill="#F8FAFC" font-family="Georgia, serif" font-size="22" font-weight="700">WordPress White Screen of Death (WSOD) — Deterministic Isolation Pipeline</text>
+  <rect x="968" y="30" width="188" height="36" rx="10" fill="#0A1E15" stroke="#C6A15B" stroke-opacity="0.5"/>
+  <text x="1062" y="53" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="12" font-weight="700">ZERO-EXPOSURE DEBUG</text>
+
+  <!-- Stage 1 -->
+  <g transform="translate(32, 128)">
+    <rect width="200" height="270" rx="18" fill="#0A1912" stroke="#EF4444" stroke-opacity="0.55" stroke-width="1.5"/>
+    <rect x="16" y="18" width="68" height="24" rx="6" fill="#3B1219"/>
+    <text x="50" y="34" text-anchor="middle" fill="#FCA5A5" font-family="monospace" font-size="11" font-weight="700">STAGE 01</text>
+    <text x="16" y="70" fill="#FFFFFF" font-family="Georgia, serif" font-size="17" font-weight="700">Classify Failure</text>
+    <text x="16" y="96" fill="#94A3B8" font-family="sans-serif" font-size="12">Inspect HTTP response</text>
+    <text x="16" y="114" fill="#94A3B8" font-family="sans-serif" font-size="12">code via curl -I:</text>
+    <rect x="16" y="132" width="168" height="54" rx="8" fill="#050806" stroke="#1E3A2F"/>
+    <text x="26" y="153" fill="#FCA5A5" font-family="monospace" font-size="11">• HTTP 500: PHP Fatal</text>
+    <text x="26" y="173" fill="#FCD34D" font-family="monospace" font-size="11">• HTTP 200: Empty Tpl</text>
+    <text x="16" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">Check if /wp-admin/ also</text>
+    <text x="16" y="232" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">fails or Recovery Email</text>
+    <text x="16" y="250" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">was dispatched.</text>
+  </g>
+
+  <line x1="234" y1="263" x2="262" y2="263" stroke="#C6A15B" stroke-width="2" marker-end="url(#arrowGold)"/>
+
+  <!-- Stage 2 -->
+  <g transform="translate(268, 128)">
+    <rect width="200" height="270" rx="18" fill="#0A1912" stroke="url(#goldBorder)" stroke-width="1.5"/>
+    <rect x="16" y="18" width="68" height="24" rx="6" fill="#2A2111"/>
+    <text x="50" y="34" text-anchor="middle" fill="#E5C78B" font-family="monospace" font-size="11" font-weight="700">STAGE 02</text>
+    <text x="16" y="70" fill="#FFFFFF" font-family="Georgia, serif" font-size="17" font-weight="700">Safe Error Log</text>
+    <text x="16" y="96" fill="#94A3B8" font-family="sans-serif" font-size="12">Enable private logging</text>
+    <text x="16" y="114" fill="#94A3B8" font-family="sans-serif" font-size="12">in wp-config.php:</text>
+    <rect x="16" y="132" width="168" height="68" rx="8" fill="#050806" stroke="#1E3A2F"/>
+    <text x="24" y="151" fill="#6EE7B7" font-family="monospace" font-size="10.5">WP_DEBUG = true</text>
+    <text x="24" y="169" fill="#6EE7B7" font-family="monospace" font-size="10.5">WP_DEBUG_LOG = true</text>
+    <text x="24" y="187" fill="#E5C78B" font-family="monospace" font-size="10.5">DISPLAY = false</text>
+    <text x="16" y="226" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">Read exact file &amp; line</text>
+    <text x="16" y="244" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">in wp-content/debug.log</text>
+  </g>
+
+  <line x1="470" y1="263" x2="498" y2="263" stroke="#C6A15B" stroke-width="2" marker-end="url(#arrowGold)"/>
+
+  <!-- Stage 3 -->
+  <g transform="translate(504, 128)">
+    <rect width="200" height="270" rx="18" fill="#0A1912" stroke="#10B981" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="16" y="18" width="68" height="24" rx="6" fill="#0D2E22"/>
+    <text x="50" y="34" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="11" font-weight="700">STAGE 03</text>
+    <text x="16" y="70" fill="#FFFFFF" font-family="Georgia, serif" font-size="17" font-weight="700">Plugin &amp; Theme</text>
+    <text x="16" y="96" fill="#94A3B8" font-family="sans-serif" font-size="12">Bypass broken hooks</text>
+    <text x="16" y="114" fill="#94A3B8" font-family="sans-serif" font-size="12">with --skip-plugins:</text>
+    <rect x="16" y="132" width="168" height="54" rx="8" fill="#050806" stroke="#1E3A2F"/>
+    <text x="24" y="153" fill="#6EE7B7" font-family="monospace" font-size="10.5">wp plugin deactivate</text>
+    <text x="24" y="171" fill="#E5C78B" font-family="monospace" font-size="10.5">--all --skip-plugins</text>
+    <text x="16" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">Test fallback theme</text>
+    <text x="16" y="232" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">(twentytwentyfive) &amp;</text>
+    <text x="16" y="250" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">binary-search culprit.</text>
+  </g>
+
+  <line x1="706" y1="263" x2="734" y2="263" stroke="#C6A15B" stroke-width="2" marker-end="url(#arrowGold)"/>
+
+  <!-- Stage 4 -->
+  <g transform="translate(740, 128)">
+    <rect width="200" height="270" rx="18" fill="#0A1912" stroke="#10B981" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect x="16" y="18" width="68" height="24" rx="6" fill="#0D2E22"/>
+    <text x="50" y="34" text-anchor="middle" fill="#6EE7B7" font-family="monospace" font-size="11" font-weight="700">STAGE 04</text>
+    <text x="16" y="70" fill="#FFFFFF" font-family="Georgia, serif" font-size="17" font-weight="700">PHP &amp; Memory</text>
+    <text x="16" y="96" fill="#94A3B8" font-family="sans-serif" font-size="12">Resolve OOM &amp; PHP 8.x</text>
+    <text x="16" y="114" fill="#94A3B8" font-family="sans-serif" font-size="12">signature mismatches:</text>
+    <rect x="16" y="132" width="168" height="54" rx="8" fill="#050806" stroke="#1E3A2F"/>
+    <text x="24" y="153" fill="#E5C78B" font-family="monospace" font-size="10.5">WP_MEMORY: 256M</text>
+    <text x="24" y="171" fill="#6EE7B7" font-family="monospace" font-size="10.5">MAX_MEMORY: 512M</text>
+    <text x="16" y="214" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">Audit TypeError calls</text>
+    <text x="16" y="232" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">&amp; corrupted core files</text>
+    <text x="16" y="250" fill="#CBD5E1" font-family="sans-serif" font-size="11.5">via wp core verify.</text>
+  </g>
+
+  <line x1="942" y1="263" x2="970" y2="263" stroke="#C6A15B" stroke-width="2" marker-end="url(#arrowGold)"/>
+
+  <!-- Stage 5 -->
+  <g transform="translate(976, 128)">
+    <rect width="192" height="270" rx="18" fill="url(#emeraldGlow)" stroke="#10B981" stroke-width="1.8"/>
+    <rect x="16" y="18" width="68" height="24" rx="6" fill="#064E3B"/>
+    <text x="50" y="34" text-anchor="middle" fill="#A7F3D0" font-family="monospace" font-size="11" font-weight="700">STAGE 05</text>
+    <text x="16" y="70" fill="#FFFFFF" font-family="Georgia, serif" font-size="17" font-weight="700">Verified Live</text>
+    <text x="16" y="96" fill="#D1FAE5" font-family="sans-serif" font-size="12">Purge stale bytecode</text>
+    <text x="16" y="114" fill="#D1FAE5" font-family="sans-serif" font-size="12">&amp; lock debug files:</text>
+    <rect x="16" y="132" width="160" height="54" rx="8" fill="#050806" stroke="#10B981" stroke-opacity="0.5"/>
+    <text x="24" y="153" fill="#6EE7B7" font-family="monospace" font-size="10.5">wp cache flush</text>
+    <text x="24" y="171" fill="#E5C78B" font-family="monospace" font-size="10.5">WP_DEBUG = false</text>
+    <text x="16" y="214" fill="#ECFDF5" font-family="sans-serif" font-size="11.5">Remove debug.log,</text>
+    <text x="16" y="232" fill="#ECFDF5" font-family="sans-serif" font-size="11.5">reset OPcache/CDN, &amp;</text>
+    <text x="16" y="250" fill="#ECFDF5" font-family="sans-serif" font-size="11.5">confirm HTTP 200 DOM.</text>
+  </g>
+
+  <!-- Footer Telemetry -->
+  <text x="44" y="482" fill="#94A3B8" font-family="monospace" font-size="12">Youssef Ghamry Engineering Knowledge Base • WordPress Production Diagnostics &amp; Recovery</text>
+  <text x="1156" y="482" text-anchor="end" fill="#E5C78B" font-family="monospace" font-size="12">MTTR Target: &lt; 15 Minutes</text>
+</svg>

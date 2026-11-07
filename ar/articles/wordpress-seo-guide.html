@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دليل سيو ووردبريس الشامل 2026 | تصدر نتائج بحث جوجل | يوسف غمري</title>
+    <meta name="description" content="خطوات تهيئة موقع ووردبريس لمحركات البحث: ضبط الروابط الدائمة، إعداد خريطة الموقع XML، تحسين بنية العناوين، وإضافة الترميز الهيكلي Schema." />
+    <link rel="canonical" href="/ar/articles/wordpress-seo-guide.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/wordpress-seo-guide.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/wordpress-seo-guide.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="يوسف غمري" />
+    <meta property="og:url" content="/ar/articles/wordpress-seo-guide.html" />
+    <meta property="og:title" content="دليل سيو ووردبريس الشامل 2026 | تصدر نتائج بحث جوجل | يوسف غمري" />
+    <meta property="og:description" content="خطوات تهيئة موقع ووردبريس لمحركات البحث: ضبط الروابط الدائمة، إعداد خريطة الموقع XML، تحسين بنية العناوين، وإضافة الترميز الهيكلي Schema." />
+    <meta property="og:image" content="/assets/images/articles/wordpress-guide-en.svg" />
+    <meta property="og:image:alt" content="استراتيجيات تحسين السيو لمواقع ووردبريس" />
+    <meta property="article:published_time" content="2026-02-15" />
+    <meta property="article:modified_time" content="2026-02-15" />
+    <meta property="article:section" content="ووردبريس (WordPress)" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="دليل سيو ووردبريس الشامل 2026 | تصدر نتائج بحث جوجل | يوسف غمري" />
+    <meta name="twitter:description" content="خطوات تهيئة موقع ووردبريس لمحركات البحث: ضبط الروابط الدائمة، إعداد خريطة الموقع XML، تحسين بنية العناوين، وإضافة الترميز الهيكلي Schema." />
+    <meta name="twitter:image" content="/assets/images/articles/wordpress-guide-en.svg" />
+    <meta name="twitter:image:alt" content="استراتيجيات تحسين السيو لمواقع ووردبريس" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Cinzel:wght@600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "/ar/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "مركز المعرفة",
+          "item": "/ar/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "ووردبريس (WordPress)",
+          "item": "/ar/articles/index.html?track=wordpress"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "الدليل المتقدم لتحسين محركات البحث (SEO) لمواقع WordPress",
+          "item": "/ar/articles/wordpress-seo-guide.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "الدليل المتقدم لتحسين محركات البحث (SEO) لمواقع WordPress",
+      "description": "خطوات تهيئة موقع ووردبريس لمحركات البحث: ضبط الروابط الدائمة، إعداد خريطة الموقع XML، تحسين بنية العناوين، وإضافة الترميز الهيكلي Schema.",
+      "image": "/assets/images/articles/wordpress-guide-en.svg",
+      "datePublished": "2026-02-15",
+      "dateModified": "2026-02-15",
+      "inLanguage": "ar",
+      "articleSection": "ووردبريس (WordPress)",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/ar/articles/wordpress-seo-guide.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "يوسف غمري",
+        "jobTitle": "مطور Full-Stack وأخصائي أول مناقصات وضبط جودة العروض الفنية"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "ما هي أفضل إضافة سيو لووردبريس؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "تعتبر إضافة Rank Math وإضافة Yoast SEO من أفضل الأدوات حالياً لما توفرانه من خيارات دقيقة للتحكم في الميتا داتا والبيانات المنظمة."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- شريط التنقل العلوي الفاخر بعرض الشاشة الكامل -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- الشعار والهوية المهنية -->
+        <a href="/ar/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="شعار يوسف غمري" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="text-sm sm:text-base tracking-wide font-extrabold gold-gradient-text">
+              يوسف غمري
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/75 tracking-tight font-mono">
+              مطور Full-Stack | أخصائي مناقصات وعروض فنية
+            </div>
+          </div>
+        </a>
+
+        <!-- التنقل الرئيسي لسطح المكتب: 8 ركائز أساسية -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-semibold" aria-label="القائمة الرئيسية">
+          <a href="/ar/index.html" class="nav-link px-2.5 py-1.5 rounded-md">الرئيسية</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>الخدمات</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold tracking-wide text-white">
+                    دليل الخدمات الهندسية والاستشارات الفنية المتكاملة
+                  </span>
+                </div>
+                <a href="/ar/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>استكشف كافة الـ 93 خدمة ←</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">تصميم وتطوير المواقع الإلكترونية</span>
+                    </div>
+                    <a href="/ar/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير مواقع ووردبريس</span>
+                    </a>
+                    <a href="/ar/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير متاجر شوبيفاي</span>
+                    </a>
+                    <a href="/ar/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير مواقع دروبال للمؤسسات</span>
+                    </a>
+                    <a href="/ar/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير متاجر ماجنتو / أدوبي كوميرس</span>
+                    </a>
+                    <a href="/ar/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير متاجر أوبن كارت</span>
+                    </a>
+                    <a href="/ar/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تصميم وتطوير متاجر سلة</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">البرمجيات والأنظمة الإدارية</span>
+                    </div>
+                    <a href="/ar/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير وتطبيق أنظمة تخطيط الموارد المؤسسية (ERP)</span>
+                    </a>
+                    <a href="/ar/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة إدارة علاقات العملاء (CRM)</span>
+                    </a>
+                    <a href="/ar/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة نقاط البيع والكاشير (POS)</span>
+                    </a>
+                    <a href="/ar/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة الموارد البشرية والرواتب (HRMS)</span>
+                    </a>
+                    <a href="/ar/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة إدارة المخازن والمستودعات (WMS)</span>
+                    </a>
+                    <a href="/ar/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير الأنظمة المحاسبية والمالية للشركات</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">تطوير تطبيقات الجوال</span>
+                    </div>
+                    <a href="/ar/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير وبرمجة تطبيقات الأندرويد الأصلية (Android)</span>
+                    </a>
+                    <a href="/ar/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير وبرمجة تطبيقات الآيفون والآيباد (iOS)</span>
+                    </a>
+                    <a href="/ar/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير التطبيقات الهجينة متعددة المنصات (Flutter وReact Native)</span>
+                    </a>
+                    <a href="/ar/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير تطبيقات الجوال لقطاع الأعمال والشركات</span>
+                    </a>
+                    <a href="/ar/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير تطبيقات المتاجر الإلكترونية والتسوق</span>
+                    </a>
+                    <a href="/ar/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تصميم واجهات وتجربة مستخدم تطبيقات الجوال (UI/UX)</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">خدمات المناقصات وإعداد العروض</span>
+                    </div>
+                    <a href="/ar/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">إعداد وكتابة العروض الفنية للمناقصات</span>
+                    </a>
+                    <a href="/ar/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">إعداد وتجهيز ملفات العرض الفني التخصصية</span>
+                    </a>
+                    <a href="/ar/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">إعداد العروض المالية وجداول الكميات والأسعار (BOQ)</span>
+                    </a>
+                    <a href="/ar/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل وثائق وكراسات الشروط للمناقصات (RFP)</span>
+                    </a>
+                    <a href="/ar/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل طلبات تقديم العروض (RFP Analysis)</span>
+                    </a>
+                    <a href="/ar/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل طلبات عروض الأسعار (RFQ Analysis)</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">التسويق الرقمي وتحسين محركات البحث</span>
+                    </div>
+                    <a href="/ar/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحسين السيو الداخلي للمحتوى والصفحات (On-Page SEO)</span>
+                    </a>
+                    <a href="/ar/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">السيو الخارجي وبناء السلطة والمصداقية (Off-Page SEO)</span>
+                    </a>
+                    <a href="/ar/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">التدقيق الشامل لمواقع الويب وفحص صحة السيو (SEO Audits)</span>
+                    </a>
+                    <a href="/ar/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">بحوث الكلمات المفتاحية وتحليل نية البحث للمستخدمين</span>
+                    </a>
+                    <a href="/ar/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استراتيجية محتوى السيو وبناء المجموعات الموضوعية (Topic Clusters)</span>
+                    </a>
+                    <a href="/ar/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحسين أرشفة وفهرسة المواقع في Google Search Console</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">تطوير الأعمال والاستشارات التقنية</span>
+                    </div>
+                    <a href="/ar/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استشارات تطوير الأعمال والتوسع التجاري</span>
+                    </a>
+                    <a href="/ar/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استشارات ما قبل البيع لقطاع التقنية (IT Pre-Sales)</span>
+                    </a>
+                    <a href="/ar/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استشارات هندسة الحلول الرقمية المؤسسية</span>
+                    </a>
+                    <a href="/ar/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">دراسة وتقييم الفرص التجارية والمشاريع الاستثمارية</span>
+                    </a>
+                    <a href="/ar/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">حوكمة وتوجيه قرار التقدم للعطاءات (Bid / No-Bid)</span>
+                    </a>
+                    <a href="/ar/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل وتوثيق العمليات المؤسسية وهندستها (BPM)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/ar/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">السيرة الذاتية</a>
+          <a href="/ar/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">الأعمال</a>
+          <a href="/ar/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">المناقصات</a>
+          <a href="/ar/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">الشهادات</a>
+          <a href="/ar/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">المقالات</a>
+          <a href="/ar/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">تواصل معي</a>
+        </nav>
+
+        <!-- أدوات التحكم اليسرى وتبديل اللغة -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/en/articles/wordpress-seo-guide.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="التبديل إلى النسخة الإنجليزية"
+          >
+            <span>🇬🇧</span>
+            <span dir="ltr">English (EN)</span>
+          </a>
+
+          <a
+            href="/ar/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>اطلب استشارة فنية</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-nav-toggle"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="فتح القائمة"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- قائمة الجوال المنسدلة -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/ar/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>الرئيسية</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>دليل الخدمات (93 خدمة متخصصة)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/ar/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                عرض دليل الخدمات الكامل (93 خدمة) ←
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>تصميم وتطوير المواقع الإلكترونية</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير مواقع ووردبريس</a>
+                <a href="/ar/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير متاجر شوبيفاي</a>
+                <a href="/ar/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير مواقع دروبال للمؤسسات</a>
+                <a href="/ar/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير متاجر ماجنتو / أدوبي كوميرس</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>البرمجيات والأنظمة الإدارية</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير وتطبيق أنظمة تخطيط الموارد المؤسسية (ERP)</a>
+                <a href="/ar/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير أنظمة إدارة علاقات العملاء (CRM)</a>
+                <a href="/ar/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير أنظمة نقاط البيع والكاشير (POS)</a>
+                <a href="/ar/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير أنظمة الموارد البشرية والرواتب (HRMS)</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>تطوير تطبيقات الجوال</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير وبرمجة تطبيقات الأندرويد الأصلية (Android)</a>
+                <a href="/ar/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير وبرمجة تطبيقات الآيفون والآيباد (iOS)</a>
+                <a href="/ar/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير التطبيقات الهجينة متعددة المنصات (Flutter وReact Native)</a>
+                <a href="/ar/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير تطبيقات الجوال لقطاع الأعمال والشركات</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>خدمات المناقصات وإعداد العروض</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">إعداد وكتابة العروض الفنية للمناقصات</a>
+                <a href="/ar/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">إعداد وتجهيز ملفات العرض الفني التخصصية</a>
+                <a href="/ar/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">إعداد العروض المالية وجداول الكميات والأسعار (BOQ)</a>
+                <a href="/ar/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">تحليل وثائق وكراسات الشروط للمناقصات (RFP)</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>التسويق الرقمي وتحسين محركات البحث</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">تحسين السيو الداخلي للمحتوى والصفحات (On-Page SEO)</a>
+                <a href="/ar/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">السيو الخارجي وبناء السلطة والمصداقية (Off-Page SEO)</a>
+                <a href="/ar/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">التدقيق الشامل لمواقع الويب وفحص صحة السيو (SEO Audits)</a>
+                <a href="/ar/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">بحوث الكلمات المفتاحية وتحليل نية البحث للمستخدمين</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>تطوير الأعمال والاستشارات التقنية</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">استشارات تطوير الأعمال والتوسع التجاري</a>
+                <a href="/ar/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">استشارات ما قبل البيع لقطاع التقنية (IT Pre-Sales)</a>
+                <a href="/ar/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">استشارات هندسة الحلول الرقمية المؤسسية</a>
+                <a href="/ar/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">دراسة وتقييم الفرص التجارية والمشاريع الاستثمارية</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/ar/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>السيرة الذاتية (CV)</span>
+        </a>
+
+        <a href="/ar/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>الأعمال والمشاريع (25 مختارة / +100 مشروع)</span>
+        </a>
+
+        <a href="/ar/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>المناقصات الحكومية (+400 خبرة ومشاركة)</span>
+        </a>
+
+        <a href="/ar/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>الشهادات والاعتمادات المهنية (+27)</span>
+        </a>
+
+        <a href="/ar/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>مركز المعرفة والمقالات (132 دليلاً)</span>
+        </a>
+
+        <a href="/ar/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>تواصل معي واستشارة العروض</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">اللغة:</span>
+          <a href="/en/articles/wordpress-seo-guide.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇬🇧</span>
+            <span dir="ltr">Switch to English (EN)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/ar/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            اطلب عرض سعر أو استشارة فنية
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ترويسة المقال بعرض الشاشة الكامل -->
+    <header class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="مسار التنقل">
+          <a href="/ar/index.html" class="hover:text-[#E5C78B]">الرئيسية</a>
+          <span>/</span>
+          <a href="/ar/articles/index.html" class="hover:text-[#E5C78B]">مركز المعرفة</a>
+          <span>/</span>
+          <a href="/ar/articles/index.html?track=wordpress" class="hover:text-[#E5C78B]">ووردبريس (WordPress)</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">الدليل المتقدم لتحسين محركات البحث (SEO) لمواقع WordPress</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>ووردبريس (WordPress) · دليل تطبيقي</span>
+              </span>
+              <span class="badge-emerald">⏱️ 9 دقائق</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">نُشر في <span dir="ltr">2026-02-15</span></span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight leading-[1.22]">
+              الدليل المتقدم لتحسين محركات البحث (SEO) لمواقع WordPress
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              خطوات تهيئة موقع ووردبريس لمحركات البحث: ضبط الروابط الدائمة، إعداد خريطة الموقع XML، تحسين بنية العناوين، وإضافة الترميز الهيكلي Schema.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="يوسف غمري" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">بقلم: يوسف غمري</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">مطور Full-Stack · خبرة +400 مناقصة</div>
+                </div>
+              </div>
+              <a href="/en/articles/wordpress-seo-guide.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇬🇧</span>
+                <span>اقرأ النسخة الإنجليزية (EN)</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/wordpress-guide-en.svg" alt="استراتيجيات تحسين السيو لمواقع ووردبريس" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>المسار: ووردبريس (WordPress)</span>
+                <a href="/ar/services/on-page-seo.html" class="text-[#E5C78B] hover:underline font-bold">الخدمة المرتبطة ←</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- مساحة التحرير والقراءة الهندسية من 3 أعمدة بعرض الشاشة الكامل -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- الشريط الجانبي الأيمن المثبت: فهرس المحتويات ودليل المسارات (3 أعمدة) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold tracking-wide text-[#E5C78B] font-mono">فهرس محتويات الدليل</div>
+            <nav class="space-y-1" aria-label="فهرس المحتويات">
+              <a href="#sec-1" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                تهيئة الإعدادات الأساسية لووردبريس للسيو
+              </a>
+              
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">الأسئلة الشائعة</a>
+              
+              
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">أدلة تقنية ذات صلة</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold tracking-wide text-emerald-400 font-mono">تصفح كافة الـ 14 مساراً</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/ar/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ المناقصات ومنصة اعتماد</a><a href="/ar/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 ووردبريس (WordPress)</a><a href="/ar/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ شوبيفاي (Shopify)</a><a href="/ar/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 دروبال (Drupal)</a><a href="/ar/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 ماجنتو (Magento)</a><a href="/ar/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 جوملا (Joomla)</a><a href="/ar/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 أوبن كارت (OpenCart)</a><a href="/ar/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 منصة سلة (Salla)</a><a href="/ar/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ منصة زد (Zid)</a><a href="/ar/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ أنجولار (Angular)</a><a href="/ar/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ ريأكت (React.js)</a><a href="/ar/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 نود جي إس (Node.js)</a><a href="/ar/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 منظومة JS وTypeScript</a><a href="/ar/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP والأنظمة الخلفية</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- عمود القراءة الأوسط بطول سطر مثالي (6 أعمدة، max-w-[75ch]) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono tracking-wide text-[#E5C78B]">نظرة عامة وسياق المشكلة الهندسية</div>
+              <div class="space-y-3 text-sm sm:text-base text-slate-200 leading-[1.9] content-body">
+                <p>خطوات تهيئة موقع ووردبريس لمحركات البحث: ضبط الروابط الدائمة، إعداد خريطة الموقع XML، تحسين بنية العناوين، وإضافة الترميز الهيكلي Schema.</p>
+              </div>
+            </div>
+            <section id="sec-1" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white leading-snug">تهيئة الإعدادات الأساسية لووردبريس للسيو</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-[1.9] content-body">
+                <p>ابدأ بضبط الروابط الدائمة (Permalinks) على خيار <em>Post name</em> (/sample-post/) لضمان وجود روابط واضحة وقابلة للقراءة ومحملة بالكلمات المفتاحية بدلاً من المعرفات الرقمية المعقدة.</p>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono tracking-wide text-[#E5C78B]">إجابات تقنية موثقة</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white">الأسئلة الشائعة</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B]">ما هي أفضل إضافة سيو لووردبريس؟</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">تعتبر إضافة Rank Math وإضافة Yoast SEO من أفضل الأدوات حالياً لما توفرانه من خيارات دقيقة للتحكم في الميتا داتا والبيانات المنظمة.</p>
+                </div>
+              </div>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white">أدلة مرتبطة في مسار ووردبريس (WordPress)</h2>
+                <a href="/ar/articles/index.html?track=wordpress" class="text-xs font-bold text-[#E5C78B] hover:underline">عرض المسار ←</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/ar/articles/essential-wordpress-plugins.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono text-[#E5C78B]">ووردبريس (WordPress) · 8 دقائق</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">الدليل الكامل لأهم إضافات WordPress الأساسية لكل موقع ناجح</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">اقرأ الدليل ←</span>
+                </a>
+                <a href="/ar/articles/how-to-choose-a-wordpress-theme.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono text-[#E5C78B]">ووردبريس (WordPress) · 8 دقائق</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">كيفية اختيار أفضل قالب WordPress: المعايير التقنية وسرعة التجاوب</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">اقرأ الدليل ←</span>
+                </a>
+                <a href="/ar/articles/what-is-wordpress.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono text-[#E5C78B]">ووردبريس (WordPress) · 8 دقائق</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">ما هو ووردبريس؟ الدليل الشامل لفهم أشهر نظام لإدارة المحتوى في العالم</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">اقرأ الدليل ←</span>
+                </a>
+                <a href="/ar/articles/woocommerce-store-setup.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono text-[#E5C78B]">ووردبريس (WordPress) · 10 دقائق</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">إنشاء وإطلاق متجر إلكتروني احترافي باستخدام WooCommerce خطوة بخطوة</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">اقرأ الدليل ←</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- الشريط الجانبي الأيسر المثبت: الخدمة المرتبطة والاعتمادية (3 أعمدة) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono tracking-wide text-[#E5C78B]">الخدمة التنفيذية المرتبطة</div>
+            <h2 class="text-base font-bold text-white leading-snug">خدمة تحسين السيو الداخلي On-Page</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              هل تحتاج إلى تنفيذ هندسي للإنتاج الفعلي، تشخيص جذري للأعطال، تحسين الأداء، أو صياغة عرض فني ومصفوفة امتثال لهذا المجال؟
+            </p>
+            <a href="/ar/services/on-page-seo.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>استكشف تفاصيل الخدمة ←</span>
+            </a>
+            
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold tracking-wide text-emerald-400 font-mono">سجل الاعتمادية الموثق</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">+400</div>
+                <div class="text-[10px] text-slate-300">مناقصة معدة ومراجعة</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-white font-mono">+100</div>
+                <div class="text-[10px] text-slate-300">مشروع رقمي منفذ</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">+60</div>
+                <div class="text-[10px] text-slate-300">جهة حكومية وسيادية</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-white font-mono">93</div>
+                <div class="text-[10px] text-slate-300">خدمة متخصصة</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold text-white">استشارة فنية مباشرة</div>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              تحدث مباشرة مع يوسف غمري حول معمارية منصتك أو متطلبات كراسة الشروط القادمة.
+            </p>
+            <div class="space-y-2">
+              <a href="/ar/contact/index.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center">أرسل استفساراً فنياً</a>
+              <a href="https://wa.me/201503292942" target="_blank" rel="noopener noreferrer" class="w-full btn-emerald text-xs py-2 px-4 justify-center">تواصل عبر واتساب</a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="شعار يوسف غمري" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-extrabold text-white gold-gradient-text tracking-wide">يوسف غمري</span>
+              <span class="text-slate-500"> — مطور Full-Stack وأخصائي أول مناقصات وضبط جودة العروض الفنية</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/ar/index.html" class="hover:text-[#E5C78B] transition-colors">الرئيسية</a>
+            <a href="/ar/services/index.html" class="hover:text-[#E5C78B] transition-colors">الخدمات (93)</a>
+            <a href="/ar/cv/index.html" class="hover:text-[#E5C78B] transition-colors">السيرة الذاتية</a>
+            <a href="/ar/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">الأعمال (25 / +100)</a>
+            <a href="/ar/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">المناقصات (+400)</a>
+            <a href="/ar/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">الشهادات (+27)</a>
+            <a href="/ar/articles/index.html" class="hover:text-[#E5C78B] transition-colors">المقالات (132)</a>
+            <a href="/ar/contact/index.html" class="hover:text-white transition-colors">تواصل معي</a>
+            <a href="/en/articles/wordpress-seo-guide.html" class="text-[#E5C78B] font-bold" dir="ltr">English Edition (EN)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 يوسف غمري. جميع الحقوق محفوظة. هندسة البرمجيات المتكاملة واستشارات المناقصات الحكومية.</div>
+          <div>القاهرة، مصر · المملكة العربية السعودية (منصة اعتماد) ومشاريع دولية عن بُعد</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

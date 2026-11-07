@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Platform 4, OAuth2, JWT, FrankenPHP, Swoole &amp; OPcache Guide | Youssef Ghamry</title>
+    <meta name="description" content="Architect high-scale PHP APIs and runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL, FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache, and PSR." />
+    <meta name="keywords" content="api platform php oauth2 jwt graphql and websockets guide, api platform 4 symfony laravel openapi graphql, league oauth2 server lcobucci jwt firebase php-jwt, frankenphp roadrunner swoole reactphp amp php-fpm opcache, php-fig psr standards pie extensions libsodium security" />
+    <link rel="canonical" href="/en/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" />
+    <meta property="og:title" content="API Platform 4, OAuth2, JWT, FrankenPHP, Swoole &amp; OPcache Guide | Youssef Ghamry" />
+    <meta property="og:description" content="Architect high-scale PHP APIs and runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL, FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache, and PSR." />
+    <meta property="og:image" content="/assets/images/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb-featured.svg" />
+    <meta property="og:image:alt" content="Enterprise PHP API and Asynchronous Runtime architecture diagram featuring API Platform 4, OAuth2/JWT, GraphQL PHP, WebSockets, FrankenPHP, RoadRunner, Swoole, PHP-FPM, and OPcache JIT" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="PHP &amp; Backend" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="API Platform 4, OAuth2, JWT, FrankenPHP, Swoole &amp; OPcache Guide | Youssef Ghamry" />
+    <meta name="twitter:description" content="Architect high-scale PHP APIs and runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL, FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache, and PSR." />
+    <meta name="twitter:image" content="/assets/images/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb-featured.svg" />
+    <meta name="twitter:image:alt" content="Enterprise PHP API and Asynchronous Runtime architecture diagram featuring API Platform 4, OAuth2/JWT, GraphQL PHP, WebSockets, FrankenPHP, RoadRunner, Swoole, PHP-FPM, and OPcache JIT" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PHP & Backend",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=php"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Enterprise PHP APIs, Security & Async Runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL & WebSockets + FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache & PSR Standards",
+          "item": "https://youssefghamry.com/en/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Enterprise PHP APIs, Security & Async Runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL & WebSockets + FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache & PSR Standards",
+      "description": "Architect high-scale PHP APIs and runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL, FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache, and PSR.",
+      "image": "https://youssefghamry.com/assets/images/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb-featured.svg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "PHP & Backend",
+      "keywords": "api platform php oauth2 jwt graphql and websockets guide, api platform 4 symfony laravel openapi graphql, league oauth2 server lcobucci jwt firebase php-jwt, frankenphp roadrunner swoole reactphp amp php-fpm opcache, php-fig psr standards pie extensions libsodium security",
+      "citation": [
+        "https://api-platform.com/docs/",
+        "https://frankenphp.dev/docs/",
+        "https://www.php-fig.org/psr/",
+        "https://oauth2.thephpleague.com/"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does API Platform 4 really work with both Symfony and Laravel now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Starting with API Platform 4, first-party Laravel integration sits alongside Symfony—letting Laravel Eloquent models and DTOs leverage #[ApiResource] to generate OpenAPI 3.1, JSON-LD/Hydra, and GraphQL endpoints automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should we switch every PHP-FPM app to FrankenPHP or RoadRunner immediately?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not blindly. Properly tuned PHP-FPM + OPcache handles thousands of RPS with 100% shared-nothing request isolation (zero cross-request memory leaks). Adopt FrankenPHP, RoadRunner, or Laravel Octane when container CPU costs or sub-10ms p99 API latency justify auditing your services for stateless worker safety."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Swoole, ReactPHP, and AMPHP?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Swoole is a compiled C++ PHP extension providing OS-level async coroutines and an HTTP/WebSocket server. ReactPHP (event-loop callbacks/promises) and AMPHP v3 (structured concurrency built on native PHP 8.1+ Fibers) are pure Composer userland PHP libraries requiring zero custom C extensions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is PIE in the PHP ecosystem?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PIE (PHP Installer for Extensions), developed under the PHP Foundation, is the modern Composer-based replacement for legacy PECL—making installing extensions like redis, igbinary, or xdebug consistent and reproducible."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=php" class="hover:text-[#E5C78B]">PHP &amp; Backend</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">Enterprise PHP APIs, Security &amp; Async Runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL &amp; WebSockets + FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache &amp; PSR Standards</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>PHP APIs, Security &amp; Async Runtimes</span>
+              </span>
+              <span class="badge-emerald">⏱️ 16 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              Enterprise PHP APIs, Security &amp; Async Runtimes: API Platform 4, OAuth 2.0, JWT, GraphQL &amp; WebSockets + FrankenPHP, RoadRunner, Swoole, ReactPHP, Amp, PHP-FPM, OPcache &amp; PSR Standards
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              The complete high-scale PHP backend engineering guide: building OpenAPI 3.1 / JSON-LD / GraphQL APIs with API Platform 4 and webonyx/graphql-php, securing OAuth 2.0 + EdDSA JWTs + libsodium cryptography, streaming WebSockets (Reverb/Swoole/Ratchet), enforcing PHP-FIG PSR standards, and scaling from tuned PHP-FPM + OPcache JIT to persistent FrankenPHP, RoadRunner, Swoole, ReactPHP, and AMPHP workers.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb-featured.svg" alt="Enterprise PHP API and Asynchronous Runtime architecture diagram featuring API Platform 4, OAuth2/JWT, GraphQL PHP, WebSockets, FrankenPHP, RoadRunner, Swoole, PHP-FPM, and OPcache JIT" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: PHP &amp; Backend</span>
+                <a href="/en/services/api-development-integration.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#api-platform-4-graphql-oauth2-jwt-websockets" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. API Platform 4, RESTful OpenAPI 3.1, GraphQL PHP, OAuth 2.0, JWT &amp; WebSockets
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#api-platform-4-dto-resource" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Decoupled Read/Write DTO Resource in API Platform 4 (Symfony &amp; Laravel)</a><a href="#lcobucci-jwt-eddsa-verification" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Strict Asymmetric JWT Verification (Preventing Algorithm-Confusion Attacks)</a>
+              </div>
+              <a href="#php-fpm-opcache-vs-frankenphp-roadrunner-swoole" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. PHP Performance &amp; Async Runtimes: PHP-FPM + OPcache JIT vs. FrankenPHP, RoadRunner, Swoole, ReactPHP &amp; Amp
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#opcache-fpm-production-ini" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Production Docker php.ini &amp; PHP-FPM Pool Tuning Baseline</a>
+              </div>
+              <a href="#psr-standards-pie-extensions-and-security-libs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. PHP-FIG PSR Standards, PIE Extensions &amp; Modern Cryptography (libsodium / Argon2id)
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#amphp-fibers-concurrent-io" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Callback-Free Asynchronous PHP Using Native PHP Fibers (AMPHP v3)</a>
+              </div>
+              <a href="#php-apis-and-runtimes-comparison-table" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. Complete PHP API Tools, Async Runtimes, Standards &amp; Security Matrix
+              </a>
+              <a href="#worker-mode-stateless-safety" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Golden Rule of FrankenPHP, RoadRunner &amp; Swoole Worker Mode
+              </a>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">A persistent myth among engineers unfamiliar with modern PHP is that PHP is trapped in 50ms stateless CGI scripts incapable of persistent WebSockets, asynchronous concurrency, or sub-5ms API gateways. In reality, PHP 8.3–8.5 combines battle-hardened <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PHP-FPM + Zend OPcache Preloading/JIT</code> with Go- and C++-backed persistent application servers (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">FrankenPHP</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">RoadRunner</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Swoole</code>) and native PHP 8.1+ Fiber concurrency (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">AMPHP v3</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ReactPHP</code>).</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Pairing these modern execution engines with standards-driven API toolkits—<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">API Platform 4</code> (now supporting both Symfony and Laravel!), <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">league/oauth2-server</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">lcobucci/jwt</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">firebase/php-jwt</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">webonyx/graphql-php</code>, PHP-FIG <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR</code> interfaces, native <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PIE</code> extensions, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">libsodium</code> cryptography—produces secure, observable API platforms handling tens of thousands of requests per second.</p>
+            </div>
+            <section id="api-platform-4-graphql-oauth2-jwt-websockets" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. API Platform 4, RESTful OpenAPI 3.1, GraphQL PHP, OAuth 2.0, JWT &amp; WebSockets</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">API Platform 4 transforms how teams build REST and GraphQL APIs in both Symfony and Laravel: annotating a DTO or Entity with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">#[ApiResource]</code> paired with clean <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ProviderInterface</code> (read) and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ProcessorInterface</code> (write) classes automatically exposes RFC 7807 Problem Details errors, JSON-LD/Hydra hypermedia, OpenAPI 3.1 Swagger docs, pagination, and optional GraphQL resolvers (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">webonyx/graphql-php</code>, also powering Laravel Lighthouse) with zero controller boilerplate.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">For stateless API security, combine <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">league/oauth2-server</code> (RFC 6749 Authorization Code + mandatory PKCE <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">S256</code> challenge) with asymmetric <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">EdDSA</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">RS256</code> tokens signed via <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">lcobucci/jwt</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">firebase/php-jwt</code> (keep access tokens short-lived at 5–15 minutes and rotate refresh tokens in Redis). When pushing live order updates or chat events, PHP offers three proven WebSocket engines: first-party <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Laravel Reverb</code> (built on ReactPHP), <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Swoole\WebSocket\Server</code>, and classic <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Ratchet</code>.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb-diagram.svg"
+                    alt="Enterprise PHP API Gateway &amp; Persistent Worker Execution Model comparing API Platform 4/OAuth2/JWT/GraphQL/WebSockets and PHP-FPM/OPcache/FrankenPHP/RoadRunner/Swoole"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Unifying standards-compliant API gateways (API Platform 4, OAuth2 PKCE, EdDSA JWT, GraphQL, WebSockets) with tuned FPM + OPcache and persistent worker runtimes.
+                  </figcaption>
+                </figure>
+
+                <div id="api-platform-4-dto-resource" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Decoupled Read/Write DTO Resource in API Platform 4 (Symfony &amp; Laravel)
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Exposing dedicated API DTOs via <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">State\ProviderInterface</code> rather than leaking raw database tables directly protects public API contracts when internal SQL schemas evolve.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/ApiResource/ShipmentStatusResource.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+declare(strict_types=1);
+
+namespace App\ApiResource;
+
+use ApiPlatform\Metadata\ApiProperty;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\State\ShipmentStatusProvider;
+
+#[ApiResource(
+    shortName: 'ShipmentStatus',
+    operations: [
+        new Get(
+            uriTemplate: '/v1/shipments/{waybill}',
+            provider: ShipmentStatusProvider::class,
+            security: &quot;is_granted('SCOPE_SHIPMENTS_READ')&quot;
+        )
+    ]
+)]
+final readonly class ShipmentStatusResource
+{
+    public function __construct(
+        #[ApiProperty(identifier: true)]
+        public string $waybill,
+        public string $currentHub,
+        public string $status,
+        public \DateTimeImmutable $estimatedDeliveryAt
+    ) {}
+}</code></pre>
+                </div>
+                </div>
+
+                <div id="lcobucci-jwt-eddsa-verification" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Strict Asymmetric JWT Verification (Preventing Algorithm-Confusion Attacks)
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">lcobucci/jwt</code> (and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">firebase/php-jwt</code>), ALWAYS enforce <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">SignedWith</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">StrictValidAt</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">IssuedBy</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PermittedFor</code> (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">aud</code>) constraints so tokens issued for Service A can never replay against Service B.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/Security/JwtVerifier.php</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">php</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;?php
+declare(strict_types=1);
+
+namespace App\Security;
+
+use Lcobucci\Clock\SystemClock;
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Eddsa;
+use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Validation\Constraint\IssuedBy;
+use Lcobucci\JWT\Validation\Constraint\PermittedFor;
+use Lcobucci\JWT\Validation\Constraint\SignedWith;
+use Lcobucci\JWT\Validation\Constraint\StrictValidAt;
+
+final readonly class JwtVerifier
+{
+    private Configuration $config;
+
+    public function __construct(string $ed25519PublicKeyBase64)
+    {
+        $key = InMemory::base64Encoded($ed25519PublicKeyBase64);
+        $this-&gt;config = Configuration::forAsymmetricSigner(new Eddsa(), $key, $key);
+    }
+
+    public function parseAndVerify(string $bearerJwt): array
+    {
+        $token = $this-&gt;config-&gt;parser()-&gt;parse($bearerJwt);
+        $this-&gt;config-&gt;validator()-&gt;assert(
+            $token,
+            new SignedWith($this-&gt;config-&gt;signer(), $this-&gt;config-&gt;verificationKey()),
+            new IssuedBy('https://auth.youssefghamry.com'),
+            new PermittedFor('api://erp-core'),
+            new StrictValidAt(SystemClock::fromUTC())
+        );
+        return $token-&gt;claims()-&gt;all();
+    }
+}</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="php-fpm-opcache-vs-frankenphp-roadrunner-swoole" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. PHP Performance &amp; Async Runtimes: PHP-FPM + OPcache JIT vs. FrankenPHP, RoadRunner, Swoole, ReactPHP &amp; Amp</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Before rewriting architecture, optimize <strong class="text-white font-semibold">PHP-FPM + Zend OPcache</strong>: setting <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">opcache.validate_timestamps=0</code> (in immutable Docker images), <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">opcache.preload</code> for hot framework classes, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">opcache.jit=tracing</code> (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">opcache.jit_buffer_size=64M</code>), and sizing <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">pm.max_children = (Available Container RAM) / (Avg Worker RSS)</code> eliminates disk stat overhead and OOM swap thrashing—comfortably serving 1,000–3,000 RPS per node.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">When you need sub-8ms p99 latency or 15,000+ RPS by eliminating framework boot per request, persistent worker servers take over: <strong class="text-white font-semibold">FrankenPHP</strong> (built on Caddy in Go, officially backed by the PHP Foundation) gives automatic HTTPS, HTTP/3, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">103 Early Hints</code>, and single-binary Worker Mode; <strong class="text-white font-semibold">RoadRunner</strong> (Go) adds built-in AMQP/Kafka/SQS queue consumers and gRPC; and <strong class="text-white font-semibold">Swoole / OpenSwoole</strong> provides C++ preemptive coroutines. Meanwhile, inside pure PHP userland, <strong class="text-white font-semibold">ReactPHP</strong> powers event-loop daemons (like Laravel Reverb) and <strong class="text-white font-semibold">AMPHP (Amp v3)</strong> uses native PHP 8.1+ <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Fiber</code>s for structured <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">async()</code> concurrent HTTP/SQL execution without callback hell!</p>
+
+                <div id="opcache-fpm-production-ini" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Production Docker php.ini &amp; PHP-FPM Pool Tuning Baseline
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Never ship default <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">pm.max_children = 5</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">validate_timestamps = 1</code> inside immutable Kubernetes containers.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">docker/php/conf.d/99-production-tuning.ini</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ini</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>; Immutable container bytecode cache — zero filesystem stat() per request!
+opcache.enable=1
+opcache.memory_consumption=256
+opcache.interned_strings_buffer=32
+opcache.max_accelerated_files=32531
+opcache.validate_timestamps=0
+opcache.save_comments=1
+opcache.jit=tracing
+opcache.jit_buffer_size=64M
+
+; Security hardening
+expose_php=Off
+session.cookie_httponly=1
+session.cookie_secure=1
+session.cookie_samesite=Lax</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="psr-standards-pie-extensions-and-security-libs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. PHP-FIG PSR Standards, PIE Extensions &amp; Modern Cryptography (libsodium / Argon2id)</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Framework-independent longevity in PHP rests on <strong class="text-white font-semibold">PHP-FIG PSR Standards</strong>: <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-4</code> autoloading, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-3</code> logging, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-7</code> HTTP messages, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-15</code> middleware, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-11</code> DI containers, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-18</code> HTTP clients, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-16</code>/<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-6</code> caching, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PSR-14</code> event dispatchers, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PER-CS 2.0</code> coding style. Writing domain SDKs against PSR interfaces lets you reuse the exact same library across Symfony, Laravel, Slim, Drupal, and Magento.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">For C/Rust PHP extensions (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">redis</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">igbinary</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">sodium</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">intl</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">apcu</code>), the PHP Foundation’s modern <strong class="text-white font-semibold">PIE (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PHP Installer for Extensions</code>)</strong> replaces archaic <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">pecl</code> builds with Composer-aware installation. Finally, for security hardening: hash passwords exclusively with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">password_hash($pw, PASSWORD_ARGON2ID)</code>, encrypt sensitive PII columns using built-in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ext-sodium</code> (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">sodium_crypto_aead_xchacha20poly1305_ietf_encrypt</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ParagonIE Halite</code>), and sanitize untrusted rich-text HTML via <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ezyang/htmlpurifier</code> or Symfony <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">HtmlSanitizer</code>.</p>
+
+                <div id="amphp-fibers-concurrent-io" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Callback-Free Asynchronous PHP Using Native PHP Fibers (AMPHP v3)
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">AMPHP v3 suspends and resumes native PHP Fibers transparently so concurrent I/O reads like sequential synchronous code.</p>
+                  
+                </div>
+              </div>
+            </section>
+
+            <section id="php-apis-and-runtimes-comparison-table" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. Complete PHP API Tools, Async Runtimes, Standards &amp; Security Matrix</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Compare all fourteen PHP API frameworks, auth libraries, WebSocket engines, application servers, async libraries, and security standards.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">PHP APIs, Authentication, WebSockets, Async Runtimes &amp; Performance Tools</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Technology</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Category</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Precise Technical Role</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Key Production Advantage</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">API Platform 4</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">API Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Hypermedia, OpenAPI 3.1 &amp; GraphQL framework</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Declarative #[ApiResource] for both Symfony &amp; Laravel</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Laravel API Resources</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">API Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">JSON:API / REST transformation &amp; Sanctum/Passport</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Rapid cursor-paginated APIs with Eloquent</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">GraphQL PHP / Lighthouse</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">API Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Reference GraphQL engine for PHP</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Deferred batch resolvers eliminating GraphQL N+1</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">League OAuth2 Server</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">API Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">RFC 6749 + PKCE Authorization Server</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Standards-compliant OAuth2 provider (powers Passport)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">lcobucci/jwt &amp; firebase/php-jwt</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">API Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">RFC 7519 EdDSA / RS256 JWT libraries</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Zero-DB-lookup stateless microservice verification</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Reverb / Ratchet / Swoole WS</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">API Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Persistent bidirectional WebSocket servers</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Real-time Pusher-compatible rooms in pure PHP/C++</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">PHP-FPM + Zend OPcache</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Backend Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Shared-nothing FastCGI pool + bytecode/JIT cache</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Bulletproof isolation + 0ms disk stat in Docker</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">FrankenPHP</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Backend Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Caddy/Go PHP app server + Worker Mode</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Single binary, HTTP/3, 103 Early Hints &amp; Octane/Symfony support</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">RoadRunner</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Backend Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Go persistent PHP worker, queue &amp; gRPC server</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Unified HTTP + Kafka/SQS/AMQP + Prometheus metrics</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Swoole / OpenSwoole</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Backend Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">C++ coroutine async networking engine</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Ultra-high concurrency coroutine sockets &amp; timers</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">ReactPHP &amp; AMPHP (v3)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Backend Tools</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Event-loop &amp; PHP Fiber async I/O libraries</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Non-blocking concurrent HTTP, DNS, Redis &amp; WebSockets</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">PHP-FIG PSR &amp; PIE</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Developer Utilities</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">PSR-3/4/7/11/15/18 specs &amp; modern extension installer</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Framework-agnostic packages &amp; clean C extension builds</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">libsodium / Halite / Argon2id</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Developer Utilities</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Authenticated encryption &amp; memory-hard hashing</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Modern AEAD XChaCha20-Poly1305 &amp; GPU-resistant hashes</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="worker-mode-stateless-safety" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Golden Rule of FrankenPHP, RoadRunner &amp; Swoole Worker Mode</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Transitioning from PHP-FPM to persistent Worker Mode multiplies throughput 4x–10x, but introduces one non-negotiable engineering rule: <strong class="text-white font-semibold">services remain in RAM across requests</strong>. Never store current-tenant IDs, auth tokens, or mutable array buffers on singleton service properties; implement Symfony <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ResetInterface</code> or Laravel Octane state flushing, and set <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">max_requests</code> (e.g., <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">500–1000</code>) to recycle workers gracefully.</p>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ High-Performance &amp; Secure PHP API Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Enforce PKCE (S256) on all OAuth 2.0 public clients and explicit alg/aud/iss checks on all JWTs</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Set opcache.validate_timestamps=0 in immutable production Docker images</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Size PHP-FPM pm.max_children mathematically from measured worker RSS memory—never guess</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Implement ResetInterface and max_requests recycling when running FrankenPHP, RoadRunner, or Swoole</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Leaving opcache.validate_timestamps=1 on High-Traffic Networked Disks</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Checking file modification timestamps across hundreds of vendor files on every HTTP request wastes CPU syscalls—disable timestamp checks in immutable container deployments.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Setting PHP-FPM pm.max_children Too High and Triggering Linux OOM Killer</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Configuring max_children = 150 when each worker consumes 60 MB on a 4 GB VM forces kernel OOM kills mid-transaction. Measure real RSS via ps/smaps and leave headroom for OS/Redis.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Accepting JWT alg Header Without Pinning Expected Asymmetric Signer</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Historical JWT vulnerabilities tricked verifiers into treating an RSA public key string as an HMAC shared secret. Always pin SignedWith(new Eddsa(), $publicKey) explicitly.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Using Legacy md5/sha256 or Outdated mcrypt Instead of Argon2id &amp; libsodium</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Fast hashes crack at billions of guesses per second on GPUs. Always use password_hash(..., PASSWORD_ARGON2ID) for passwords and built-in ext-sodium AEAD for encryption.</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Does API Platform 4 really work with both Symfony and Laravel now?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Yes! Starting with API Platform 4, first-party Laravel integration sits alongside Symfony—letting Laravel Eloquent models and DTOs leverage #[ApiResource] to generate OpenAPI 3.1, JSON-LD/Hydra, and GraphQL endpoints automatically.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Should we switch every PHP-FPM app to FrankenPHP or RoadRunner immediately?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Not blindly. Properly tuned PHP-FPM + OPcache handles thousands of RPS with 100% shared-nothing request isolation (zero cross-request memory leaks). Adopt FrankenPHP, RoadRunner, or Laravel Octane when container CPU costs or sub-10ms p99 API latency justify auditing your services for stateless worker safety.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">What is the difference between Swoole, ReactPHP, and AMPHP?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Swoole is a compiled C++ PHP extension providing OS-level async coroutines and an HTTP/WebSocket server. ReactPHP (event-loop callbacks/promises) and AMPHP v3 (structured concurrency built on native PHP 8.1+ Fibers) are pure Composer userland PHP libraries requiring zero custom C extensions.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">What is PIE in the PHP ecosystem?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">PIE (PHP Installer for Extensions), developed under the PHP Foundation, is the modern Composer-based replacement for legacy PECL—making installing extensions like redis, igbinary, or xdebug consistent and reproducible.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Summary: Standards-Driven APIs Powered by Modern PHP Execution Engines</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Modern PHP combines enterprise API ergonomics (API Platform 4, League OAuth2, EdDSA JWTs, GraphQL PHP, Reverb WebSockets) with world-class runtime performance—scaling smoothly from OPcache-tuned PHP-FPM pools to persistent FrankenPHP, RoadRunner, Swoole, and Fiber-powered workers.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Build against PHP-FIG PSR interfaces, enforce modern Argon2id/libsodium cryptography, and benchmark worker memory discipline before scaling horizontally.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · PHP &amp; Backend</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert PHP &amp; Backend Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated API Development &amp; Third-Party Integration service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/api-development-integration.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore API Development &amp; Third-Party Integration →</a>
+                <a href="/en/services/speed-optimization.html" class="btn-emerald text-xs py-2.5 px-5">Website Speed &amp; Core Web Vitals Optimization</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://api-platform.com/docs/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">API Platform 4 Official Documentation — Symfony &amp; Laravel Hypermedia, OpenAPI &amp; GraphQL ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Les-Tilleuls.coop / API Platform</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://frankenphp.dev/docs/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">FrankenPHP &amp; RoadRunner Official Persistent PHP Application Server Guides ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">FrankenPHP / The PHP Foundation</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://www.php-fig.org/psr/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">PHP-FIG Official PSR Standards Index &amp; PHP Manual OPcache/Sodium Reference ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">PHP Framework Interop Group (PHP-FIG)</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://oauth2.thephpleague.com/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">League OAuth 2.0 Server &amp; lcobucci/jwt Official Security Documentation ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">The League of Extraordinary Packages</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in PHP &amp; Backend</h2>
+                <a href="/en/articles/index.html?track=php" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/php-8-5-new-features-and-upgrade-guide.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">PHP &amp; Backend · 13 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">PHP 8.5 Official Release &amp; Upgrade Guide: Pipe Operator, RFC 3986 URI Extension, Breaking Changes &amp; Legacy Migration</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/laravel-vs-symfony-enterprise-architecture-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">PHP &amp; Backend · 15 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Laravel vs. Symfony for Enterprise PHP Applications: Architecture, Ecosystem Packages, Performance &amp; Decision Matrix</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/doctrine-orm-vs-eloquent-orm-php-persistence-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">PHP &amp; Backend · 14 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">PHP Database &amp; ORM Architecture: Doctrine ORM 3 vs. Eloquent ORM, Cycle ORM, Atlas ORM, Propel, Medoo, RedBeanPHP &amp; Prepared PDO</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">API Development &amp; Third-Party Integration</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/api-development-integration.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/speed-optimization.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Website Speed &amp; Core Web Vitals Optimization</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/enterprise-php-api-architecture-api-platform-oauth2-jwt-graphql-reverb.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

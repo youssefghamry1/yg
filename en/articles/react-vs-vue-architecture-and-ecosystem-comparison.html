@@ -1,0 +1,1260 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React 19 vs Vue 3.5+: Reactivity, Ecosystem &amp; Architecture | Youssef Ghamry</title>
+    <meta name="description" content="Objective technical comparison between React 19.3 (UI library + React Compiler) and Vue 3.5+ (progressive framework) across reactivity, Pinia vs Zustand, SSR, and DX." />
+    <meta name="keywords" content="react vs vue architecture comparison, react 19 vs vue 3.5 composition api, vue reactivity vs react compiler, pinia vs zustand typescript, nextjs vs nuxt ssr architecture, vue vapor mode vs react fiber, choose react or vue enterprise" />
+    <link rel="canonical" href="/en/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" />
+    <link rel="alternate" hreflang="en" href="/en/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Youssef Ghamry" />
+    <meta property="og:url" content="/en/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" />
+    <meta property="og:title" content="React 19 vs Vue 3.5+: Reactivity, Ecosystem &amp; Architecture | Youssef Ghamry" />
+    <meta property="og:description" content="Objective technical comparison between React 19.3 (UI library + React Compiler) and Vue 3.5+ (progressive framework) across reactivity, Pinia vs Zustand, SSR, and DX." />
+    <meta property="og:image" content="/assets/images/articles/react-vs-vue-architecture-and-ecosystem-comparison-featured.jpg" />
+    <meta property="og:image:alt" content="Dark obsidian 3D architectural render contrasting cyan-gold interlocking orbital reconciliation rings on the left with faceted emerald fine-grained reactivity crystals on the right" />
+    <meta property="article:published_time" content="2026-11-02" />
+    <meta property="article:modified_time" content="2026-11-02" />
+    <meta property="article:section" content="JS &amp; TS Ecosystem" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="React 19 vs Vue 3.5+: Reactivity, Ecosystem &amp; Architecture | Youssef Ghamry" />
+    <meta name="twitter:description" content="Objective technical comparison between React 19.3 (UI library + React Compiler) and Vue 3.5+ (progressive framework) across reactivity, Pinia vs Zustand, SSR, and DX." />
+    <meta name="twitter:image" content="/assets/images/articles/react-vs-vue-architecture-and-ecosystem-comparison-featured.jpg" />
+    <meta name="twitter:image:alt" content="Dark obsidian 3D architectural render contrasting cyan-gold interlocking orbital reconciliation rings on the left with faceted emerald fine-grained reactivity crystals on the right" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://youssefghamry.com/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Knowledge Hub",
+          "item": "https://youssefghamry.com/en/articles/index.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JS & TS Ecosystem",
+          "item": "https://youssefghamry.com/en/articles/index.html?track=javascript"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "React.js vs. Vue.js in Production: Fine-Grained Reactivity, Virtual DOM, Pinia/Zustand & Team Velocity Comparison",
+          "item": "https://youssefghamry.com/en/articles/react-vs-vue-architecture-and-ecosystem-comparison.html"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "React.js vs. Vue.js in Production: Fine-Grained Reactivity, Virtual DOM, Pinia/Zustand & Team Velocity Comparison",
+      "description": "Objective technical comparison between React 19.3 (UI library + React Compiler) and Vue 3.5+ (progressive framework) across reactivity, Pinia vs Zustand, SSR, and DX.",
+      "image": "https://youssefghamry.com/assets/images/articles/react-vs-vue-architecture-and-ecosystem-comparison-featured.jpg",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-02",
+      "inLanguage": "en",
+      "articleSection": "JS & TS Ecosystem",
+      "keywords": "react vs vue architecture comparison, react 19 vs vue 3.5 composition api, vue reactivity vs react compiler, pinia vs zustand typescript, nextjs vs nuxt ssr architecture, vue vapor mode vs react fiber, choose react or vue enterprise",
+      "citation": [
+        "https://react.dev/blog/2024/12/05/react-19",
+        "https://vuejs.org/guide/extras/reactivity-in-depth.html",
+        "https://pinia.vuejs.org/core-concepts/",
+        "https://zustand.docs.pmnd.rs/guides/typescript"
+      ],
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://youssefghamry.com/en/articles/react-vs-vue-architecture-and-ecosystem-comparison.html"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Youssef Ghamry",
+        "jobTitle": "Full-Stack Developer & Senior Bid QA Specialist"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is React.js a framework or a library, and how does that differ from Vue.js?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "React.js is strictly a UI View Library (`react` + `react-dom`) that delegates routing, global state, data fetching, and SSR to ecosystem packages or meta-frameworks like Next.js. Vue.js is a Progressive Framework whose core team officially builds and maintains Vue Router, Pinia state management, `@vitejs/plugin-vue` SFC tooling, and Nuxt in unified lockstep."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does React Compiler 1.0 make React as fast as Vue 3.5 fine-grained reactivity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "React Compiler 1.0 closes much of the historical re-render gap by automatically memoizing JSX subtrees and values at build time without manual `useMemo`/`useCallback`. However, Vue 3.5’s Proxy/Ref dependency graph and SFC template `PatchFlags` (plus upcoming Vapor Mode) still carry a smaller baseline runtime footprint (~22–33 kB vs ~42–45 kB gzipped) and never re-execute component setup logic on updates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should we use Pinia or Vuex for new Vue 3.5+ enterprise projects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Always use Pinia (v3/v4). Vuex 4 is in maintenance/legacy status, whereas Pinia is the official Vue state library—offering native TypeScript inference without string mutation constants, modular tree-shakable stores, smaller bundle weight, and built-in Nuxt SSR hydration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is better for SEO and Core Web Vitals: React or Vue?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When deployed purely as client-side SPAs, neither is ideal for public search indexation without SSR/SSG. When paired with their flagship meta-frameworks—Next.js (App Router + Server Components) for React or Nuxt (Nitro SSR/ISR + Route Rules) for Vue—both deliver full HTML indexability, `BlogPosting`/`Product` JSON-LD rendering, and 95+ Core Web Vitals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which frontend stack pairs best with a Laravel or Symfony PHP backend?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both integrate cleanly via REST/OpenAPI or Inertia.js, though Vue.js holds deep first-party heritage in the Laravel community (Inertia + Vue 3 + TypeScript + Tailwind) while Symfony UX pairs smoothly with either Vue, React, or Twig LiveComponents."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white bg-[#050806] text-slate-100 min-h-screen">
+    <!-- Global Full-Width Luxury Header Navigation -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- Brand Logo / Emblem -->
+        <a href="/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="font-cinzel text-sm sm:text-base tracking-wider font-bold gold-gradient-text uppercase">
+              Youssef Ghamry
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/70 tracking-tight sm:tracking-widest uppercase font-mono">
+              Full-Stack Developer | Tender &amp; Bid QA
+            </div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation: 8 Core Pillars -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-medium" aria-label="Main Navigation">
+          <a href="/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Home</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>Services</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-white">
+                    Comprehensive Engineering &amp; Tender Services Directory
+                  </span>
+                </div>
+                <a href="/en/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>Explore All 93 Services →</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Website Design &amp; Development</span>
+                    </div>
+                    <a href="/en/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">WordPress Website Development</span>
+                    </a>
+                    <a href="/en/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Shopify Website Development</span>
+                    </a>
+                    <a href="/en/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Drupal Website Development</span>
+                    </a>
+                    <a href="/en/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Magento / Adobe Commerce Development</span>
+                    </a>
+                    <a href="/en/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">OpenCart Store Development</span>
+                    </a>
+                    <a href="/en/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Salla Store Design &amp; Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Software &amp; Business Systems</span>
+                    </div>
+                    <a href="/en/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">ERP System Development &amp; Implementation</span>
+                    </a>
+                    <a href="/en/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">CRM Development &amp; Sales Pipeline Engineering</span>
+                    </a>
+                    <a href="/en/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Point of Sale (POS) Systems Development</span>
+                    </a>
+                    <a href="/en/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">HR Management &amp; Payroll Systems Development</span>
+                    </a>
+                    <a href="/en/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Inventory &amp; Warehouse Management Systems (WMS)</span>
+                    </a>
+                    <a href="/en/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Accounting &amp; Financial Software Development</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Mobile Application Development</span>
+                    </div>
+                    <a href="/en/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native Android Application Development</span>
+                    </a>
+                    <a href="/en/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Native iOS Application Development</span>
+                    </a>
+                    <a href="/en/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Cross-Platform Mobile App Development (Flutter &amp; React Native)</span>
+                    </a>
+                    <a href="/en/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business &amp; Enterprise Mobile Applications</span>
+                    </a>
+                    <a href="/en/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">E-Commerce Mobile Application Development</span>
+                    </a>
+                    <a href="/en/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Mobile UI/UX Design &amp; Prototyping</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Tender &amp; Proposal Services</span>
+                    </div>
+                    <a href="/en/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender &amp; Technical Proposal Writing</span>
+                    </a>
+                    <a href="/en/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Technical Proposal Preparation &amp; Engineering</span>
+                    </a>
+                    <a href="/en/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Financial Proposal &amp; BOQ Preparation</span>
+                    </a>
+                    <a href="/en/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Tender Document &amp; RFP In-Depth Analysis</span>
+                    </a>
+                    <a href="/en/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFP (Request for Proposal) Breakdown &amp; Strategy</span>
+                    </a>
+                    <a href="/en/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">RFQ (Request for Quotation) Rapid Assessment</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Digital Marketing &amp; SEO</span>
+                    </div>
+                    <a href="/en/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">On-Page SEO Optimization</span>
+                    </a>
+                    <a href="/en/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Off-Page SEO &amp; Authority Building</span>
+                    </a>
+                    <a href="/en/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Comprehensive SEO Audits &amp; Health Inspections</span>
+                    </a>
+                    <a href="/en/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Keyword Research &amp; Search Intent Mapping</span>
+                    </a>
+                    <a href="/en/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">SEO Content Strategy &amp; Topic Clustering</span>
+                    </a>
+                    <a href="/en/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Website Indexing &amp; Google Search Console Optimization</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">Business Development &amp; Consulting</span>
+                    </div>
+                    <a href="/en/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">View</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/en/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Development Consulting &amp; Market Expansion</span>
+                    </a>
+                    <a href="/en/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">IT Pre-Sales Consulting &amp; Solution Engineering</span>
+                    </a>
+                    <a href="/en/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Enterprise Solution Consulting &amp; Digital Architecture</span>
+                    </a>
+                    <a href="/en/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Commercial Opportunity Assessment &amp; Feasibility Studies</span>
+                    </a>
+                    <a href="/en/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Strategic Bid / No-Bid Governance Support</span>
+                    </a>
+                    <a href="/en/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">Business Process Analysis &amp; Operational Mapping</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">CV</a>
+          <a href="/en/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Portfolio</a>
+          <a href="/en/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">Tenders</a>
+          <a href="/en/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Certifications</a>
+          <a href="/en/articles/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">Articles</a>
+          <a href="/en/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">Contact</a>
+        </nav>
+
+        <!-- Right Controls -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/ar/articles/react-vs-vue-architecture-and-ecosystem-comparison.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="Switch to Arabic"
+          >
+            <span>🇸🇦</span>
+            <span>Arabic (AR)</span>
+          </a>
+
+          <a
+            href="/en/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>Request Consultation</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="Toggle Menu"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>Home</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>Services Directory (93 Services)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/en/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                View Complete Services Directory (93 Services) →
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>Website Design &amp; Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">WordPress Website Development</a>
+                <a href="/en/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Shopify Website Development</a>
+                <a href="/en/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Drupal Website Development</a>
+                <a href="/en/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Magento / Adobe Commerce Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>Software &amp; Business Systems</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">ERP System Development &amp; Implementation</a>
+                <a href="/en/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">CRM Development &amp; Sales Pipeline Engineering</a>
+                <a href="/en/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Point of Sale (POS) Systems Development</a>
+                <a href="/en/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">HR Management &amp; Payroll Systems Development</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>Mobile Application Development</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native Android Application Development</a>
+                <a href="/en/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Native iOS Application Development</a>
+                <a href="/en/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">Cross-Platform Mobile App Development (Flutter &amp; React Native)</a>
+                <a href="/en/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">Business &amp; Enterprise Mobile Applications</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>Tender &amp; Proposal Services</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender &amp; Technical Proposal Writing</a>
+                <a href="/en/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Technical Proposal Preparation &amp; Engineering</a>
+                <a href="/en/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">Financial Proposal &amp; BOQ Preparation</a>
+                <a href="/en/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">Tender Document &amp; RFP In-Depth Analysis</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>Digital Marketing &amp; SEO</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">On-Page SEO Optimization</a>
+                <a href="/en/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">Off-Page SEO &amp; Authority Building</a>
+                <a href="/en/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">Comprehensive SEO Audits &amp; Health Inspections</a>
+                <a href="/en/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">Keyword Research &amp; Search Intent Mapping</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>Business Development &amp; Consulting</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/en/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Business Development Consulting &amp; Market Expansion</a>
+                <a href="/en/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">IT Pre-Sales Consulting &amp; Solution Engineering</a>
+                <a href="/en/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">Enterprise Solution Consulting &amp; Digital Architecture</a>
+                <a href="/en/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">Commercial Opportunity Assessment &amp; Feasibility Studies</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>Curriculum Vitae (CV)</span>
+        </a>
+
+        <a href="/en/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>Portfolio (25 Selected / 100+ Projects)</span>
+        </a>
+
+        <a href="/en/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>Government Tenders (400+ Experience)</span>
+        </a>
+
+        <a href="/en/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>Certifications &amp; Credentials (27+)</span>
+        </a>
+
+        <a href="/en/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>Knowledge Hub &amp; Articles (132 Guides)</span>
+        </a>
+
+        <a href="/en/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>Contact &amp; Proposal Inquiry</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">Language:</span>
+          <a href="/ar/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇸🇦</span>
+            <span>Switch to Arabic (AR)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/en/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            Request Proposal &amp; Consultation
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Full-Width Article Hero Split -->
+    <section class="border-b border-emerald-950/70 bg-gradient-to-b from-[#07130D]/90 via-[#050806] to-[#050806]">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-10 lg:py-14">
+        <nav class="breadcrumbs flex flex-wrap items-center gap-2 text-xs text-emerald-300/70 mb-6" aria-label="Breadcrumb">
+          <a href="/index.html" class="hover:text-[#E5C78B]">Home</a>
+          <span>/</span>
+          <a href="/en/articles/index.html" class="hover:text-[#E5C78B]">Knowledge Hub</a>
+          <span>/</span>
+          <a href="/en/articles/index.html?track=javascript" class="hover:text-[#E5C78B]">JS &amp; TS Ecosystem</a>
+          <span>/</span>
+          <span class="text-white font-semibold truncate max-w-xs sm:max-w-md">React.js vs. Vue.js in Production: Fine-Grained Reactivity, Virtual DOM, Pinia/Zustand &amp; Team Velocity Comparison</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>Frontend Architecture Comparison</span>
+              </span>
+              <span class="badge-emerald">⏱️ 15 min read</span>
+              <span class="px-2.5 py-1 rounded-full bg-[#07130D] border border-emerald-950 text-[11px] font-mono text-slate-300">Published 2026-11-02</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl xl:text-5xl font-extrabold text-white tracking-tight font-serif leading-[1.15]">
+              React.js vs. Vue.js in Production: Fine-Grained Reactivity, Virtual DOM, Pinia/Zustand &amp; Team Velocity Comparison
+            </h1>
+
+            <p class="text-sm sm:text-base text-slate-300 leading-relaxed max-w-[72ch]">
+              An authoritative, code-level comparison of React 19.3 (+ React Compiler 1.0) and Vue 3.5+ (Composition API &amp; Vapor Mode)—clarifying UI Library vs. Progressive Framework taxonomy, Fiber reconciliation vs. Proxy signal graphs, Zustand v5 vs. Pinia v4 stores, Next.js vs. Nuxt SSR, and enterprise team velocity.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2 border-t border-emerald-950/70">
+              <div class="flex items-center gap-3">
+                <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry" class="w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]" />
+                <div>
+                  <div class="text-xs font-bold text-white">By Youssef Ghamry</div>
+                  <div class="text-[11px] text-emerald-300/80 font-mono">Full-Stack Developer · 400+ Tenders Experience</div>
+                </div>
+              </div>
+              <a href="/ar/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" class="ms-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#07130D] border border-[#C6A15B]/40 text-xs font-bold text-[#E5C78B] hover:text-white transition-colors">
+                <span>🇸🇦</span>
+                <span>Read Arabic Edition</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="p-3 sm:p-4 rounded-3xl glass-panel-elevated border border-emerald-500/30 shadow-2xl space-y-3">
+              <div class="rounded-2xl overflow-hidden bg-[#07130D] border border-emerald-950 aspect-[16/9]">
+                <img src="/assets/images/articles/react-vs-vue-architecture-and-ecosystem-comparison-featured.jpg" alt="Dark obsidian 3D architectural render contrasting cyan-gold interlocking orbital reconciliation rings on the left with faceted emerald fine-grained reactivity crystals on the right" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex items-center justify-between px-1 text-[11px] font-mono text-emerald-300/80">
+                <span>Track: JS &amp; TS Ecosystem</span>
+                <a href="/en/services/frontend-development.html" class="text-[#E5C78B] hover:underline font-bold">Connected Service →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-Width 3-Column Editorial & Technical Workspace -->
+    <main class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 xl:gap-12 items-start">
+        
+        <!-- Left Sticky Sidebar: Table of Contents & Track Directory (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-2 lg:order-1">
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3 max-h-[72vh] overflow-y-auto">
+            <div class="text-xs font-bold uppercase tracking-wider text-[#E5C78B] font-mono">Table of Contents</div>
+            <nav class="space-y-1" aria-label="Table of Contents">
+              <a href="#reactivity-internals-react-fiber-compiler-vs-vue-proxy-signals" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                1. Reactivity Internals: React 19 Fiber + Compiler vs. Vue 3.5 Proxy Dependency Graph
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#react-19-action-state-compiler-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">React 19.3 Native Actions (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useActionState</code>) &amp; Automatic Compiler Memoization</a><a href="#vue-3-5-composition-api-reactive-props-example" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Vue 3.5 <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;script setup&gt;</code> with Reactive Props Destructuring &amp; <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useTemplateRef</code></a>
+              </div>
+              <a href="#head-to-head-architecture-matrix-react-19-vs-vue-3-5" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                2. Production Architecture &amp; Ecosystem Matrix: React 19.3 vs. Vue 3.5+
+              </a>
+              <a href="#state-management-ergonomics-zustand-v5-vs-pinia-v4" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                3. State Management in TypeScript: Zustand v5 Selectors vs. Pinia v4 Setup Stores
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#zustand-v5-react-selector-store" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">React + Zustand v5 Immutable TypeScript Store with Atomic Selectors</a><a href="#pinia-v4-vue-setup-store" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Vue 3.5 + Pinia v4 Composable Setup Store with SSR-Safe State</a>
+              </div>
+              <a href="#large-dataset-performance-and-ssr-hydration-discipline" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                4. High-Density Data Grids, Memory Ceilings &amp; Hydration Discipline
+              </a><div class="ms-3 ps-2.5 border-s border-emerald-900/70 space-y-0.5 my-1">
+                <a href="#vue-shallowref-50k-rows-optimization" class="block px-2 py-1 rounded text-[11px] text-slate-400 hover:text-[#E5C78B] hover:bg-emerald-950/40 transition-colors leading-snug">Eliminating Deep Proxy Overhead on Large Read-Only Payloads with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef</code></a>
+              </div>
+              <a href="#executive-decision-framework-when-to-choose-react-vs-vue" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors leading-snug">
+                5. Executive Decision Guide: Selecting React.js vs. Vue.js for Your Next Platform
+              </a>
+              <a href="#common-mistakes" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Common Mistakes to Avoid</a>
+              <a href="#article-faqs" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Frequently Asked Questions</a>
+              <a href="#conclusion" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Conclusion &amp; Summary</a>
+              <a href="#official-references" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Official References</a>
+              <a href="#related-guides" class="block px-3 py-2 rounded-lg hover:bg-emerald-950/60 text-xs font-medium text-slate-200 hover:text-[#E5C78B] transition-colors">Related Technical Guides</a>
+            </nav>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/20 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Browse All 14 Tracks</div>
+            <div class="flex flex-wrap gap-1.5">
+              <a href="/en/articles/index.html?track=tenders" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏛️ Tenders &amp; Etimad</a><a href="/en/articles/index.html?track=wordpress" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🌐 WordPress</a><a href="/en/articles/index.html?track=shopify" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛍️ Shopify</a><a href="/en/articles/index.html?track=drupal" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">💧 Drupal</a><a href="/en/articles/index.html?track=magento" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🏪 Magento</a><a href="/en/articles/index.html?track=joomla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🧩 Joomla</a><a href="/en/articles/index.html?track=opencart" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🛒 OpenCart</a><a href="/en/articles/index.html?track=salla" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🇸🇦 Salla</a><a href="/en/articles/index.html?track=zid" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚡ Zid</a><a href="/en/articles/index.html?track=angular" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🅰️ Angular</a><a href="/en/articles/index.html?track=react" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">⚛️ React.js</a><a href="/en/articles/index.html?track=node" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟢 Node.js</a><a href="/en/articles/index.html?track=javascript" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🟨 JS &amp; TS Ecosystem</a><a href="/en/articles/index.html?track=php" class="px-2.5 py-1 rounded-lg bg-[#07130D] border border-emerald-950 hover:border-[#C6A15B]/50 text-[11px] text-slate-300 hover:text-[#E5C78B] transition-colors">🐘 PHP &amp; Backend</a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Center Optimal-Line-Length Prose Column (6 Cols, max-w-[75ch] inside) -->
+        <article class="lg:col-span-6 min-w-0 order-1 lg:order-2">
+          <div class="max-w-[75ch] mx-auto space-y-8">
+            <div class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border border-[#C6A15B]/35 space-y-4">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Overview &amp; Problem Context</div>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Few architectural decisions shape frontend productivity, bundle budgets, and multi-year hiring pipelines as deeply as choosing between React.js and Vue.js. Before comparing syntax or benchmarks, senior engineers must establish one foundational taxonomic distinction: React is an unopinionated UI View Library focused strictly on rendering declarative component trees across DOM and native targets, whereas Vue.js is a cohesive Progressive Framework whose core team officially maintains and synchronizes routing (Vue Router), state management (Pinia), build tooling (Vite-powered SFC compilation), and full-stack SSR orchestration (Nuxt).</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">Both ecosystems have evolved dramatically in their current stable generations. On the React side, React 19 (spanning 19.0 through 19.3) combined with React Compiler 1.0 introduced native asynchronous Actions (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useActionState</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useOptimistic</code>), the <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">use()</code> resource hook, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref</code> as a standard prop, Server Components, and build-time automatic memoization that eliminates most manual <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useMemo</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useCallback</code> clutter. On the Vue side, Vue 3.5 overhauled its internal <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@vue/reactivity</code> engine to cut memory usage by 56%, stabilized reactive props destructuring, added <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useTemplateRef()</code> and SSR lazy hydration strategies, and paved the way for Vue 3.6 RC’s opt-in Vapor Mode direct-DOM compilation.</p>
+              <p class="text-sm sm:text-base text-slate-200 leading-[1.85]">This guide compares React 19.3 and Vue 3.5+ across reactivity internals, client/server state architectures, TypeScript ergonomics, large-dataset rendering performance, and team governance—complete with five explained production code examples to help engineering leaders make an objective, evidence-backed choice.</p>
+            </div>
+            <section id="reactivity-internals-react-fiber-compiler-vs-vue-proxy-signals" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">1. Reactivity Internals: React 19 Fiber + Compiler vs. Vue 3.5 Proxy Dependency Graph</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">The core difference between React and Vue lies in how each system detects state changes and schedules DOM updates. React follows a pull-based, immutable snapshot model: calling a state setter or completing an async Action schedules a re-render pass on React’s concurrent Fiber tree. Historically, re-executing a parent component function also re-executed every child component unless wrapped in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">React.memo()</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useMemo()</code>, or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useCallback()</code>. React Compiler 1.0 changes this ergonomics equation at build time by lowering JSX functions into fine-grained memoization slots (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useMemoCache</code>), automatically skipping subtree re-renders when inputs are referentially unchanged.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Vue 3.5 uses a push-pull fine-grained reactivity graph powered by ES6 Proxies (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">reactive()</code>) and getter/setter value cells (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref()</code>, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef()</code>). A Vue component’s <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;script setup&gt;</code> block executes <strong class="text-white font-semibold">once</strong> when the component mounts—never on every re-render. Inside that single setup pass, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">computed()</code> values and template expressions register themselves as subscribers in a doubly-linked dependency list. When <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">count.value++</code> mutates later, Vue knows the exact component bindings affected without re-running setup closures, eliminating React’s classic stale-closure bugs and dependency-array maintenance altogether.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Furthermore, Vue’s Single-File Component (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.vue</code> SFC) template compiler statically analyzes HTML templates at build time, hoisting static elements outside the render loop and annotating dynamic nodes with numeric <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PatchFlags</code> so Virtual DOM diffing inspects only dynamic attributes—while Vue’s emerging Vapor Mode (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;script setup vapor&gt;</code>) bypasses Virtual DOM allocation entirely for performance-critical widgets.</p>
+
+                <figure class="my-6 rounded-2xl overflow-hidden border border-[#C6A15B]/35 bg-[#07130D]/90 p-3 space-y-2.5 shadow-xl">
+                  <img
+                    src="/assets/images/articles/react-vs-vue-reactivity-pipeline.svg"
+                    alt="Architecture diagram comparing React 19.3 concurrent Fiber reconciliation and React Compiler memoization cache against Vue 3.5 Proxy-based fine-grained reactivity and SFC PatchFlags"
+                    loading="lazy"
+                    width="1200"
+                    height="520"
+                    class="w-full h-auto rounded-xl border border-emerald-950"
+                  />
+                  <figcaption class="px-2 text-xs font-mono text-emerald-300/85 leading-relaxed">
+                    Figure 1 — Execution pipeline comparison: React 19.3 schedules concurrent Fiber lane updates optimized by React Compiler memoization slots, whereas Vue 3.5 executes setup() once and dispatches fine-grained Proxy/Ref notifications directly to subscribed template PatchFlags.
+                  </figcaption>
+                </figure>
+
+                <div id="react-19-action-state-compiler-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    React 19.3 Native Actions (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useActionState</code>) &amp; Automatic Compiler Memoization
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In the React 19.3 TypeScript component below, notice two modern idioms working together: <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useActionState</code> manages pending transitions and server/API validation errors natively without manual <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">isLoading</code> boolean state, while <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">filteredItems</code> requires zero <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useMemo()</code> wrapper when compiled with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">babel-plugin-react-compiler</code>—the compiler automatically caches the filtered array until <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">items</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">query</code> changes.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/features/procurement/BidLineFilter.tsx</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">tsx</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { useActionState, useState } from 'react';
+
+export interface BidLineItem {
+  id: string;
+  code: string;
+  description: string;
+  unitPriceSar: number;
+}
+
+interface ApprovalState {
+  approvedIds: string[];
+  error: string | null;
+}
+
+export function BidLineFilter({
+  items,
+  approveLineOnServer,
+}: {
+  items: readonly BidLineItem[];
+  approveLineOnServer: (lineId: string) =&gt; Promise&lt;void&gt;;
+}) {
+  const [query, setQuery] = useState('');
+
+  // React Compiler 1.0 automatically memoizes this derived list at build time:
+  const filteredItems = items.filter((item) =&gt;
+    item.description.toLowerCase().includes(query.trim().toLowerCase())
+  );
+
+  // React 19 useActionState tracks async transitions, optimistic state &amp; errors:
+  const [state, submitApproval, isPending] = useActionState&lt;ApprovalState, FormData&gt;(
+    async (prev, formData) =&gt; {
+      const lineId = String(formData.get('lineId') ?? '');
+      try {
+        await approveLineOnServer(lineId);
+        return { approvedIds: [...prev.approvedIds, lineId], error: null };
+      } catch (err) {
+        return {
+          ...prev,
+          error: err instanceof Error ? err.message : 'Approval request failed',
+        };
+      }
+    },
+    { approvedIds: [], error: null }
+  );
+
+  return (
+    &lt;section className=&quot;space-y-4&quot;&gt;
+      &lt;input
+        type=&quot;search&quot;
+        value={query}
+        onChange={(e) =&gt; setQuery(e.target.value)}
+        placeholder=&quot;Filter BOQ items...&quot;
+      /&gt;
+      {state.error &amp;&amp; &lt;p role=&quot;alert&quot;&gt;{state.error}&lt;/p&gt;}
+      &lt;ul&gt;
+        {filteredItems.map((line) =&gt; (
+          &lt;li key={line.id}&gt;
+            &lt;span&gt;{line.code} — {line.description} ({line.unitPriceSar} SAR)&lt;/span&gt;
+            &lt;form action={submitApproval}&gt;
+              &lt;input type=&quot;hidden&quot; name=&quot;lineId&quot; value={line.id} /&gt;
+              &lt;button type=&quot;submit&quot; disabled={isPending}&gt;
+                {state.approvedIds.includes(line.id) ? 'Approved' : 'Approve'}
+              &lt;/button&gt;
+            &lt;/form&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/section&gt;
+  );
+}</code></pre>
+                </div>
+                </div>
+
+                <div id="vue-3-5-composition-api-reactive-props-example" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Vue 3.5 <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">&lt;script setup&gt;</code> with Reactive Props Destructuring &amp; <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useTemplateRef</code>
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Compare the equivalent component in Vue 3.5 Single-File Component syntax. Here, destructuring <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">const { items, initialQuery = &quot;&quot; } = defineProps&lt;...&gt;()</code> is natively reactive in Vue 3.5+ (the compiler transforms <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">items</code> accesses into reactive prop getters automatically), <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useTemplateRef()</code> provides strict DOM element typing, and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">setup</code> runs only once—meaning <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">approveLine</code> never needs <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useCallback</code>.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/features/procurement/BidLineFilter.vue</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">vue</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>&lt;script setup lang=&quot;ts&quot;&gt;
+import { computed, ref, useTemplateRef } from 'vue';
+
+export interface BidLineItem {
+  id: string;
+  code: string;
+  description: string;
+  unitPriceSar: number;
+}
+
+// Vue 3.5+ native reactive props destructuring with clean TypeScript defaults:
+const { items, initialQuery = '' } = defineProps&lt;{
+  items: readonly BidLineItem[];
+  initialQuery?: string;
+}&gt;();
+
+const emit = defineEmits&lt;{
+  approve: [lineId: string];
+}&gt;();
+
+const query = ref(initialQuery);
+const searchEl = useTemplateRef&lt;HTMLInputElement&gt;('searchInput');
+
+// Fine-grained computed signal: recalculates ONLY when items or query.value mutates
+const filteredItems = computed(() =&gt; {
+  const q = query.value.trim().toLowerCase();
+  return q ? items.filter((i) =&gt; i.description.toLowerCase().includes(q)) : items;
+});
+
+function clearAndFocus() {
+  query.value = '';
+  searchEl.value?.focus();
+}
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;section class=&quot;space-y-4&quot;&gt;
+    &lt;div class=&quot;flex gap-2&quot;&gt;
+      &lt;input ref=&quot;searchInput&quot; v-model=&quot;query&quot; type=&quot;search&quot; placeholder=&quot;Filter BOQ items...&quot; /&gt;
+      &lt;button type=&quot;button&quot; @click=&quot;clearAndFocus&quot;&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li v-for=&quot;line in filteredItems&quot; :key=&quot;line.id&quot;&gt;
+        &lt;span&gt;{{ line.code }} — {{ line.description }} ({{ line.unitPriceSar }} SAR)&lt;/span&gt;
+        &lt;button type=&quot;button&quot; @click=&quot;emit('approve', line.id)&quot;&gt;Approve&lt;/button&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/section&gt;
+&lt;/template&gt;</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="head-to-head-architecture-matrix-react-19-vs-vue-3-5" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">2. Production Architecture &amp; Ecosystem Matrix: React 19.3 vs. Vue 3.5+</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Because React intentionally limits its scope to the view layer, assembling an enterprise React application means curating and governing a multi-vendor stack: Next.js or React Router v7 (Remix) for routing/SSR, TanStack Query for async server cache, Zustand or Redux Toolkit for client state, React Hook Form + Zod for forms, and Shadcn UI / Radix UI or MUI for accessible components. That modularity grants unmatched architectural freedom—including seamless code sharing with mobile apps via React Native and Expo—but requires strong tech-lead governance so five squads do not invent five incompatible patterns.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Vue’s progressive framework model standardizes the critical layers under official stewardship: Vue Router, Pinia, Vue DevTools, Vite (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@vitejs/plugin-vue</code>), and Nuxt (powered by the universal Nitro server engine) evolve in lockstep. Onboarding full-stack PHP/Laravel, .NET, or backend engineers onto Vue is consistently faster because Single-File Components cleanly co-locate standard HTML templates, scoped CSS, and TypeScript logic.</p>
+
+                <div class="my-5 space-y-2">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-300">Enterprise Frontend Comparison: React 19.3 (+ React Compiler) vs. Vue 3.5+ / Vapor Mode</div>
+                  <div class="overflow-x-auto rounded-xl border border-emerald-500/25 shadow-lg">
+                    <table class="w-full border-collapse min-w-[620px]">
+                      <thead><tr><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Architectural Dimension</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">React 19.3 + React Compiler 1.0</th><th scope="col" class="px-4 py-3 text-left text-[11px] font-mono uppercase tracking-wider text-[#E5C78B] border-b border-emerald-900/80 bg-[#07130D]">Vue 3.5 Stable (+ Vue 3.6 Vapor RC)</th></tr></thead>
+                      <tbody><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Official Taxonomic Role</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Declarative UI View Library (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react-dom</code>)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Progressive Frontend Framework (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vue</code> + official router/store)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Reactivity &amp; Update Model</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Immutable state snapshots + Concurrent Fiber + build-time Compiler memoization</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">ES6 Proxy &amp; <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref</code> fine-grained dependency graph (56% lower RAM in Vue 3.5)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Template &amp; Component Authoring</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">JSX / TSX (full JavaScript expressiveness inside render functions)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed"><code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.vue</code> Single-File Components (HTML template + scoped CSS + TS) or TSX</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Client State Standard</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Zustand v5, Redux Toolkit (RTK), Jotai, or React Context</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Pinia v4 (official modular TypeScript store with SSR hydration)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Async Server State &amp; Caching</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">TanStack Query v5, React Server Components (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">use</code>), or SWR</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Pinia Colada, TanStack Vue Query, or Nuxt <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useFetch</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useAsyncData</code></td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Flagship Full-Stack SSR Meta-Framework</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Next.js (App Router, RSC, Server Actions) &amp; React Router v7</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Nuxt (Nitro universal edge/Node server, hybrid routeRules, Islands)</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">UI Component &amp; Headless Ecosystem</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Shadcn UI, Radix UI, MUI, Ant Design, Mantine, Chakra UI, Headless UI</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Nuxt UI, PrimeVue, Shadcn-Vue (Reka UI), Vuetify, Headless UI, DaisyUI</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Native Mobile Code Reuse</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">First-class native rendering via React Native &amp; Expo</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Hybrid/WebView via Ionic Capacitor, Tauri Mobile, or NativeScript-Vue</td></tr><tr class="bg-[#050806]/90 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Backend Monolith Pairing (Inertia)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">Excellent via Laravel Inertia.js + React</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">First-class historical pairing with Laravel (Inertia + Vue / Blade + Vue)</td></tr><tr class="bg-[#07130D]/45 hover:bg-emerald-950/40 transition-colors"><td class="px-4 py-3 text-xs sm:text-[13px] font-bold text-white border-b border-emerald-950/70 align-top leading-relaxed">Baseline Gzipped Runtime Weight</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">~42–45 kB (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react-dom/client</code> gzipped)</td><td class="px-4 py-3 text-xs sm:text-[13px] text-slate-300 border-b border-emerald-950/70 align-top leading-relaxed">~22–33 kB (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vue</code> runtime tree-shaken; even smaller in Vapor components)</td></tr></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="state-management-ergonomics-zustand-v5-vs-pinia-v4" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">3. State Management in TypeScript: Zustand v5 Selectors vs. Pinia v4 Setup Stores</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In modern frontend architecture, global stores should hold genuine client-domain state (multi-step tender wizard drafts, UI workspace layout, optimistic selection queues), while HTTP API responses belong in a dedicated async cache like TanStack Query. Comparing Zustand v5 in React against Pinia v4 in Vue highlights how each ecosystem’s reactivity model shapes state ergonomics.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Zustand v5 connects an external immutable store to React 19 via <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useSyncExternalStore</code>. Components subscribe using fine-grained selector functions (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useBidCartStore((s) =&gt; s.selectedIds)</code>), ensuring a component re-renders only when its selected slice changes referentially. In Vue, Pinia v4 leverages Vue’s native <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref()</code> and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">computed()</code> primitives directly inside a composable Setup Store—giving you automatic getter caching, DevTools time-travel inspection, and built-in SSR state serialization without immutable spread boilerplate.</p>
+
+                <div id="zustand-v5-react-selector-store" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    React + Zustand v5 Immutable TypeScript Store with Atomic Selectors
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Notice below how Zustand v5 uses curried <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">create&lt;BidWorkspaceState&gt;()(...)</code> syntax for full TypeScript inference. Always select primitive values or stable action references per hook call—returning a freshly allocated object literal inside a selector without <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useShallow</code> will trigger infinite re-render loops under <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useSyncExternalStore</code>.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/stores/useBidWorkspaceStore.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { create } from 'zustand';
+
+interface BidWorkspaceState {
+  rfpReference: string;
+  selectedEnvelopeIds: string[];
+  toggleEnvelope: (envelopeId: string) =&gt; void;
+  resetWorkspace: () =&gt; void;
+}
+
+export const useBidWorkspaceStore = create&lt;BidWorkspaceState&gt;()((set) =&gt; ({
+  rfpReference: '',
+  selectedEnvelopeIds: [],
+  toggleEnvelope: (envelopeId) =&gt;
+    set((state) =&gt; ({
+      selectedEnvelopeIds: state.selectedEnvelopeIds.includes(envelopeId)
+        ? state.selectedEnvelopeIds.filter((id) =&gt; id !== envelopeId)
+        : [...state.selectedEnvelopeIds, envelopeId],
+    })),
+  resetWorkspace: () =&gt; set({ rfpReference: '', selectedEnvelopeIds: [] }),
+}));
+
+// Usage inside a React 19 component — atomic selector prevents extra re-renders:
+// const count = useBidWorkspaceStore((s) =&gt; s.selectedEnvelopeIds.length);</code></pre>
+                </div>
+                </div>
+
+                <div id="pinia-v4-vue-setup-store" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Vue 3.5 + Pinia v4 Composable Setup Store with SSR-Safe State
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In Pinia v4, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref()</code> declarations become serialized state properties, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">computed()</code> declarations become cached getters, and plain functions become actions. When destructuring reactive state from a Pinia store inside a component, wrap the store in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">storeToRefs(store)</code> so reactivity connections stay intact, while actions like <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">toggleEnvelope</code> can be destructured directly.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/stores/bidWorkspace.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
+
+export const useBidWorkspaceStore = defineStore('bid-workspace', () =&gt; {
+  const rfpReference = ref('');
+  const selectedEnvelopeIds = ref&lt;string[]&gt;([]);
+
+  const selectedCount = computed(() =&gt; selectedEnvelopeIds.value.length);
+
+  function toggleEnvelope(envelopeId: string) {
+    const idx = selectedEnvelopeIds.value.indexOf(envelopeId);
+    if (idx === -1) {
+      selectedEnvelopeIds.value.push(envelopeId);
+    } else {
+      selectedEnvelopeIds.value.splice(idx, 1);
+    }
+  }
+
+  function resetWorkspace() {
+    rfpReference.value = '';
+    selectedEnvelopeIds.value = [];
+  }
+
+  return {
+    rfpReference,
+    selectedEnvelopeIds,
+    selectedCount,
+    toggleEnvelope,
+    resetWorkspace,
+  };
+});</code></pre>
+                </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="large-dataset-performance-and-ssr-hydration-discipline" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">4. High-Density Data Grids, Memory Ceilings &amp; Hydration Discipline</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Enterprise ERP dashboards, financial trading blotters, and Etimad BOQ pricing sheets routinely load 10,000 to 50,000 JSON records in the browser. Both React and Vue will stutter if engineers misunderstand each runtime’s cost model—yet their bottlenecks occur at opposite stages.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">In React, storing 50,000 plain objects in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useState</code> has zero Proxy wrapping cost on initial load, because React treats state as opaque plain JavaScript data; the bottleneck happens during render if thousands of DOM rows mount without window virtualization (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@tanstack/react-virtual</code>). In Vue, passing 50,000 deeply nested objects into <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref()</code> recursively converts nested objects into ES6 Proxies on access—wasting memory on read-only API payloads. Switching to <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef()</code> eliminates deep Proxy allocation completely, giving Vue instantaneous ingestion plus surgical updates.</p>
+
+                <div id="vue-shallowref-50k-rows-optimization" class="pt-4 mt-4 border-t border-emerald-950/70 space-y-3 scroll-mt-28">
+                  <h3 class="text-base sm:text-lg font-bold text-[#E5C78B] font-serif leading-snug">
+                    Eliminating Deep Proxy Overhead on Large Read-Only Payloads with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef</code>
+                  </h3>
+                  <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Whenever a Vue 3.5+ store or component ingests large GeoJSON layers, chart series, or multi-thousand-row financial ledgers that are replaced as immutable snapshots rather than mutated field-by-field, declare state with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef</code> instead of <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref</code>. Vue tracks only <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">.value</code> reassignment, keeping heap memory flat and initial frame time under 4ms.</p>
+                  
+                <div class="rounded-xl overflow-hidden border border-emerald-500/30 bg-[#040705] shadow-lg my-4">
+                  <div class="flex items-center justify-between px-4 py-2 bg-[#07130D] border-b border-emerald-950/90 text-[11px] font-mono">
+                    <span class="text-[#E5C78B] font-bold">src/composables/useLargeLedgerGrid.ts</span>
+                    <span class="text-emerald-400 uppercase tracking-wider">ts</span>
+                  </div>
+                  <pre class="p-4 overflow-x-auto text-xs sm:text-[13px] leading-relaxed font-mono text-emerald-100/95"><code>import { computed, shallowRef } from 'vue';
+
+export interface LedgerEntry {
+  readonly id: string;
+  readonly accountCode: string;
+  readonly amountHalalas: number;
+}
+
+export function useLargeLedgerGrid() {
+  // shallowRef avoids deep Proxy wrapping across 50,000+ immutable API rows:
+  const entries = shallowRef&lt;readonly LedgerEntry[]&gt;([]);
+
+  const totalSar = computed(() =&gt; {
+    let sumHalalas = 0;
+    for (const row of entries.value) sumHalalas += row.amountHalalas;
+    return sumHalalas / 100;
+  });
+
+  async function loadSnapshot(url: string) {
+    const res = await fetch(url);
+    const payload = (await res.json()) as readonly LedgerEntry[];
+    // Reassigning .value triggers totalSar and virtualized table subscribers cleanly:
+    entries.value = payload;
+  }
+
+  return { entries, totalSar, loadSnapshot };
+}</code></pre>
+                </div>
+                </div>
+
+                <div class="p-5 rounded-xl bg-[#050806]/90 border border-emerald-500/30 space-y-3 mt-4">
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                    ✓ Enterprise React &amp; Vue Production Governance Checklist
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Enforce strict TypeScript compiler checks (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">tsc --noEmit</code> in React or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vue-tsc --noEmit</code> in Vue) on every pull request in CI.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Separate async server cache (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">TanStack Query</code> / Nuxt <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useAsyncData</code>) from client UI state (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Zustand</code> / <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Pinia</code>) so HTTP responses are never duplicated in manual stores.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Virtualize tables exceeding 200 visible rows (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@tanstack/react-virtual</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@tanstack/vue-virtual</code>) and use <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef</code> for large immutable payloads in Vue.</span></div><div class="p-3 rounded-lg bg-[#07130D]/80 border border-emerald-950 text-xs text-slate-200 flex items-start gap-2 leading-relaxed"><span class="text-emerald-400 font-bold shrink-0">✓</span><span>Enable React Compiler ESLint rules (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">eslint-plugin-react-hooks</code>) in React 19 or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">eslint-plugin-vue</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vue-tsc</code> strict template checking in Vue 3.5+.</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="executive-decision-framework-when-to-choose-react-vs-vue" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/20 space-y-4 scroll-mt-28">
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">5. Executive Decision Guide: Selecting React.js vs. Vue.js for Your Next Platform</h2>
+              <div class="space-y-4 text-sm sm:text-base text-slate-300 leading-relaxed">
+                <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choose <strong class="text-white font-semibold">React 19.3 (+ Next.js / TanStack / Shadcn UI)</strong> when your roadmap includes shared web-and-mobile engineering via <strong class="text-white font-semibold">React Native / Expo</strong>, when you are building AI-heavy streaming interfaces leveraging <strong class="text-white font-semibold">React Server Components</strong> and <strong class="text-white font-semibold">Shadcn/Radix</strong> ecosystems, or when scaling a multi-squad engineering organization that benefits from the industry’s largest global TypeScript hiring pool.</p>
+<p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choose <strong class="text-white font-semibold">Vue 3.5+ (+ Pinia v4 / Nuxt)</strong> when your priority is <strong class="text-white font-semibold">high feature velocity with low cognitive overhead</strong>, clean HTML/CSS/TS separation in Single-File Components, full-stack cohesion with <strong class="text-white font-semibold">Laravel + Inertia.js</strong> or <strong class="text-white font-semibold">Nuxt Nitro</strong> edge deployments, and predictable fine-grained reactivity without hook dependency arrays or memoization edge cases. Both technologies comfortably sustain 95+ Core Web Vitals and enterprise security SLAs when paired with disciplined TypeScript architecture.</p>
+              </div>
+            </section>
+            <section id="common-mistakes" class="p-6 sm:p-8 rounded-2xl glass-panel border border-rose-500/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-rose-300">Production Pitfalls</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Common Mistakes to Avoid</h2>
+              </div>
+              <div class="space-y-3.5">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Calling React Hooks Conditionally or Mutating State Arrays In-Place</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">React relies on deterministic hook call order per Fiber node and <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Object.is</code> reference changes. Mutating <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">items.push(newItem)</code> in place instead of creating a new array reference causes silent stale UIs and breaks React Compiler memoization assumptions.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Destructuring a Pinia Store Directly Without <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">storeToRefs()</code> in Vue</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Writing <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">const { selectedCount } = useBidWorkspaceStore()</code> copies the current primitive value once and severs Vue reactivity! Always wrap state/getters in <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">const { selectedCount } = storeToRefs(store)</code> while destructuring action functions directly.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Wrapping 50,000-Row Read-Only API Responses in Deep <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref()</code> Instead of <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef()</code> in Vue</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Deep <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">ref()</code> lazily wraps nested objects in ES6 Proxies when traversed, inflating memory on massive analytics or GIS payloads. Use <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">shallowRef()</code> whenever replacing server snapshots wholesale.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Returning Fresh Object Literals Inside Zustand v5 Selectors Without <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useShallow</code></h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Writing <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useStore((s) =&gt; ({ a: s.a, b: s.b }))</code> allocates a brand-new object reference on every snapshot check, causing React 19’s <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useSyncExternalStore</code> to throw maximum-update-depth infinite loop errors. Select atomic primitives or wrap multi-key selectors with <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useShallow</code>.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/90 border border-rose-500/20 space-y-1.5">
+                  <h3 class="text-sm sm:text-base font-bold text-rose-200 font-serif">⚠️ Conflating React (View Library) with Next.js or Vue (Core) with Nuxt During RFP Sizing</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Technical proposals must explicitly specify whether the application runs as a client-rendered Vite SPA (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">vue</code>) or a server-rendered meta-framework (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Next.js</code> or <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Nuxt</code>), because Node.js/Edge SSR infrastructure, caching, and WAF rules differ substantially from static CDN hosting.</p>
+                </div>
+              </div>
+            </section>
+            <section id="article-faqs" class="p-6 sm:p-8 rounded-2xl glass-panel border border-[#C6A15B]/30 space-y-5 scroll-mt-28">
+              <div class="space-y-1">
+                <div class="text-xs font-mono uppercase tracking-widest text-[#E5C78B]">Technical Q&amp;A</div>
+                <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Frequently Asked Questions</h2>
+              </div>
+              <div class="space-y-4">
+                
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Is React.js a framework or a library, and how does that differ from Vue.js?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">React.js is strictly a UI View Library (<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react</code> + <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">react-dom</code>) that delegates routing, global state, data fetching, and SSR to ecosystem packages or meta-frameworks like Next.js. Vue.js is a Progressive Framework whose core team officially builds and maintains Vue Router, Pinia state management, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">@vitejs/plugin-vue</code> SFC tooling, and Nuxt in unified lockstep.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Does React Compiler 1.0 make React as fast as Vue 3.5 fine-grained reactivity?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">React Compiler 1.0 closes much of the historical re-render gap by automatically memoizing JSX subtrees and values at build time without manual <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useMemo</code>/<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">useCallback</code>. However, Vue 3.5’s Proxy/Ref dependency graph and SFC template <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">PatchFlags</code> (plus upcoming Vapor Mode) still carry a smaller baseline runtime footprint (~22–33 kB vs ~42–45 kB gzipped) and never re-execute component setup logic on updates.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Should we use Pinia or Vuex for new Vue 3.5+ enterprise projects?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Always use Pinia (v3/v4). Vuex 4 is in maintenance/legacy status, whereas Pinia is the official Vue state library—offering native TypeScript inference without string mutation constants, modular tree-shakable stores, smaller bundle weight, and built-in Nuxt SSR hydration.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Which is better for SEO and Core Web Vitals: React or Vue?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">When deployed purely as client-side SPAs, neither is ideal for public search indexation without SSR/SSG. When paired with their flagship meta-frameworks—Next.js (App Router + Server Components) for React or Nuxt (Nitro SSR/ISR + Route Rules) for Vue—both deliver full HTML indexability, <code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">BlogPosting</code>/<code class="px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-500/20 font-mono text-[0.9em] text-emerald-200">Product</code> JSON-LD rendering, and 95+ Core Web Vitals.</p>
+                </div>
+                <div class="p-4 sm:p-5 rounded-xl bg-[#07130D]/85 border border-emerald-950 space-y-2">
+                  <h3 class="text-sm sm:text-base font-bold text-[#E5C78B] font-serif">Which frontend stack pairs best with a Laravel or Symfony PHP backend?</h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Both integrate cleanly via REST/OpenAPI or Inertia.js, though Vue.js holds deep first-party heritage in the Laravel community (Inertia + Vue 3 + TypeScript + Tailwind) while Symfony UX pairs smoothly with either Vue, React, or Twig LiveComponents.</p>
+                </div>
+              </div>
+            </section>
+            <section id="conclusion" class="p-6 sm:p-8 rounded-2xl glass-panel border border-emerald-500/30 space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-widest text-emerald-400">Executive Takeaway</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif">Summary: Composable Ecosystem Reach vs. Cohesive Progressive Velocity</h2>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Choosing between React 19.3 and Vue 3.5+ is not a search for a single &quot;winner,&quot; because both power mission-critical enterprise systems at massive scale. React gives organizations an unrivaled UI library ecosystem, Server Components innovation, Shadcn/Radix design-system dominance, and direct mobile code reuse through React Native.</p>
+              <p class="text-sm sm:text-base text-slate-300 leading-[1.85]">Vue gives organizations a remarkably cohesive, low-boilerplate progressive framework where fine-grained Proxy reactivity, Single-File Components, Pinia stores, and Nuxt server rendering fit together seamlessly from day one. Anchor your selection in mobile code-sharing needs, backend pairing, and your engineering team’s governance maturity.</p>
+            </section>
+            <section id="service-cta" class="p-6 sm:p-8 rounded-2xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/85 to-[#050806] space-y-4 scroll-mt-28">
+              <div class="text-xs font-mono uppercase tracking-wider text-[#E5C78B]">Connected Engineering Practice · JS &amp; TS Ecosystem</div>
+              <h2 class="text-xl sm:text-2xl font-bold text-white font-serif leading-snug">Need Expert JS &amp; TS Ecosystem Diagnostics, Architecture, or Ongoing SLA Support?</h2>
+              <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Our engineering practice resolves complex production bottlenecks, PHP/runtime upgrades, and security hardening with zero-downtime deployment governance. Explore our dedicated Frontend Engineering &amp; Interactive UI service or request a direct technical review.</p>
+              <div class="flex flex-wrap items-center gap-3 pt-1">
+                <a href="/en/services/frontend-development.html" class="btn-gold text-xs py-2.5 px-5 font-bold">Explore Frontend Engineering &amp; Interactive UI →</a>
+                <a href="/en/services/custom-software-development.html" class="btn-emerald text-xs py-2.5 px-5">Custom Software Development</a>
+              </div>
+            </section>
+            <section id="official-references" class="p-6 rounded-2xl glass-panel border border-emerald-900/80 space-y-3 scroll-mt-28">
+              <h2 class="text-base sm:text-lg font-bold text-white font-serif">Official Documentation &amp; References</h2>
+              <ul class="space-y-2 text-xs sm:text-sm">
+                
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://react.dev/blog/2024/12/05/react-19" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">React 19 Official Release Documentation — Actions, use(), Metadata &amp; Compiler ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Meta / React Core Team (react.dev)</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://vuejs.org/guide/extras/reactivity-in-depth.html" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Vue.js Official Documentation — Reactivity in Depth &amp; Vue 3.5+ Composition API ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Evan You &amp; Vue Core Team (vuejs.org)</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://pinia.vuejs.org/core-concepts/" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Pinia Official Documentation — Core Concepts, Setup Stores &amp; SSR Hydration ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Vue.js Official State Management (pinia.vuejs.org)</span>
+                </li>
+                <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 p-3 rounded-xl bg-[#07130D]/75 border border-emerald-950/90">
+                  <a href="https://zustand.docs.pmnd.rs/guides/typescript" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#E5C78B] hover:underline break-all">Zustand Official TypeScript Guide — Slices, Selectors &amp; useShallow ↗</a>
+                  <span class="text-[11px] font-mono text-emerald-400/80 shrink-0">Poimandres Open Source Collective</span>
+                </li>
+              </ul>
+            </section>
+
+            <section id="related-guides" class="pt-6 border-t border-emerald-950/80 space-y-4 scroll-mt-28">
+              <div class="flex items-center justify-between gap-4">
+                <h2 class="text-xl font-bold text-white font-serif">Related Guides in JS &amp; TS Ecosystem</h2>
+                <a href="/en/articles/index.html?track=javascript" class="text-xs font-bold text-[#E5C78B] hover:underline">View Track →</a>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/en/articles/prisma-vs-drizzle-orm-typescript-comparison.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">JS &amp; TS Ecosystem · 14 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Prisma vs. Drizzle ORM in TypeScript &amp; Node.js: Architecture, SQL Control, Latest Releases &amp; Migration Guide</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+                <a href="/en/articles/angular-signals-and-reactivity-guide.html" class="p-5 rounded-2xl glass-panel border border-emerald-500/20 hover:border-[#C6A15B]/50 transition-all flex flex-col justify-between gap-3 group">
+                  <div class="space-y-2">
+                    <span class="text-[10px] font-mono uppercase tracking-wider text-[#E5C78B]">Angular · 9 min read</span>
+                    <h3 class="text-sm font-bold text-white group-hover:text-[#E5C78B] transition-colors line-clamp-2">Angular Signals &amp; Fine-Grained Reactivity: Architecture Patterns for Zoneless Performance</h3>
+                  </div>
+                  <span class="text-xs font-bold text-emerald-300 group-hover:text-white">Read Guide →</span>
+                </a>
+              </div>
+            </section>
+          </div>
+        </article>
+
+        <!-- Right Sticky Sidebar: Connected Service & Direct Consultation (3 Cols) -->
+        <aside class="lg:col-span-3 lg:sticky lg:top-24 space-y-6 order-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-4">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-[#E5C78B]">Connected Practice Service</div>
+            <h2 class="text-base font-bold text-white font-serif leading-snug">Frontend Engineering &amp; Interactive UI</h2>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Need production implementation, root-cause diagnostics, performance hardening, or compliant technical proposal drafting for this domain?
+            </p>
+            <a href="/en/services/frontend-development.html" class="w-full btn-gold text-xs py-2.5 px-4 font-bold justify-center">
+              <span>Explore Service Blueprint →</span>
+            </a>
+            <a href="/en/services/custom-software-development.html" class="w-full btn-ghost-gold text-xs py-2 px-4 justify-center"><span>Custom Software Development</span></a>
+          </div>
+
+          <div class="p-5 rounded-2xl glass-panel border border-emerald-500/25 space-y-3">
+            <div class="text-xs font-bold uppercase tracking-wider text-emerald-400 font-mono">Verified Authority</div>
+            <div class="grid grid-cols-2 gap-2.5 text-center">
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold gold-gradient-text font-mono">400+</div>
+                <div class="text-[10px] text-slate-300">Tenders Prepared &amp; Reviewed</div>
+              </div>
+              <div class="p-3 rounded-xl bg-[#07130D] border border-emerald-950">
+                <div class="text-lg font-extrabold text-emerald-400 font-mono">100+</div>
+                <div class="text-[10px] text-slate-300">Delivered Digital Projects</div>
+              </div>
+            </div>
+            <a href="/en/contact/index.html" class="w-full btn-emerald text-xs py-2.5 px-4 justify-center">
+              <span>Request Consultation</span>
+            </a>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="Youssef Ghamry Emblem" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-cinzel font-bold text-white gold-gradient-text tracking-wider">YOUSSEF GHAMRY</span>
+              <span class="text-slate-500"> — Full-Stack Developer &amp; Senior Bid QA Specialist</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/index.html" class="hover:text-[#E5C78B] transition-colors">Home</a>
+            <a href="/en/services/index.html" class="hover:text-[#E5C78B] transition-colors">Services (93)</a>
+            <a href="/en/cv/index.html" class="hover:text-[#E5C78B] transition-colors">CV</a>
+            <a href="/en/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">Portfolio (25 / 100+)</a>
+            <a href="/en/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">Tenders (400+)</a>
+            <a href="/en/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">Certifications (27+)</a>
+            <a href="/en/articles/index.html" class="hover:text-[#E5C78B] transition-colors">Articles (132)</a>
+            <a href="/en/contact/index.html" class="hover:text-white transition-colors">Contact</a>
+            <a href="/ar/articles/react-vs-vue-architecture-and-ecosystem-comparison.html" class="text-[#E5C78B] font-bold">Arabic Edition (AR)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 Youssef Ghamry. All rights reserved. Full-Stack Digital Engineering &amp; Government Tender Advisory.</div>
+          <div>Cairo, Egypt · Saudi Arabia (Etimad) &amp; Global Remote Engagements</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>

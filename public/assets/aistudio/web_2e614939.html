@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بورتفوليو كامل - جميع المشاريع والخدمات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons/css/flag-icons.min.css">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --card-bg: rgba(30, 41, 59, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* الهيدر */
+        header {
+            padding: 60px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+        
+        .services-overview {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .service-badge {
+            background: rgba(30, 41, 59, 0.7);
+            padding: 12px 25px;
+            border-radius: 30px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .service-badge:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-badge i {
+            color: var(--primary);
+        }
+        
+        /* إحصائيات */
+        .stats-section {
+            padding: 50px 0;
+            background: rgba(15, 23, 42, 0.7);
+            border-radius: 20px;
+            margin: 50px auto;
+            max-width: 1200px;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+        }
+        
+        .stats-title {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            color: var(--light);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 15px;
+            border-top: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .stat-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        /* الفلاتر */
+        .filter-section {
+            margin: 50px auto;
+            max-width: 1200px;
+        }
+        
+        .filter-title {
+            font-size: 1.5rem;
+            color: var(--light);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .filter-btn {
+            background: rgba(30, 41, 59, 0.8);
+            color: var(--light);
+            border: 1px solid var(--gray);
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        /* المعرض */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .portfolio-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(100, 116, 139, 0.3);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: var(--primary);
+        }
+        
+        .item-header {
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.9);
+            border-bottom: 1px solid rgba(100, 116, 139, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+        
+        .item-logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .item-titles {
+            flex-grow: 1;
+        }
+        
+        .item-titles h3 {
+            font-size: 1.4rem;
+            color: var(--light);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .item-titles h4 {
+            font-size: 1rem;
+            color: var(--gray);
+            font-weight: normal;
+        }
+        
+        .item-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .item-description {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+        
+        .item-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--light);
+            font-size: 0.95rem;
+        }
+        
+        .meta-item i {
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .country-flag {
+            width: 24px;
+            height: 16px;
+            border-radius: 3px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .item-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+        }
+        
+        .service-tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* ألوان الخدمات */
+        .service-tag.website { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .service-tag.marketing { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .service-tag.sales { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .service-tag.erp { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+        .service-tag.crm { background: rgba(236, 72, 153, 0.2); color: #ec4899; }
+        .service-tag.pos { background: rgba(14, 165, 233, 0.2); color: #0ea5e9; }
+        .service-tag.app { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .service-tag.branding { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+        
+        /* تفاصيل المشروع */
+        .project-details {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 6, 23, 0.98);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+        
+        .project-details.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .details-header {
+            padding: 30px 40px;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(100, 116, 139, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .project-header-info {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .project-logo {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.15));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .project-titles h2 {
+            font-size: 2.2rem;
+            color: var(--light);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .project-titles h3 {
+            font-size: 1.3rem;
+            color: var(--gray);
+            font-weight: normal;
+        }
+        
+        .close-details {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        
+        .close-details:hover {
+            background: #2563eb;
+            transform: rotate(90deg);
+        }
+        
+        .details-content {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .project-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .project-service {
+            background: rgba(59, 130, 246, 0.15);
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .project-service:hover {
+            transform: translateY(-3px);
+        }
+        
+        .project-service i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .project-description {
+            background: rgba(30, 41, 59, 0.7);
+            padding: 35px;
+            border-radius: 18px;
+            margin-bottom: 40px;
+            line-height: 1.9;
+            color: var(--gray);
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .project-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .highlight-card {
+            background: rgba(30, 41, 59, 0.7);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .highlight-title {
+            color: var(--light);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .highlight-title i {
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .highlight-card p {
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        .part-of-work {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 40px 0;
+            font-size: 1.1rem;
+            color: #10b981;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .part-of-work i {
+            margin-left: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .visit-project {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .visit-project:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+        
+        .project-link-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 60px 0 40px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            color: var(--light);
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .footer-section p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-link {
+            color: var(--gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+        
+        .contact-link:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(100, 116, 139, 0.3);
+            color: var(--gray);
+            font-size: 1rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        /* التجاوب */
+        @media (max-width: 1200px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .project-highlights {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 25px;
+            }
+            
+            .project-highlights {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-overview {
+                gap: 12px;
+            }
+            
+            .service-badge {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 0 30px;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .stat-card {
+                padding: 25px 15px;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .details-header {
+                padding: 20px;
+            }
+            
+            .project-header-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .project-titles h2 {
+                font-size: 1.8rem;
+            }
+            
+            .details-content {
+                padding: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            
+            .footer-section h3::after {
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                gap: 10px;
+            }
+            
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .item-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .item-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .project-service {
+                padding: 12px 20px;
+                font-size: 0.95rem;
+            }
+        }
+        
+        .fi {
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            border: none;
+        }
+        
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .counter {
+            font-feature-settings: "tnum";
+            font-variant-numeric: tabular-nums;
+        }
+    </style>
+</head>
+<body>
+    <!-- زر العودة للأعلى -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div class="container">
+        <!-- الهيدر -->
+        <header>
+            <div class="logo">
+                <i class="fas fa-briefcase"></i> بورتفوليو كامل
+            </div>
+            <p class="tagline">
+                هذا المعرض يضم جميع المشاريع والبراندات التي عملت عليها، ويغطي مجموعة واسعة من الخدمات 
+                تشمل تطوير المواقع والتطبيقات، أنظمة إدارة الأعمال (ERP، CRM، POS)، التسويق الإلكتروني، 
+                استراتيجيات المبيعات، وتطوير العلامات التجارية.
+            </p>
+            
+            <div class="services-overview">
+                <div class="service-badge">
+                    <i class="fas fa-globe"></i> تطوير مواقع
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-mobile-alt"></i> تطبيقات محمولة
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-cogs"></i> أنظمة ERP
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-users"></i> أنظمة CRM
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-cash-register"></i> أنظمة POS
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-bullhorn"></i> تسويق إلكتروني
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-chart-line"></i> استراتيجيات مبيعات
+                </div>
+                <div class="service-badge">
+                    <i class="fas fa-palette"></i> تطوير براندات
+                </div>
+            </div>
+        </header>
+        
+        <!-- إحصائيات -->
+        <section class="stats-section">
+            <h2 class="stats-title">أرقام وإحصائيات</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number counter" id="totalProjects">25</div>
+                    <div class="stat-label">مشروع مكتمل</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number counter">15+</div>
+                    <div class="stat-label">دولة مختلفة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number counter">8</div>
+                    <div class="stat-label">مجالات متخصصة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number counter">50+</div>
+                    <div class="stat-label">خدمة مقدمة</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- الفلاتر -->
+        <section class="filter-section">
+            <h2 class="filter-title">تصفية المشاريع حسب الخدمة:</h2>
+            <div class="filter-buttons" id="filterButtons">
+                <!-- سيتم إضافة الأزرار ديناميكياً -->
+            </div>
+        </section>
+        
+        <!-- المعرض -->
+        <section class="portfolio-grid" id="portfolioGrid">
+            <!-- سيتم إضافة جميع المشاريع الـ 25 ديناميكياً -->
+        </section>
+        
+        <!-- تفاصيل المشروع -->
+        <div class="project-details" id="projectDetails">
+            <div class="details-header">
+                <div class="project-header-info">
+                    <div class="project-logo" id="projectLogo"></div>
+                    <div class="project-titles">
+                        <h2 id="projectNameAr">اسم المشروع</h2>
+                        <h3 id="projectNameEn">Project Name</h3>
+                    </div>
+                </div>
+                <button class="close-details" id="closeDetails">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="details-content">
+                <div class="project-services" id="projectServices">
+                    <!-- سيتم إضافة الخدمات ديناميكياً -->
+                </div>
+                
+                <div class="project-description" id="projectDescription">
+                    <!-- سيتم إضافة الوصف ديناميكياً -->
+                </div>
+                
+                <div class="project-highlights" id="projectHighlights">
+                    <!-- سيتم إضافة المميزات ديناميكياً -->
+                </div>
+                
+                <div class="part-of-work">
+                    <i class="fas fa-info-circle"></i> 
+                    هذا المشروع هو جزء من مجموعة أعمال شاملة قمنا بها للعميل، تضمنت خدمات متعددة 
+                    حسب احتياجات المشروع، وقد ساهمت في تحقيق أهداف العميل وزيادة أرباحه.
+                </div>
+                
+                <div class="project-link-container">
+                    <a id="projectLink" class="visit-project" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> زيارة المشروع
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+         </div>
+
+    <script>
+        // بيانات جميع المشاريع الـ 25
+        const allProjects = [
+            {
+                id: 1,
+                nameAr: "بحرين فايندر",
+                nameEn: "Bahrain Finder",
+                domain: "bahrainfinder.bh",
+                country: "bh",
+                countryName: "البحرين",
+                description: "منصة رقمية عقارية متكاملة تتيح اكتشاف وشراء وبيع العقارات في البحرين. قمنا بتطوير الموقع مع نظام إدارة محتوى متقدم، بالإضافة إلى استراتيجية تسويق إلكتروني شاملة زادت من وضوح العلامة التجارية وجذبت عملاء جدد. النظام يتضمن خريطة تفاعلية، محرك بحث متقدم، وإدارة علاقات عملاء متكاملة.",
+                services: ["website", "marketing", "crm", "branding"],
+                logo: "🏢",
+                highlights: [
+                    {
+                        icon: "fas fa-chart-line",
+                        title: "نتائج التسويق",
+                        text: "زيادة حركة المرور بنسبة 300% خلال 6 أشهر من خلال استراتيجية تسويق محكمة"
+                    },
+                    {
+                        icon: "fas fa-cogs",
+                        title: "النظام التقني",
+                        text: "تطوير نظام إدارة محتوى مخصص مع لوحة تحكم متقدمة لإدارة العقارات والعملاء"
+                    },
+                    {
+                        icon: "fas fa-users",
+                        title: "إدارة العملاء",
+                        text: "تنفيذ نظام CRM لمتابعة العملاء وتحسين تجربة المستخدم وزيادة المبيعات"
+                    }
+                ]
+            },
+            {
+                id: 2,
+                nameAr: "مركز الأداء المتوازن للتدريب",
+                nameEn: "Balanced Scorecard Center",
+                domain: "bscenter.org/ar",
+                country: "sa",
+                countryName: "السعودية",
+                description: "مركز تدريب واستشارات متخصص قدمنا له حلولاً متكاملة تشمل تطوير موقع تعليمي تفاعلي، نظام حجز دورات إلكتروني، استراتيجية تسويق تعليمي، وتطبيق محمول للطلاب. ساعدت الحلول في توسيع قاعدة العملاء وزيادة الإيرادات بنسبة 150% خلال السنة الأولى.",
+                services: ["website", "app", "marketing", "crm"],
+                logo: "🎓",
+                highlights: [
+                    {
+                        icon: "fas fa-mobile-alt",
+                        title: "تطبيق محمول",
+                        text: "تطوير تطبيق خاص بالهواتف الذكية يسمح بالتعلم عن بعد ومتابعة الدروس والتفاعل مع المدربين"
+                    },
+                    {
+                        icon: "fas fa-shopping-cart",
+                        title: "نظام حجز إلكتروني",
+                        text: "نظام حجز دورات متكامل مع بوابة دفع إلكترونية آمنة وتكامل مع أنظمة الدفع المحلية"
+                    },
+                    {
+                        icon: "fas fa-bullhorn",
+                        title: "تسويق تعليمي",
+                        text: "حملة تسويقية مستهدفة زادت من نسبة الاشتراكات بنسبة 150% وجذبت طلاب من دول خليجية مختلفة"
+                    }
+                ]
+            },
+            {
+                id: 3,
+                nameAr: "إيكوالايت فودز",
+                nameEn: "Equalite Foods",
+                domain: "equalitefoods.com",
+                country: "in",
+                countryName: "الهند",
+                description: "لشركة الأغذية الصحية قمنا بتطوير متجر إلكتروني متكامل، نظام إدارة طلبات، استراتيجية تسويق للمنتجات الصحية، وتطبيق ولاء للعملاء. ركزنا على تجربة مستخدم سلسة وتصميم يعكس طبيعة المنتجات الصحية والعضوية.",
+                services: ["website", "sales", "marketing", "crm"],
+                logo: "🥗",
+                highlights: [
+                    {
+                        icon: "fas fa-shopping-bag",
+                        title: "متجر إلكتروني",
+                        text: "تطوير متجر إلكتروني سريع وسهل الاستخدام مع نظام دفع متعدد الخيارات"
+                    },
+                    {
+                        icon: "fas fa-heart",
+                        title: "منتجات صحية",
+                        text: "تصميم يعكس الطبيعة الصحية للمنتجات مع معلومات تغذوية مفصلة"
+                    },
+                    {
+                        icon: "fas fa-tags",
+                        title: "تسويق صحي",
+                        text: "استراتيجية تسويق تركز على الفوائد الصحية وجذبت عملاء مهتمين بالصحة والتغذية"
+                    }
+                ]
+            },
+            {
+                id: 4,
+                nameAr: "دوست زراعت إيشليتميلاري",
+                nameEn: "Dost Ziraat",
+                domain: "dostziraat.com",
+                country: "tr",
+                countryName: "تركيا",
+                description: "لشركة الزراعة والثروة الحيوانية قمنا بتطوير نظام إدارة مزارع متكامل، موقع تعريفي، استراتيجية تسويق للمنتجات الزراعية، وتطبيق لمراقبة المحاصيل. النظام يحسن من كفاءة الإنتاج والتوزيع.",
+                services: ["erp", "website", "marketing", "app"],
+                logo: "🚜",
+                highlights: [
+                    {
+                        icon: "fas fa-seedling",
+                        title: "نظام إدارة مزارع",
+                        text: "نظام ERP مخصص لإدارة المزارع يتابع المحاصيل والثروة الحيوانية والتكاليف"
+                    },
+                    {
+                        icon: "fas fa-chart-pie",
+                        title: "تحليل البيانات",
+                        text: "أدوات تحليل بيانات تساعد في اتخاذ قرارات إنتاجية وتوزيعية ذكية"
+                    },
+                    {
+                        icon: "fas fa-tractor",
+                        title: "تسويق زراعي",
+                        text: "استراتيجية تسويق للمنتجات الزراعية تركز على الجودة والاستدامة"
+                    }
+                ]
+            },
+            {
+                id: 5,
+                nameAr: "سومي ليمتد",
+                nameEn: "SUMI LIMITED",
+                domain: "sumi.fillinglife.co/en/",
+                country: "jp",
+                countryName: "اليابان",
+                description: "للعلامة التجارية الفاخرة للأثاث قمنا بتطوير متجر إلكتروني يعرض المنتجات بطريقة فنية، نظام إدارة طلبات، استراتيجية تسويق للفئة المستهدفة، وتطبيق عرض ثلاثي الأبعاد. ركزنا على الفخامة وتجربة المستخدم المميزة.",
+                services: ["website", "sales", "marketing", "branding"],
+                logo: "🪑",
+                highlights: [
+                    {
+                        icon: "fas fa-couch",
+                        title: "عرض ثلاثي الأبعاد",
+                        text: "تطبيق يسمح بعرض المنتجات ثلاثية الأبعاد وتجربتها افتراضياً في المكان"
+                    },
+                    {
+                        icon: "fas fa-gem",
+                        title: "تصميم فاخر",
+                        text: "تصميم يعكس فخامة العلامة التجارية وجاذبية منتجاتها العالية الجودة"
+                    },
+                    {
+                        icon: "fas fa-bullseye",
+                        title: "تسويق مستهدف",
+                        text: "استراتيجية تسويق موجهة للفئة العليا من العملاء المهتمين بالفخامة والجودة"
+                    }
+                ]
+            },
+            {
+                id: 6,
+                nameAr: "إم بي إم بريلين",
+                nameEn: "MBM Brillen",
+                domain: "mbm-brillen.de",
+                country: "de",
+                countryName: "ألمانيا",
+                description: "عملنا مع هذه العلامة التجارية الألمانية للنظارات الفاخرة على تطوير متجر إلكتروني متكامل، نظام إدارة علاقات عملاء، استراتيجية مبيعات دولية، وتطبيق للواقع المعزز يسمح بتجربة النظارات افتراضياً. ساعدت الحلول في توسيع السوق عالمياً.",
+                services: ["website", "sales", "crm", "app", "branding"],
+                logo: "👓",
+                highlights: [
+                    {
+                        icon: "fas fa-vr-cardboard",
+                        title: "تطبيق الواقع المعزز",
+                        text: "تطوير تقنية تسمح بتجربة النظارات افتراضياً قبل الشراء باستخدام كاميرا الهاتف"
+                    },
+                    {
+                        icon: "fas fa-globe",
+                        title: "توسع دولي",
+                        text: "استراتيجية مبيعات دولية زادت من المبيعات عبر الإنترنت بنسبة 200% في سنة واحدة"
+                    },
+                    {
+                        icon: "fas fa-warehouse",
+                        title: "تكامل المخزون",
+                        text: "نظام متكامل لإدارة المخزون والمبيعات عبر منافذ متعددة ومواقع مختلفة"
+                    }
+                ]
+            },
+            {
+                id: 7,
+                nameAr: "جادجيت بي دي",
+                nameEn: "Gadget BD",
+                domain: "gadgetbd.com",
+                country: "bd",
+                countryName: "بنغلاديش",
+                description: "للمتجر الإلكتروني المتخصص في إكسسوارات أبل قمنا بتطوير متجر سريع وسهل الاستخدام، نظام إدارة عروض، استراتيجية تسويق تركز على العروض، وتطبيق للهواتف. ركزنا على سرعة التصفح وسهولة الشراء.",
+                services: ["website", "sales", "marketing", "app"],
+                logo: "📱",
+                highlights: [
+                    {
+                        icon: "fas fa-bolt",
+                        title: "سرعة الأداء",
+                        text: "متصفح سريع جداً يحسن تجربة المستخدم ويزيد من معدلات التحويل"
+                    },
+                    {
+                        icon: "fas fa-tag",
+                        title: "إدارة العروض",
+                        text: "نظام متقدم لإدارة العروض والتخفيضات والتخفيضات الزمنية"
+                    },
+                    {
+                        icon: "fas fa-rocket",
+                        title: "تسويق العروض",
+                        text: "استراتيجية تسويق تركز على العروض والتخفيضات وتجذب الباحثين عن الصفقات"
+                    }
+                ]
+            },
+            {
+                id: 8,
+                nameAr: "كراون تورف",
+                nameEn: "Crown Turf",
+                domain: "crownturf.ca",
+                country: "ca",
+                countryName: "كندا",
+                description: "لشركة العشب الصناعي قمنا بتطوير موقع تعريفي متكامل، نظام حجز قياسات، استراتيجية تسويق محلي، وتطبيق لحساب التكلفة. ركزنا على إظهار جودة المنتجات وسهولة عملية الشراء والتركيب.",
+                services: ["website", "sales", "marketing"],
+                logo: "🏡",
+                highlights: [
+                    {
+                        icon: "fas fa-ruler-combined",
+                        title: "حاسبة القياسات",
+                        text: "أداة تفاعلية لحساب القياسات المطلوبة والتكلفة النهائية تلقائياً"
+                    },
+                    {
+                        icon: "fas fa-images",
+                        title: "معرض الأعمال",
+                        text: "معرض لأعمال سابقة يظهر جودة المنتجات والتطبيقات المختلفة"
+                    },
+                    {
+                        icon: "fas fa-map-marker-alt",
+                        title: "تسويق محلي",
+                        text: "استراتيجية تسويق موجهة جغرافياً للمناطق المستهدفة في كندا"
+                    }
+                ]
+            },
+            {
+                id: 9,
+                nameAr: "نيوروغلو",
+                nameEn: "NEUROGLOW",
+                domain: "neuroglow.com",
+                country: "us",
+                countryName: "الولايات المتحدة",
+                description: "للعيادة الطبية المتخصصة قمنا بتطوير نظام حجوزات متقدم، موقع طبي مع مدونة طبية، استراتيجية تسويق طبي متخصصة، وتطبيق لمتابعة المرضى. حسنت الحلول من تجربة المرضى وزيادة عدد الحجوزات بنسبة 180%.",
+                services: ["website", "app", "crm", "marketing"],
+                logo: "🏥",
+                highlights: [
+                    {
+                        icon: "fas fa-calendar-check",
+                        title: "نظام حجوزات ذكي",
+                        text: "نظام حجوزات يتكامل مع التقويم ويرسل تذكيرات تلقائية ويقلل من المواعيد الملغاة"
+                    },
+                    {
+                        icon: "fas fa-user-md",
+                        title: "تطبيق المتابعة",
+                        text: "تطبيق لمتابعة حالة المرضى ونتائج العلاج وإرسال نصائح طبية"
+                    },
+                    {
+                        icon: "fas fa-stethoscope",
+                        title: "تسويق طبي",
+                        text: "استراتيجية تسويق طبي متخصصة تلتزم باللوائح الطبية وتجذب المرضى المناسبين"
+                    }
+                ]
+            },
+            {
+                id: 10,
+                nameAr: "أبشر لتخليص المعاملات",
+                nameEn: "Absher",
+                domain: "absherbh.com",
+                country: "bh",
+                countryName: "البحرين",
+                description: "لشركة الخدمات الحكومية قمنا بتطوير نظام إدارة معاملات، موقع للخدمات، استراتيجية تسويق للخدمات، وتطبيق للموظفين. النظام يحسن من كفاءة تقديم الخدمات ويقلل من وقت الإنجاز.",
+                services: ["website", "erp", "crm", "app"],
+                logo: "📄",
+                highlights: [
+                    {
+                        icon: "fas fa-tasks",
+                        title: "نظام إدارة معاملات",
+                        text: "نظام متكامل لمتابعة المعاملات من البداية إلى النهاية مع إشعارات تلقائية"
+                    },
+                    {
+                        icon: "fas fa-file-contract",
+                        title: "مستندات ذكية",
+                        text: "نظام إنشاء وإدارة مستندات ذكي يقلل من الأخطاء الورقية"
+                    },
+                    {
+                        icon: "fas fa-clock",
+                        title: "تتبع الوقت",
+                        text: "نظام يتابع وقت إنجاز كل معاملة ويحسن من كفاءة الموظفين"
+                    }
+                ]
+            },
+            {
+                id: 11,
+                nameAr: "أوزما كوزمتكس",
+                nameEn: "Osma Cosmetics",
+                domain: "osmacosmetics.com",
+                country: "ae",
+                countryName: "الإمارات",
+                description: "للمتجر التجميلي الإلكتروني قمنا بتطوير متجر تجميلي متكامل، نظام توصيات منتجات، استراتيجية تسويق تجميلي، وتطبيق للعناية بالبشرة. ركزنا على تجربة مستخدم أنثوية وجذابة.",
+                services: ["website", "sales", "marketing", "app", "branding"],
+                logo: "💄",
+                highlights: [
+                    {
+                        icon: "fas fa-star",
+                        title: "نظام توصيات",
+                        text: "نظام ذكي يوصي بالمنتجات المناسبة لنوع البشرة والاحتياجات"
+                    },
+                    {
+                        icon: "fas fa-spa",
+                        title: "تجربة تجميلية",
+                        text: "تصميم وتجربة مستخدم تعكس عالم التجميل والجمال"
+                    },
+                    {
+                        icon: "fas fa-female",
+                        title: "تسويق تجميلي",
+                        text: "استراتيجية تسويق موجهة للنساء المهتمات بالعناية بالبشرة والتجميل"
+                    }
+                ]
+            },
+            {
+                id: 12,
+                nameAr: "ناشيونال فود إنداستريز",
+                nameEn: "National Food Industries",
+                domain: "nfidubai.com",
+                country: "ae",
+                countryName: "الإمارات",
+                description: "لشركة الأغذية قمنا بتطوير موقع تعريفي متكامل، نظام إدارة منتجات، استراتيجية تسويق للوجبات الخفيفة، وتطبيق ولاء. ساعدت الحلول في زيادة الحصة السوقية وتحسين تجربة العملاء.",
+                services: ["website", "erp", "marketing", "crm"],
+                logo: "🍿",
+                highlights: [
+                    {
+                        icon: "fas fa-truck-loading",
+                        title: "سلسلة التوريد",
+                        text: "نظام إدارة سلسلة توريد يحسن من كفاءة التوزيع ويقلل من الهدر"
+                    },
+                    {
+                        icon: "fas fa-gift",
+                        title: "برنامج ولاء",
+                        text: "تطبيق ولاء للعملاء زاد من تكرار الشراء بنسبة 40% وولاء العملاء"
+                    },
+                    {
+                        icon: "fas fa-ad",
+                        title: "حملات تسويقية",
+                        text: "حملات تسويق مبدعة زادت من معرفة العلامة التجارية والمبيعات"
+                    }
+                ]
+            },
+            {
+                id: 13,
+                nameAr: "أبيكس سكفولدينج",
+                nameEn: "Apex Scaffolding",
+                domain: "apexscaffoldinguae.com",
+                country: "ae",
+                countryName: "الإمارات",
+                description: "لشركة السقالات الرائدة قمنا بتطوير نظام إدارة مشاريع متكامل (ERP)، موقع شركة مع كتالوج منتجات تفاعلي، استراتيجية مبيعات B2B، ونظام POS للمبيعات المباشرة. حسنت الحلول من كفاءة العمليات وزادت المبيعات.",
+                services: ["erp", "website", "sales", "pos", "crm"],
+                logo: "🏗️",
+                highlights: [
+                    {
+                        icon: "fas fa-project-diagram",
+                        title: "نظام ERP متكامل",
+                        text: "نظام إدارة موارد مؤسسية مخصص لقطاع الإنشاءات وإدارة المشاريع"
+                    },
+                    {
+                        icon: "fas fa-cash-register",
+                        title: "نظام POS",
+                        text: "نظام نقاط بيع متقدم للمبيعات المباشرة في الفروع والمشاريع"
+                    },
+                    {
+                        icon: "fas fa-handshake",
+                        title: "مبيعات B2B",
+                        text: "استراتيجية مبيعات للمؤسسات زادت من عقود الشركات الكبرى والجهات الحكومية"
+                    }
+                ]
+            },
+            {
+                id: 14,
+                nameAr: "أبيكس باور كونسبتس",
+                nameEn: "Apex Power Concepts",
+                domain: "apexpowerconcepts.com",
+                country: "ae",
+                countryName: "الإمارات",
+                description: "لشركة الطاقة الشمسية قمنا بتطوير نظام إدارة مشاريع الطاقة الشمسية، موقع مع حاسبة طاقة تفاعلية، استراتيجية مبيعات للمشاريع التجارية والسكنية، وتطبيق لمراقبة أنظمة الطاقة الشمسية. ساعدت الحلول في زيادة كفاءة العمليات والمبيعات.",
+                services: ["erp", "website", "sales", "app", "marketing"],
+                logo: "☀️",
+                highlights: [
+                    {
+                        icon: "fas fa-solar-panel",
+                        title: "مراقبة الطاقة",
+                        text: "تطبيق لمراقبة أداء أنظمة الطاقة الشمسية في الوقت الفعلي وتحليل البيانات"
+                    },
+                    {
+                        icon: "fas fa-calculator",
+                        title: "حاسبة الطاقة",
+                        text: "أداة تفاعلية لحساب توفير الطاقة والعائد على الاستثمار وتقديم اقتراحات"
+                    },
+                    {
+                        icon: "fas fa-building",
+                        title: "مبيعات تجارية",
+                        text: "استراتيجية مبيعات للمشاريع التجارية الكبرى والمجمعات السكنية"
+                    }
+                ]
+            },
+            {
+                id: 15,
+                nameAr: "رويفير",
+                nameEn: "Ruifier",
+                domain: "ruifier.com",
+                country: "gb",
+                countryName: "المملكة المتحدة",
+                description: "للعلامة التجارية البريطانية للمجوهرات قمنا بتطوير متجر فاخر، نظام عرض ثلاثي الأبعاد، استراتيجية تسويق للفئة العليا، وتطبيق للهواتف. ركزنا على الفخامة وتجربة التسوق الفاخرة.",
+                services: ["website", "sales", "marketing", "app", "branding"],
+                logo: "💎",
+                highlights: [
+                    {
+                        icon: "fas fa-gem",
+                        title: "عرض ثلاثي الأبعاد",
+                        text: "تقنية لعرض المجوهرات ثلاثية الأبعاد وتكبيرها لرؤية التفاصيل الدقيقة"
+                    },
+                    {
+                        icon: "fas fa-crown",
+                        title: "تجربة فاخرة",
+                        text: "تصميم وتجربة مستخدم تعكس فخامة المجوهرات والعلامة التجارية"
+                    },
+                    {
+                        icon: "fas fa-user-tie",
+                        title: "تسويق نخبوي",
+                        text: "استراتيجية تسويق موجهة للفئة العليا والمهتمين بالمجوهرات الفاخرة"
+                    }
+                ]
+            },
+            {
+                id: 16,
+                nameAr: "هيدن-أندر",
+                nameEn: "Hidn-Ander",
+                domain: "hidnander.com",
+                country: "eu",
+                countryName: "أوروبا",
+                description: "لمشروع الأزياء قمنا بتطوير متجر أزياء، نظام إدارة تصنيفات، استراتيجية تسويق للموضة، وتطبيق للهواتف. ركزنا على الجودة وتجربة التسوق البسيطة والأنيقة.",
+                services: ["website", "sales", "marketing", "app"],
+                logo: "👗",
+                highlights: [
+                    {
+                        icon: "fas fa-tshirt",
+                        title: "متصفح أزياء",
+                        text: "متصفح منتجات سهل الاستخدام مع تصفية متقدمة حسب النوع والمقاس واللون"
+                    },
+                    {
+                        icon: "fas fa-shipping-fast",
+                        title: "شحن أوروبي",
+                        text: "نظام شحن متكامل مع خيارات مختلفة للدول الأوروبية"
+                    },
+                    {
+                        icon: "fas fa-camera",
+                        title: "تسويق مرئي",
+                        text: "استراتيجية تسويق تركز على المحتوى المرئي والتجارب الحقيقية للعملاء"
+                    }
+                ]
+            },
+            {
+                id: 17,
+                nameAr: "هيجاب هايف",
+                nameEn: "Hijab Hive",
+                domain: "hijabhive.com",
+                country: "gb",
+                countryName: "المملكة المتحدة",
+                description: "للمتجر الرائد للحجاب قمنا بتطوير متجر إسلامي، نظام إدارة ألوان وأنسجة، استراتيجية تسويق إسلامي، وتطبيق للهواتف. ركزنا على احتياجات المرأة المسلمة وتجربة التسوق المناسبة.",
+                services: ["website", "sales", "marketing", "app"],
+                logo: "🧕",
+                highlights: [
+                    {
+                        icon: "fas fa-palette",
+                        title: "مكتبة ألوان",
+                        text: "نظام عرض ألوان دقيق يساعد في اختيار اللون المناسب"
+                    },
+                    {
+                        icon: "fas fa-layer-group",
+                        title: "أنسجة ومقاسات",
+                        text: "تصنيف متقدم حسب نوع القماش والمقاس والاستخدام"
+                    },
+                    {
+                        icon: "fas fa-hands-helping",
+                        title: "مجتمع إسلامي",
+                        text: "استراتيجية تسويق تعتمد على بناء مجتمع حول العلامة التجارية"
+                    }
+                ]
+            },
+            {
+                id: 18,
+                nameAr: "ميس سبا",
+                nameEn: "Miss Spa",
+                domain: "miss-spa.com",
+                country: "us",
+                countryName: "الولايات المتحدة",
+                description: "لعلامة العناية بالبشرة قمنا بتطوير متجر تجميلي، نظام توصيات حسب نوع البشرة، استراتيجية تسويق للعناية بالبشرة، وتطبيق للعناية اليومية. ركزنا على التعليم والرعاية.",
+                services: ["website", "sales", "marketing", "app", "branding"],
+                logo: "🎭",
+                highlights: [
+                    {
+                        icon: "fas fa-brain",
+                        title: "محرك توصيات",
+                        text: "نظام ذكي يوصي بالمنتجات حسب نوع البشرة والمشاكل والاحتياجات"
+                    },
+                    {
+                        icon: "fas fa-graduation-cap",
+                        title: "تعليمي",
+                        text: "محتوى تعليمي عن العناية بالبشرة وروتينات العناية اليومية"
+                    },
+                    {
+                        icon: "fas fa-heart",
+                        title: "رعاية شخصية",
+                        text: "استراتيجية تركز على الرعاية الشخصية وبناء علاقة مع العملاء"
+                    }
+                ]
+            },
+            {
+                id: 19,
+                nameAr: "لوفينا سكينكير",
+                nameEn: "Lovinah",
+                domain: "lovinah.com",
+                country: "us",
+                countryName: "الولايات المتحدة",
+                description: "للعلامة التجارية العالمية للعناية بالبشرة قمنا بتطوير متجر فاخر، نظام خبير تجميلي افتراضي، استراتيجية تسويق عالمي، وتطبيق للعناية الشاملة. ركزنا على الجودة العالية والخبرة.",
+                services: ["website", "sales", "marketing", "app", "branding"],
+                logo: "✨",
+                highlights: [
+                    {
+                        icon: "fas fa-robot",
+                        title: "خبير تجميلي افتراضي",
+                        text: "ذكاء اصطناعي يحلل البشرة ويوصي بالمنتجات المناسبة"
+                    },
+                    {
+                        icon: "fas fa-globe-americas",
+                        title: "تواجد عالمي",
+                        text: "استراتيجية تسويق وشحن عالمي تغطي مختلف الدول"
+                    },
+                    {
+                        icon: "fas fa-flask",
+                        title: "تركيز علمي",
+                        text: "استراتيجية تسويق تركز على المكونات العلمية والنتائج المثبتة"
+                    }
+                ]
+            },
+            {
+                id: 20,
+                nameAr: "سبورت يونيفورم",
+                nameEn: "Sport Uniform",
+                domain: "sportuniform.com",
+                country: "us",
+                countryName: "الولايات المتحدة",
+                description: "للمتجر المتخصص في الملابس الرياضية قمنا بتطوير نظام تصميم مخصص، متجر للمنتجات الرياضية، استراتيجية تسويق للفرق الرياضية، وتطبيق للتصميم. ركزنا على التخصيص والجودة.",
+                services: ["website", "sales", "marketing", "branding"],
+                logo: "⚽",
+                highlights: [
+                    {
+                        icon: "fas fa-pen-fancy",
+                        title: "مصمم مخصص",
+                        text: "أداة تصميم تسمح بتصميم الملابس الرياضية حسب الطلب"
+                    },
+                    {
+                        icon: "fas fa-users",
+                        title: "فرق رياضية",
+                        text: "نظام مخصص لإدارة طلبات الفرق الرياضية والمدارس"
+                    },
+                    {
+                        icon: "fas fa-medal",
+                        title: "جودة رياضية",
+                        text: "استراتيجية تسويق تركز على جودة المنتجات وملاءمتها للأداء الرياضي"
+                    }
+                ]
+            },
+            {
+                id: 21,
+                nameAr: "كول إيديو",
+                nameEn: "Cool Edu",
+                domain: "classes5.cooledu.info",
+                country: "eg",
+                countryName: "مصر",
+                description: "للمجتمع التعليمي عبر الإنترنت قمنا بتطوير منصة تعليمية متكاملة، نظام إدارة فصول، استراتيجية تسويق تعليمي، وتطبيق للهواتف. ركزنا على التفاعل وسهولة التعلم.",
+                services: ["website", "app", "marketing", "crm"],
+                logo: "📚",
+                highlights: [
+                    {
+                        icon: "fas fa-chalkboard-teacher",
+                        title: "فصول افتراضية",
+                        text: "نظام فصول افتراضية متكامل مع أدوات التفاعل والمشاركة"
+                    },
+                    {
+                        icon: "fas fa-user-graduate",
+                        title: "تتبع التقدم",
+                        text: "نظام يتابع تقدم الطلاب ويقدم تقارير مفصلة"
+                    },
+                    {
+                        icon: "fas fa-comments",
+                        title: "مجتمع تعليمي",
+                        text: "بناء مجتمع تعليمي تفاعلي يدعم عملية التعلم"
+                    }
+                ]
+            },
+            {
+                id: 22,
+                nameAr: "تيك جروب",
+                nameEn: "Tech Group",
+                domain: "techgroup.co",
+                country: "us",
+                countryName: "الولايات المتحدة",
+                description: "لشركة التقنية المتخصصة قمنا بتطوير نظام إدارة مشاريع برمجية، موقع تعريفي، استراتيجية تسويق B2B، وتطبيق للعملاء. ركزنا على الاحترافية والتقنية المتقدمة.",
+                services: ["website", "erp", "marketing", "crm"],
+                logo: "💻",
+                highlights: [
+                    {
+                        icon: "fas fa-code",
+                        title: "إدارة برمجية",
+                        text: "نظام إدارة مشاريع برمجية متكامل مع متابعة المهام والأخطاء"
+                    },
+                    {
+                        icon: "fas fa-network-wired",
+                        title: "تكامل أنظمة",
+                        text: "خبرة في تكامل الأنظمة المختلفة والمتنوعة"
+                    },
+                    {
+                        icon: "fas fa-handshake",
+                        title: "شركات B2B",
+                        text: "استراتيجية تسويق موجهة للشركات والمؤسسات الكبرى"
+                    }
+                ]
+            },
+            {
+                id: 23,
+                nameAr: "جرين فارم",
+                nameEn: "Green Farm",
+                domain: "greenfarm.org",
+                country: "ca",
+                countryName: "كندا",
+                description: "للمشروع الزراعي المستدام قمنا بتطوير نظام إدارة مزارع عضوية، موقع للبيع المباشر، استراتيجية تسويق للمنتجات العضوية، وتطبيق للعملاء. ركزنا على الاستدامة والجودة.",
+                services: ["website", "erp", "sales", "marketing"],
+                logo: "🌱",
+                highlights: [
+                    {
+                        icon: "fas fa-leaf",
+                        title: "زراعة عضوية",
+                        text: "نظام يتابع عملية الإنتاج العضوي من البداية إلى النهاية"
+                    },
+                    {
+                        icon: "fas fa-truck",
+                        title: "توصيل مباشر",
+                        text: "نظام توصيل مباشر من المزرعة إلى المنزل"
+                    },
+                    {
+                        icon: "fas fa-recycle",
+                        title: "استدامة",
+                        text: "استراتيجية تسويق تركز على الاستدامة والزراعة العضوية"
+                    }
+                ]
+            },
+            {
+                id: 24,
+                nameAr: "ديجيتال ماركتنج برو",
+                nameEn: "Digital Marketing Pro",
+                domain: "dmpro.net",
+                country: "ae",
+                countryName: "الإمارات",
+                description: "لوكالة التسويق الرقمي قمنا بتطوير نظام إدارة حملات، موقع تعريفي، استراتيجية تسويق للخدمات، وتطبيق للعملاء. ركزنا على النتائج والاحترافية.",
+                services: ["website", "crm", "marketing", "branding"],
+                logo: "📈",
+                highlights: [
+                    {
+                        icon: "fas fa-chart-bar",
+                        title: "تحليل حملات",
+                        text: "نظام متقدم لتحليل نتائج الحملات التسويقية وقياس العائد"
+                    },
+                    {
+                        icon: "fas fa-bullseye",
+                        title: "استهداف دقيق",
+                        text: "أدوات استهداف متقدمة للحملات التسويقية"
+                    },
+                    {
+                        icon: "fas fa-trophy",
+                        title: "نتائج ملموسة",
+                        text: "استراتيجية تركز على تحقيق نتائج ملموسة للعملاء"
+                    }
+                ]
+            },
+            {
+                id: 25,
+                nameAr: "فيتنس وورلد",
+                nameEn: "Fitness World",
+                domain: "fitnessworld.com",
+                country: "us",
+                countryName: "الولايات المتحدة",
+                description: "لمنصة اللياقة البدنية قمنا بتطوير منصة تدريب متكاملة، نظام متابعة تمارين، استراتيجية تسويق للصحة، وتطبيق للتدريبات. ركزنا على التحفيز والنتائج.",
+                services: ["website", "app", "marketing", "crm"],
+                logo: "🏋️",
+                highlights: [
+                    {
+                        icon: "fas fa-dumbbell",
+                        title: "متابعة تمارين",
+                        text: "نظام يتابع التمارين والإنجازات ويقدم تقارير أداء"
+                    },
+                    {
+                        icon: "fas fa-utensils",
+                        title: "نظام تغذية",
+                        text: "نظام يقدم خطط تغذية متكاملة مع خطط التمارين"
+                    },
+                    {
+                        icon: "fas fa-fire",
+                        title: "تحفيز ومتابعة",
+                        text: "استراتيجية تحفيز ومتابعة تزيد من التزام المستخدمين"
+                    }
+                ]
+            }
+        ];
+
+        // تصنيفات الخدمات
+        const serviceCategories = [
+            { id: 'all', name: 'جميع المشاريع', icon: 'fas fa-th' },
+            { id: 'website', name: 'تطوير مواقع', icon: 'fas fa-globe' },
+            { id: 'marketing', name: 'تسويق إلكتروني', icon: 'fas fa-bullhorn' },
+            { id: 'sales', name: 'أنظمة مبيعات', icon: 'fas fa-chart-line' },
+            { id: 'erp', name: 'أنظمة ERP', icon: 'fas fa-cogs' },
+            { id: 'crm', name: 'أنظمة CRM', icon: 'fas fa-users' },
+            { id: 'pos', name: 'أنظمة POS', icon: 'fas fa-cash-register' },
+            { id: 'app', name: 'تطبيقات محمولة', icon: 'fas fa-mobile-alt' },
+            { id: 'branding', name: 'تطوير براندات', icon: 'fas fa-palette' }
+        ];
+
+        // عناصر DOM
+        const portfolioGrid = document.getElementById('portfolioGrid');
+        const filterButtons = document.getElementById('filterButtons');
+        const projectDetails = document.getElementById('projectDetails');
+        const closeDetailsBtn = document.getElementById('closeDetails');
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+        const totalProjectsEl = document.getElementById('totalProjects');
+
+        // متغيرات التصفية
+        let currentFilter = 'all';
+
+        // تحديث العداد
+        function updateCounter() {
+            const counter = totalProjectsEl;
+            let current = 0;
+            const target = 25;
+            const duration = 1500;
+            const increment = target / (duration / 16);
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counter.textContent = Math.floor(current);
+            }, 16);
+        }
+
+        // دالة لإنشاء أزرار التصفية
+        function createFilterButtons() {
+            filterButtons.innerHTML = '';
+            
+            serviceCategories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'filter-btn';
+                button.innerHTML = `<i class="${category.icon}"></i> ${category.name}`;
+                button.dataset.filter = category.id;
+                
+                if (category.id === 'all') {
+                    button.classList.add('active');
+                }
+                
+                button.addEventListener('click', () => {
+                    // إزالة النشط من جميع الأزرار
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // إضافة النشط للزر الحالي
+                    button.classList.add('active');
+                    
+                    // تطبيق التصفية
+                    currentFilter = category.id;
+                    renderPortfolio();
+                });
+                
+                filterButtons.appendChild(button);
+            });
+        }
+
+        // دالة لعرض المشاريع
+        function renderPortfolio() {
+            portfolioGrid.innerHTML = '';
+            
+            // تصفية المشاريع حسب الخدمة
+            const filteredProjects = currentFilter === 'all' 
+                ? allProjects 
+                : allProjects.filter(project => project.services.includes(currentFilter));
+            
+            // إنشاء بطاقة لكل مشروع
+            filteredProjects.forEach(project => {
+                const item = document.createElement('div');
+                item.className = 'portfolio-item';
+                item.dataset.id = project.id;
+                
+                // توليد أكواد الخدمات
+                const servicesHTML = project.services.map(service => 
+                    `<span class="service-tag ${service}">
+                        <i class="${serviceCategories.find(s => s.id === service)?.icon || 'fas fa-cog'}"></i>
+                        ${getServiceName(service)}
+                    </span>`
+                ).join('');
+                
+                item.innerHTML = `
+                    <div class="item-header">
+                        <div class="item-logo">${project.logo}</div>
+                        <div class="item-titles">
+                            <h3>${project.nameAr}</h3>
+                            <h4>${project.nameEn}</h4>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <p class="item-description">${project.description.substring(0, 140)}...</p>
+                        
+                        <div class="item-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-globe"></i>
+                                <span>${project.domain}</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-flag"></i>
+                                <span class="fi fi-${project.country}"></span>
+                                <span>${project.countryName}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-services">
+                            ${servicesHTML}
+                        </div>
+                    </div>
+                `;
+                
+                // إضافة حدث النقر لعرض التفاصيل
+                item.addEventListener('click', () => showProjectDetails(project.id));
+                
+                portfolioGrid.appendChild(item);
+            });
+            
+            // تحديث العدد المعروض
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.filter === currentFilter) {
+                    const count = currentFilter === 'all' ? allProjects.length : filteredProjects.length;
+                    btn.innerHTML = btn.innerHTML.replace(/\s*\(\d+\)/, '') + ` (${count})`;
+                }
+            });
+        }
+
+        // دالة للحصول على اسم الخدمة
+        function getServiceName(serviceId) {
+            const service = serviceCategories.find(s => s.id === serviceId);
+            return service ? service.name : serviceId;
+        }
+
+        // دالة لعرض تفاصيل المشروع
+        function showProjectDetails(projectId) {
+            const project = allProjects.find(p => p.id === projectId);
+            
+            if (!project) return;
+            
+            // تعبئة البيانات
+            document.getElementById('projectLogo').innerHTML = project.logo;
+            document.getElementById('projectNameAr').textContent = project.nameAr;
+            document.getElementById('projectNameEn').textContent = project.nameEn;
+            document.getElementById('projectDescription').textContent = project.description;
+            document.getElementById('projectLink').href = `https://${project.domain}`;
+            
+            // توليد أكواد الخدمات
+            const servicesContainer = document.getElementById('projectServices');
+            servicesContainer.innerHTML = '';
+            
+            project.services.forEach(service => {
+                const serviceDiv = document.createElement('div');
+                serviceDiv.className = 'project-service';
+                serviceDiv.innerHTML = `
+                    <i class="${serviceCategories.find(s => s.id === service)?.icon || 'fas fa-cog'}"></i>
+                    <span>${getServiceName(service)}</span>
+                `;
+                servicesContainer.appendChild(serviceDiv);
+            });
+            
+            // توليد أكواد المميزات
+            const highlightsContainer = document.getElementById('projectHighlights');
+            highlightsContainer.innerHTML = '';
+            
+            project.highlights.forEach(highlight => {
+                const highlightDiv = document.createElement('div');
+                highlightDiv.className = 'highlight-card';
+                highlightDiv.innerHTML = `
+                    <div class="highlight-title">
+                        <i class="${highlight.icon}"></i>
+                        <span>${highlight.title}</span>
+                    </div>
+                    <p>${highlight.text}</p>
+                `;
+                highlightsContainer.appendChild(highlightDiv);
+            });
+            
+            // عرض تفاصيل المشروع
+            projectDetails.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // إغلاق تفاصيل المشروع
+        closeDetailsBtn.addEventListener('click', () => {
+            projectDetails.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        // إغلاق بالنقر خارج الصندوق
+        projectDetails.addEventListener('click', (e) => {
+            if (e.target === projectDetails) {
+                projectDetails.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // التحكم في زر العودة للأعلى
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            createFilterButtons();
+            renderPortfolio();
+            updateCounter();
+            
+            console.log("البورتفوليو الكامل جاهز! يعرض", allProjects.length, "مشروع بمختلف الخدمات.");
+        });
+    </script><script src="https://ygbrandmaker.site/web.js"></script> <link rel="stylesheet" href="https://ygbrandmaker.site/web.css">
+</body>
+</html>

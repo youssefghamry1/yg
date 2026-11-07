@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('theme');
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          var theme = saved || (prefersLight ? 'light' : 'dark');
+          if (theme === 'light') {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+          } else {
+            document.documentElement.classList.remove('light');
+            document.documentElement.classList.add('dark');
+          }
+        } catch(e) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#050806" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/assets/aistudio/image_ef5d64bf.png" />
+    <title>يوسف غمري | مطور Full-Stack | مواقع وأنظمة وتطبيقات جوال</title>
+    <meta name="description" content="الموقع المهني الرسمي للمطور يوسف غمري. أصمم وأطور المواقع والأنظمة البرمجية ERP وCRM وتطبيقات الهواتف الذكية مع إعداد العروض الفنية وضبط الجودة." />
+    <meta name="keywords" content="مطور Full-Stack, برمجة مواقع, تصميم مواقع, تطبيقات جوال, أنظمة ERP, منصة اعتماد, عروض فنية, ضبط الجودة, يوسف غمري" />
+    
+    <!-- الروابط المعيارية واللغات المتعددة -->
+    <link rel="canonical" href="/ar/index.html" />
+    <link rel="alternate" hreflang="ar" href="/ar/index.html" />
+    <link rel="alternate" hreflang="en" href="/index.html" />
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="يوسف غمري | مطور Full-Stack | مواقع وأنظمة وتطبيقات جوال" />
+    <meta property="og:description" content="من الفكرة إلى التنفيذ، أحوّل الأفكار إلى منتجات رقمية متكاملة: مواقع تعريفية ومتاجر، أنظمة إدارية، وتطبيقات هواتف ذكية." />
+    <meta property="og:site_name" content="المنصة المهنية الرسمية - يوسف غمري" />
+    <meta property="og:image" content="/assets/aistudio/image_ef5d64bf.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="يوسف غمري | مطور Full-Stack | مواقع وأنظمة وتطبيقات جوال" />
+    <meta name="twitter:description" content="من الفكرة إلى التنفيذ، أصمم وأطور المواقع المخصصة وأنظمة ERP وتطبيقات الويب والموبايل. أكثر من 100 مشروع رقمي منفذ وخبرة +400 مناقصة تم إعدادها ومراجعتها." />
+    <meta name="twitter:image" content="/assets/aistudio/image_ef5d64bf.png" />
+
+    <!-- خطوط جوجل: تجوال والقاهرة و Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- ملف التنسيق الموحد -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <!-- بيانات Schema.org المنظمة -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "name": "يوسف غمري (Youssef Ghamry)",
+          "jobTitle": "أخصائي مناقصات وعروض فنية | كاتب عروض تقنية | ضبط الجودة والامتثال",
+          "email": "1youssefghamry@gmail.com",
+          "telephone": "+201503292942",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "القاهرة",
+            "addressCountry": "مصر"
+          },
+          "knowsAbout": [
+            "إعداد العروض الفنية للمناقصات",
+            "تحليل كراسات الشروط والمواصفات RFP",
+            "مصفوفة الامتثال للمناقصات",
+            "مناقصات الحكومة السعودية ومنصة اعتماد",
+            "مراجعة الجودة والتدقيق الفني Red Team",
+            "تطوير مواقع الويب وأنظمة ووردبريس",
+            "أنظمة إدارة الأعمال ERP",
+            "السيو التقني وتحسين محركات البحث"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "منصة يوسف غمري المهنية",
+          "url": "/ar/index.html",
+          "inLanguage": ["ar", "en"]
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="theme-gold selection:bg-emerald-600 selection:text-white">
+    <!-- شريط التنقل العلوي الفاخر بعرض الشاشة الكامل -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-emerald-950/60 bg-[#050806]/95 backdrop-blur-xl">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 h-20 flex items-center justify-between gap-4 relative">
+        
+        <!-- الشعار والهوية المهنية -->
+        <a href="/ar/index.html" class="flex items-center gap-3 text-white no-underline group flex-shrink-0">
+          <div class="relative w-10 h-10 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D] group-hover:border-[#E5C78B] transition-colors">
+            <img src="/assets/aistudio/image_ef5d64bf.png" alt="شعار يوسف غمري" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <div class="text-sm sm:text-base tracking-wide font-extrabold gold-gradient-text">
+              يوسف غمري
+            </div>
+            <div class="text-[9px] sm:text-[10px] text-emerald-300/75 tracking-tight font-mono">
+              مطور Full-Stack | أخصائي مناقصات وعروض فنية
+            </div>
+          </div>
+        </a>
+
+        <!-- التنقل الرئيسي لسطح المكتب: 8 ركائز أساسية -->
+        <nav class="hidden lg:flex items-center gap-1.5 xl:gap-3 text-xs font-semibold" aria-label="القائمة الرئيسية">
+          <a href="/ar/index.html" class="nav-link active px-2.5 py-1.5 rounded-md">الرئيسية</a>
+
+          <div class="mega-menu-wrapper static">
+            <button
+              type="button"
+              class="nav-link px-2.5 py-1.5 rounded-md flex items-center gap-1.5 mega-menu-trigger group cursor-pointer focus:outline-none"
+              aria-haspopup="true"
+              aria-expanded="false"
+              id="services-menu-trigger"
+            >
+              <span>الخدمات</span>
+              <svg class="w-3.5 h-3.5 text-emerald-400 group-hover:text-[#E5C78B] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+
+            <div class="mega-menu-dropdown p-6 space-y-4 text-start">
+              <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-emerald-950/80">
+                <div class="flex items-center gap-2.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span class="text-xs font-bold tracking-wide text-white">
+                    دليل الخدمات الهندسية والاستشارات الفنية المتكاملة
+                  </span>
+                </div>
+                <a href="/ar/services/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 hover:border-[#E5C78B] bg-[#C6A15B]/15 text-xs font-bold text-[#E5C78B] hover:text-white transition-all shadow-sm">
+                  <span>استكشف كافة الـ 93 خدمة ←</span>
+                </a>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 text-xs">
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🌐</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">تصميم وتطوير المواقع الإلكترونية</span>
+                    </div>
+                    <a href="/ar/services/index.html#web-development" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/wordpress-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير مواقع ووردبريس</span>
+                    </a>
+                    <a href="/ar/services/shopify-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير متاجر شوبيفاي</span>
+                    </a>
+                    <a href="/ar/services/drupal-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير مواقع دروبال للمؤسسات</span>
+                    </a>
+                    <a href="/ar/services/magento-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير متاجر ماجنتو / أدوبي كوميرس</span>
+                    </a>
+                    <a href="/ar/services/opencart-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير متاجر أوبن كارت</span>
+                    </a>
+                    <a href="/ar/services/salla-store-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تصميم وتطوير متاجر سلة</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">⚙️</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">البرمجيات والأنظمة الإدارية</span>
+                    </div>
+                    <a href="/ar/services/index.html#software-systems" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/erp-system-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير وتطبيق أنظمة تخطيط الموارد المؤسسية (ERP)</span>
+                    </a>
+                    <a href="/ar/services/crm-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة إدارة علاقات العملاء (CRM)</span>
+                    </a>
+                    <a href="/ar/services/pos-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة نقاط البيع والكاشير (POS)</span>
+                    </a>
+                    <a href="/ar/services/hr-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة الموارد البشرية والرواتب (HRMS)</span>
+                    </a>
+                    <a href="/ar/services/inventory-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير أنظمة إدارة المخازن والمستودعات (WMS)</span>
+                    </a>
+                    <a href="/ar/services/accounting-systems-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير الأنظمة المحاسبية والمالية للشركات</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📱</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">تطوير تطبيقات الجوال</span>
+                    </div>
+                    <a href="/ar/services/index.html#mobile-applications" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/android-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير وبرمجة تطبيقات الأندرويد الأصلية (Android)</span>
+                    </a>
+                    <a href="/ar/services/ios-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير وبرمجة تطبيقات الآيفون والآيباد (iOS)</span>
+                    </a>
+                    <a href="/ar/services/cross-platform-app-development.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير التطبيقات الهجينة متعددة المنصات (Flutter وReact Native)</span>
+                    </a>
+                    <a href="/ar/services/business-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير تطبيقات الجوال لقطاع الأعمال والشركات</span>
+                    </a>
+                    <a href="/ar/services/ecommerce-mobile-applications.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تطوير تطبيقات المتاجر الإلكترونية والتسوق</span>
+                    </a>
+                    <a href="/ar/services/mobile-ui-ux-design.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تصميم واجهات وتجربة مستخدم تطبيقات الجوال (UI/UX)</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">📜</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">خدمات المناقصات وإعداد العروض</span>
+                    </div>
+                    <a href="/ar/services/index.html#tender-services" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/tender-proposal-writing.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">إعداد وكتابة العروض الفنية للمناقصات</span>
+                    </a>
+                    <a href="/ar/services/technical-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">إعداد وتجهيز ملفات العرض الفني التخصصية</span>
+                    </a>
+                    <a href="/ar/services/financial-proposal-preparation.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">إعداد العروض المالية وجداول الكميات والأسعار (BOQ)</span>
+                    </a>
+                    <a href="/ar/services/tender-document-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل وثائق وكراسات الشروط للمناقصات (RFP)</span>
+                    </a>
+                    <a href="/ar/services/rfp-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل طلبات تقديم العروض (RFP Analysis)</span>
+                    </a>
+                    <a href="/ar/services/rfq-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل طلبات عروض الأسعار (RFQ Analysis)</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">🚀</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">التسويق الرقمي وتحسين محركات البحث</span>
+                    </div>
+                    <a href="/ar/services/index.html#digital-marketing-seo" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/on-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحسين السيو الداخلي للمحتوى والصفحات (On-Page SEO)</span>
+                    </a>
+                    <a href="/ar/services/off-page-seo.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">السيو الخارجي وبناء السلطة والمصداقية (Off-Page SEO)</span>
+                    </a>
+                    <a href="/ar/services/seo-audits.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">التدقيق الشامل لمواقع الويب وفحص صحة السيو (SEO Audits)</span>
+                    </a>
+                    <a href="/ar/services/keyword-research.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">بحوث الكلمات المفتاحية وتحليل نية البحث للمستخدمين</span>
+                    </a>
+                    <a href="/ar/services/seo-content-strategy.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استراتيجية محتوى السيو وبناء المجموعات الموضوعية (Topic Clusters)</span>
+                    </a>
+                    <a href="/ar/services/website-indexing-optimization.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحسين أرشفة وفهرسة المواقع في Google Search Console</span>
+                    </a>
+                  </div>
+                </div>
+                <div class="space-y-2 p-3 rounded-xl bg-[#07130D]/70 border border-emerald-950/80 hover:border-emerald-500/30 transition-colors">
+                  <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-emerald-950/80">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="text-base">💼</span>
+                      <span class="text-xs font-bold text-white tracking-wide truncate">تطوير الأعمال والاستشارات التقنية</span>
+                    </div>
+                    <a href="/ar/services/index.html#business-consulting" class="text-[10px] font-mono text-[#E5C78B] hover:underline shrink-0">عرض</a>
+                  </div>
+                  <div class="space-y-1">
+                    <a href="/ar/services/business-development-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استشارات تطوير الأعمال والتوسع التجاري</span>
+                    </a>
+                    <a href="/ar/services/it-pre-sales-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استشارات ما قبل البيع لقطاع التقنية (IT Pre-Sales)</span>
+                    </a>
+                    <a href="/ar/services/solution-consulting.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">استشارات هندسة الحلول الرقمية المؤسسية</span>
+                    </a>
+                    <a href="/ar/services/opportunity-assessment.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">دراسة وتقييم الفرص التجارية والمشاريع الاستثمارية</span>
+                    </a>
+                    <a href="/ar/services/bid-no-bid-support.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">حوكمة وتوجيه قرار التقدم للعطاءات (Bid / No-Bid)</span>
+                    </a>
+                    <a href="/ar/services/business-process-analysis.html" class="mega-menu-link">
+                      <span class="bullet w-1.5 h-1.5 rounded-full bg-emerald-500/60"></span>
+                      <span class="truncate">تحليل وتوثيق العمليات المؤسسية وهندستها (BPM)</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="/ar/cv/index.html" class="nav-link px-2.5 py-1.5 rounded-md">السيرة الذاتية</a>
+          <a href="/ar/portfolio/index.html" class="nav-link px-2.5 py-1.5 rounded-md">الأعمال</a>
+          <a href="/ar/tenders/awarded-tenders.html" class="nav-link px-2.5 py-1.5 rounded-md">المناقصات</a>
+          <a href="/ar/certifications/index.html" class="nav-link px-2.5 py-1.5 rounded-md">الشهادات</a>
+          <a href="/ar/articles/index.html" class="nav-link px-2.5 py-1.5 rounded-md">المقالات</a>
+          <a href="/ar/contact/index.html" class="nav-link px-2.5 py-1.5 rounded-md">تواصل معي</a>
+        </nav>
+
+        <!-- أدوات التحكم اليسرى وتبديل اللغة -->
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/index.html"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#C6A15B]/40 hover:border-[#E5C78B] bg-[#07130D]/90 text-xs font-bold text-[#E5C78B] hover:text-white transition-all"
+            title="التبديل إلى النسخة الإنجليزية"
+          >
+            <span>🇬🇧</span>
+            <span dir="ltr">English (EN)</span>
+          </a>
+
+          <a
+            href="/ar/contact/index.html"
+            class="hidden sm:inline-flex btn-gold text-xs py-2 px-4 font-bold items-center gap-1.5 shadow-md"
+          >
+            <span>اطلب استشارة فنية</span>
+          </a>
+
+          <button
+            type="button"
+            id="mobile-nav-toggle"
+            class="lg:hidden p-2 rounded-xl border border-emerald-800/60 bg-[#07130D] text-[#E5C78B] hover:text-white focus:outline-none cursor-pointer"
+            aria-label="فتح القائمة"
+            aria-expanded="false"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- قائمة الجوال المنسدلة -->
+      <div id="mobile-nav-drawer" class="hidden lg:hidden glass-panel border-t border-emerald-950/80 px-4 py-5 space-y-3.5 max-h-[85vh] overflow-y-auto">
+        <a href="/ar/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-[#E5C78B] font-bold hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏠</span>
+          <span>الرئيسية</span>
+        </a>
+
+        <div class="border-y border-emerald-950/70 py-2">
+          <button
+            type="button"
+            class="mobile-accordion-btn w-full flex items-center justify-between text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-1.5 focus:outline-none"
+            data-target="mobile-services-accordion"
+            aria-expanded="false"
+          >
+            <span class="flex items-center gap-2.5">
+              <span>🌐</span>
+              <span>دليل الخدمات (93 خدمة متخصصة)</span>
+            </span>
+            <svg class="accordion-chevron w-4 h-4 transition-transform duration-200 text-[#E5C78B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="mobile-services-accordion" class="mobile-accordion-content space-y-3 ps-2 my-2 border-s-2 border-emerald-900/60 text-xs">
+            <div class="pt-1 pb-1">
+              <a href="/ar/services/index.html" class="block py-1.5 px-2.5 rounded-lg bg-[#C6A15B]/15 border border-[#C6A15B]/40 text-[#E5C78B] font-bold">
+                عرض دليل الخدمات الكامل (93 خدمة) ←
+              </a>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🌐</span>
+                <span>تصميم وتطوير المواقع الإلكترونية</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/wordpress-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير مواقع ووردبريس</a>
+                <a href="/ar/services/shopify-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير متاجر شوبيفاي</a>
+                <a href="/ar/services/drupal-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير مواقع دروبال للمؤسسات</a>
+                <a href="/ar/services/magento-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير متاجر ماجنتو / أدوبي كوميرس</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>⚙️</span>
+                <span>البرمجيات والأنظمة الإدارية</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/erp-system-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير وتطبيق أنظمة تخطيط الموارد المؤسسية (ERP)</a>
+                <a href="/ar/services/crm-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير أنظمة إدارة علاقات العملاء (CRM)</a>
+                <a href="/ar/services/pos-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير أنظمة نقاط البيع والكاشير (POS)</a>
+                <a href="/ar/services/hr-systems-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير أنظمة الموارد البشرية والرواتب (HRMS)</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📱</span>
+                <span>تطوير تطبيقات الجوال</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/android-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير وبرمجة تطبيقات الأندرويد الأصلية (Android)</a>
+                <a href="/ar/services/ios-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير وبرمجة تطبيقات الآيفون والآيباد (iOS)</a>
+                <a href="/ar/services/cross-platform-app-development.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير التطبيقات الهجينة متعددة المنصات (Flutter وReact Native)</a>
+                <a href="/ar/services/business-mobile-applications.html" class="block py-1 text-emerald-200/80 hover:text-white">تطوير تطبيقات الجوال لقطاع الأعمال والشركات</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>📜</span>
+                <span>خدمات المناقصات وإعداد العروض</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/tender-proposal-writing.html" class="block py-1 text-emerald-200/80 hover:text-white">إعداد وكتابة العروض الفنية للمناقصات</a>
+                <a href="/ar/services/technical-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">إعداد وتجهيز ملفات العرض الفني التخصصية</a>
+                <a href="/ar/services/financial-proposal-preparation.html" class="block py-1 text-emerald-200/80 hover:text-white">إعداد العروض المالية وجداول الكميات والأسعار (BOQ)</a>
+                <a href="/ar/services/tender-document-analysis.html" class="block py-1 text-emerald-200/80 hover:text-white">تحليل وثائق وكراسات الشروط للمناقصات (RFP)</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>🚀</span>
+                <span>التسويق الرقمي وتحسين محركات البحث</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/on-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">تحسين السيو الداخلي للمحتوى والصفحات (On-Page SEO)</a>
+                <a href="/ar/services/off-page-seo.html" class="block py-1 text-emerald-200/80 hover:text-white">السيو الخارجي وبناء السلطة والمصداقية (Off-Page SEO)</a>
+                <a href="/ar/services/seo-audits.html" class="block py-1 text-emerald-200/80 hover:text-white">التدقيق الشامل لمواقع الويب وفحص صحة السيو (SEO Audits)</a>
+                <a href="/ar/services/keyword-research.html" class="block py-1 text-emerald-200/80 hover:text-white">بحوث الكلمات المفتاحية وتحليل نية البحث للمستخدمين</a>
+              </div>
+            </div>
+            <div class="space-y-1">
+              <div class="font-bold text-white flex items-center gap-1.5 text-[11px] text-[#E5C78B]">
+                <span>💼</span>
+                <span>تطوير الأعمال والاستشارات التقنية</span>
+              </div>
+              <div class="ms-3 space-y-1">
+                <a href="/ar/services/business-development-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">استشارات تطوير الأعمال والتوسع التجاري</a>
+                <a href="/ar/services/it-pre-sales-support.html" class="block py-1 text-emerald-200/80 hover:text-white">استشارات ما قبل البيع لقطاع التقنية (IT Pre-Sales)</a>
+                <a href="/ar/services/solution-consulting.html" class="block py-1 text-emerald-200/80 hover:text-white">استشارات هندسة الحلول الرقمية المؤسسية</a>
+                <a href="/ar/services/opportunity-assessment.html" class="block py-1 text-emerald-200/80 hover:text-white">دراسة وتقييم الفرص التجارية والمشاريع الاستثمارية</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/ar/cv/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📄</span>
+          <span>السيرة الذاتية (CV)</span>
+        </a>
+
+        <a href="/ar/portfolio/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>💼</span>
+          <span>الأعمال والمشاريع (25 مختارة / +100 مشروع)</span>
+        </a>
+
+        <a href="/ar/tenders/awarded-tenders.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🏛️</span>
+          <span>المناقصات الحكومية (+400 خبرة ومشاركة)</span>
+        </a>
+
+        <a href="/ar/certifications/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>🎓</span>
+          <span>الشهادات والاعتمادات المهنية (+27)</span>
+        </a>
+
+        <a href="/ar/articles/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>📚</span>
+          <span>مركز المعرفة والمقالات (132 دليلاً)</span>
+        </a>
+
+        <a href="/ar/contact/index.html" class="flex items-center gap-2.5 text-xs sm:text-sm text-emerald-200/90 hover:text-[#E5C78B] py-2 transition-colors">
+          <span>✉️</span>
+          <span>تواصل معي واستشارة العروض</span>
+        </a>
+
+        <div class="pt-3 border-t border-emerald-950/80 flex items-center justify-between">
+          <span class="text-xs text-emerald-400/80">اللغة:</span>
+          <a href="/index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#C6A15B]/50 bg-[#07130D] text-xs font-bold text-[#E5C78B]">
+            <span>🇬🇧</span>
+            <span dir="ltr">Switch to English (EN)</span>
+          </a>
+        </div>
+
+        <div class="pt-1">
+          <a href="/ar/contact/index.html" class="block w-full py-2.5 px-4 text-center rounded-xl btn-gold text-xs font-bold shadow-md">
+            اطلب عرض سعر أو استشارة فنية
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="relative z-10">
+
+      <!-- تأثيرات الإضاءة المحيطية -->
+      <div class="absolute top-20 right-1/4 w-[35rem] h-[35rem] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+      <div class="absolute top-96 left-10 w-[30rem] h-[30rem] bg-[#C6A15B]/10 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+
+      <!-- ========================================================= -->
+      <!-- القسم 1: الواجهة السينمائية والصورة الشخصية المتفاعلة -->
+      <!-- ========================================================= -->
+      <section class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 pt-12 pb-20 lg:pt-16 lg:pb-28">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          <!-- المحتوى النصي الأيمن -->
+          <div class="lg:col-span-7 space-y-6">
+            
+            <!-- أوسمة التموضع المهني -->
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="badge-gold">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                <span>مطور Full-Stack</span>
+              </span>
+              <span class="badge-emerald">
+                <span>مواقع وأنظمة وتطبيقات جوال</span>
+              </span>
+              <span class="badge-gold">
+                <span>إعداد العروض الفنية وضبط الجودة</span>
+              </span>
+            </div>
+
+            <!-- الاسم والمسميات المهنية -->
+            <div class="space-y-3">
+              <div class="text-xs sm:text-sm font-semibold tracking-wider text-emerald-400 font-mono uppercase">
+                يوسف غمري — مطور Full-Stack
+              </div>
+              <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.25]">
+                أصمم وأطور المواقع الإلكترونية والأنظمة والبرامج وتطبيقات الموبايل
+              </h1>
+              <p class="text-xl sm:text-2xl font-bold font-serif gold-gradient-text">
+                مطور Full-Stack | مواقع وأنظمة وتطبيقات جوال
+              </p>
+              <p class="text-xs sm:text-sm font-semibold tracking-wide text-slate-300">
+                تطبيقات الويب · أنظمة الشركات وERP · تطبيقات الهواتف الذكية · السحاب وواجهات الربط APIs
+              </p>
+            </div>
+
+            <!-- المقدمة المهنية المعتمدة -->
+            <div class="space-y-3 text-slate-300 leading-relaxed text-sm sm:text-base max-w-2xl font-normal">
+              <p>
+                من الفكرة إلى التنفيذ، أحوّل الأفكار إلى منتجات رقمية متكاملة، بدايةً من تحليل المتطلبات وتصميم تجربة المستخدم، وحتى البرمجة والتطوير والإطلاق.
+              </p>
+              <p class="text-xs sm:text-sm text-emerald-300/90 font-medium border-s-2 border-[#C6A15B] ps-3.5 italic">
+                «أصمم وأطور المواقع التعريفية والشركات والمتاجر، وأنظمة ERP وCRM وPOS، وتطبيقات الهواتف الذكية لنظامي Android وiOS، مع تقديم العروض الفنية الموثقة وضبط الجودة للمشاريع والمناقصات.»
+              </p>
+            </div>
+
+            <!-- أزرار الإجراءات التفاعلية -->
+            <div class="flex flex-wrap items-center gap-3.5 pt-2">
+              <a href="/ar/services/index.html" class="btn-gold">
+                <span>استكشاف الخدمات المهنية</span>
+                <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <a href="#portfolio" class="btn-ghost-gold">
+                <span>استعراض الأعمال (25 مختارة / +100 مشروع)</span>
+              </a>
+              <a href="#resume" class="btn-emerald">
+                <span>تحميل السيرة الذاتية (CV)</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              </a>
+              <a href="#contact" class="btn-ghost-gold">
+                <span>تواصل معي</span>
+              </a>
+            </div>
+
+            <!-- عدادات الإنجاز الموثقة -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-emerald-950/80">
+              <div class="p-3.5 glass-panel rounded-xl border border-emerald-500/20 text-center">
+                <div class="text-2xl lg:text-3xl font-extrabold gold-gradient-text font-mono">+400</div>
+                <div class="text-[11px] text-emerald-300/70 font-medium mt-1">مناقصة تم إعدادها ومراجعتها</div>
+              </div>
+              <div class="p-3.5 glass-panel rounded-xl border border-emerald-500/20 text-center">
+                <div class="text-2xl lg:text-3xl font-extrabold text-white font-mono">+100</div>
+                <div class="text-[11px] text-emerald-300/70 font-medium mt-1">مشروع رقمي منفذ</div>
+              </div>
+              <div class="p-3.5 glass-panel rounded-xl border border-emerald-500/20 text-center">
+                <div class="text-2xl lg:text-3xl font-extrabold text-white font-mono">+60</div>
+                <div class="text-[11px] text-emerald-300/70 font-medium mt-1">جهة حكومية وسيادية</div>
+              </div>
+              <div class="p-3.5 glass-panel rounded-xl border border-emerald-500/20 text-center">
+                <div class="text-2xl lg:text-3xl font-extrabold gold-gradient-text">100%</div>
+                <div class="text-[11px] text-emerald-300/70 font-medium mt-1">نسبة اجتياز الامتثال</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- الصورة الشخصية المتفاعلة مع تحول ألوان البدلة الفاخرة -->
+          <div class="lg:col-span-5 flex flex-col items-center">
+            
+            <div class="relative w-full max-w-md mx-auto aspect-[3/4] rounded-3xl p-3 glass-panel-elevated border-2 transition-all duration-500" id="portrait-suit-glow">
+              
+              <!-- الصورة الشخصية التنفيذية المحررة وهالة الإضاءة الفاخرة -->
+              <div class="relative w-full h-full rounded-2xl overflow-hidden bg-[#07130D] flex items-center justify-center group">
+                <img src="/assets/images/youssef-executive-portrait.jpg" alt="يوسف غمري — مطور Full-Stack وأخصائي عروض فنية ومناقصات" class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" id="active-portrait-img" referrerpolicy="no-referrer" />
+                
+                <!-- تدرج التباين السفلي وهالة الألوان المتفاعلة -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#050806]/80 via-transparent to-transparent pointer-events-none"></div>
+                <div id="portrait-aura-overlay" class="portrait-aura-overlay absolute inset-0 pointer-events-none"></div>
+
+                <!-- المجسم ثلاثي الأبعاد الزمردي العائم -->
+                <div class="absolute bottom-3.5 left-3.5 w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-[#050806]/80 backdrop-blur-md border border-[#C6A15B]/50 shadow-2xl animate-float-slow">
+                  <img src="/assets/aistudio/image_ef5d64bf.png" alt="الكرة الزمردية ثلاثية الأبعاد" class="w-full h-full object-contain rounded-full" referrerpolicy="no-referrer" />
+                </div>
+
+                <!-- البطاقة التعريفية التنفيذية -->
+                <div class="absolute bottom-4 right-4 left-24 pointer-events-none">
+                  <div class="text-xs sm:text-sm font-bold text-white">يوسف غمري</div>
+                  <div class="text-[10px] font-mono text-[#E5C78B]">مطور Full-Stack · خبير مناقصات وعروض فنية</div>
+                </div>
+
+                <!-- وسام الاعتماد المهني -->
+                <div class="absolute top-3.5 right-3.5 px-3 py-1 rounded-lg bg-[#050806]/75 backdrop-blur-md border border-[#C6A15B]/35">
+                  <span class="text-[10px] font-mono text-[#E5C78B] font-semibold">ملف تنفيذي موثق</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- أداة التحكم بتدرجات ألوان البدلة والإضاءة المحيطة -->
+            <div class="w-full max-w-md mt-4 p-3.5 glass-panel rounded-2xl border border-emerald-500/30 flex items-center justify-between gap-2">
+              <div class="text-xs">
+                <div class="text-[10px] text-emerald-400 font-mono uppercase tracking-wider">نمط الإضاءة والبدلة:</div>
+                <div class="font-bold text-white text-xs" id="active-theme-name">الذهب الملكي</div>
+              </div>
+
+              <!-- أزرار الألوان الفاخرة -->
+              <div class="flex items-center gap-1.5">
+                <button data-theme-select="theme-charcoal" class="w-5 h-5 rounded-full bg-slate-700 border border-slate-500 cursor-pointer transition-transform hover:scale-110" title="أسود فحمي"></button>
+                <button data-theme-select="theme-forest" class="w-5 h-5 rounded-full bg-emerald-950 border border-emerald-600 cursor-pointer transition-transform hover:scale-110" title="أخضر داكن"></button>
+                <button data-theme-select="theme-emerald" class="w-5 h-5 rounded-full bg-emerald-600 border border-emerald-400 cursor-pointer transition-transform hover:scale-110" title="زمردي عميق"></button>
+                <button data-theme-select="theme-bright-emerald" class="w-5 h-5 rounded-full bg-emerald-400 border border-mint-soft cursor-pointer transition-transform hover:scale-110" title="زمردي ساطع"></button>
+                <button data-theme-select="theme-gold" class="w-5 h-5 rounded-full bg-[#C6A15B] border border-[#F0D9A2] cursor-pointer transition-transform hover:scale-110 ring-2 ring-white" title="ذهب ميتاليك"></button>
+                <button data-theme-select="theme-yellow" class="w-5 h-5 rounded-full bg-yellow-400 border border-yellow-200 cursor-pointer transition-transform hover:scale-110" title="أصفر دافئ"></button>
+              </div>
+
+              <!-- زر التبديل التلقائي -->
+              <button id="cycle-portrait-color" class="p-1.5 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white transition-colors cursor-pointer" title="تبديل تلقائي للون">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- القسم 2: منصة الخدمات المهنية المتكاملة -->
+      <!-- ========================================================= -->
+      <section id="services" class="py-20 border-t border-emerald-950/60 bg-[#07130D]/50 relative">
+        <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-12">
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-widest text-[#E5C78B] mb-2 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>مجالات الخبرة والاستشارات الفنية</span>
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                منصة <span class="gold-gradient-text heading-hover-glow">الخدمات المهنية المتخصصة</span>
+              </h2>
+              <p class="text-sm text-emerald-200/70 mt-2 max-w-2xl leading-relaxed">
+                حلول استشارية وتنفيذية متكاملة تشمل إدارة المناقصات، صياغة العروض الفنية، تطوير مواقع الويب، والأنظمة السحابية وتحسين محركات البحث.
+              </p>
+            </div>
+
+            <a href="/ar/services/index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-[#E5C78B] hover:text-white transition-colors">
+              <span>استعراض دليل الخدمات الكامل (93 خدمة متخصصة)</span>
+              <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+
+          <!-- البطاقات الست الرئيسية للخدمات -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- خدمة 1: كتابة العروض الفنية -->
+            <div class="p-8 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#E5C78B] group-hover:border-[#C6A15B] transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                </div>
+                <div class="text-xs font-semibold text-[#E5C78B] uppercase tracking-wider">إدارة العطاءات</div>
+                <h3 class="text-xl font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  إعداد وصياغة العروض الفنية للمناقصات
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  صياغة شاملة للمنهجيات الفنية، خطط التنفيذ، حوكمة المشاريع، وجداول الأعمال المتوافقة بدقة مع معايير لجان التقييم والترسية.
+                </p>
+                <ul class="text-xs text-emerald-300/80 space-y-1.5 list-disc list-inside">
+                  <li>المنهجية الفنية وخطة العمل التنفيذية</li>
+                  <li>المخرجات ومعايير القبول والاعتماد</li>
+                  <li>اتفاقيات مستوى الخدمة SLA ومصفوفة RACI</li>
+                </ul>
+              </div>
+              <div class="pt-6 border-t border-emerald-950/80 mt-6 flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-mono">صفحة مخصصة ومفصلة</span>
+                <a href="/ar/services/tender-proposal-writing.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                  <span>تفاصيل الخدمة</span>
+                  <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- خدمة 2: مصفوفة الامتثال للمناقصات -->
+            <div class="p-8 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#E5C78B] group-hover:border-[#C6A15B] transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="text-xs font-semibold text-[#E5C78B] uppercase tracking-wider">ضبط الجودة والامتثال</div>
+                <h3 class="text-xl font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  إعداد مصفوفة الامتثال وتحليل الفجوات
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  استخراج كافة المتطلبات الإلزامية والاختيارية من كراسة الشروط RFP وربطها بنقاط العرض الفني لتفادي أي استبعاد فني مفاجئ.
+                </p>
+                <ul class="text-xs text-emerald-300/80 space-y-1.5 list-disc list-inside">
+                  <li>تتبع وتفكيك بنود كراسة الشروط الإلزامية</li>
+                  <li>مراجعة الاتساق بين العرض الفني والمالي</li>
+                  <li>المراجعة الحمراء Red Team لكشف الثغرات</li>
+                </ul>
+              </div>
+              <div class="pt-6 border-t border-emerald-950/80 mt-6 flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-mono">صفحة مخصصة ومفصلة</span>
+                <a href="/ar/services/tender-compliance-matrix.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                  <span>تفاصيل الخدمة</span>
+                  <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- خدمة 3: مناقصات منصة اعتماد -->
+            <div class="p-8 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#E5C78B] group-hover:border-[#C6A15B] transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                </div>
+                <div class="text-xs font-semibold text-[#E5C78B] uppercase tracking-wider">السوق السعودي</div>
+                <h3 class="text-xl font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  دعم مناقصات منصة اعتماد والمنافسات الحكومية
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  خبرة عملية متخصصة في متطلبات نظام المنافسات والمشتريات الحكومية السعودي، فصل الملفات الفنية والمالية، وإجراءات البوابة الإلكترونية.
+                </p>
+                <ul class="text-xs text-emerald-300/80 space-y-1.5 list-disc list-inside">
+                  <li>الامتثال لنظام المنافسات والمشتريات السعودي</li>
+                  <li>توثيق المحتوى المحلي والتأهيل المسبق واللاحق</li>
+                  <li>مراجعة جاهزية المستندات قبل موعد الإغلاق</li>
+                </ul>
+              </div>
+              <div class="pt-6 border-t border-emerald-950/80 mt-6 flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-mono">صفحة مخصصة ومفصلة</span>
+                <a href="/ar/services/etimad-tender-support.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                  <span>تفاصيل الخدمة</span>
+                  <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- خدمة 4: تطوير ووردبريس والمواقع -->
+            <div class="p-8 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#E5C78B] group-hover:border-[#C6A15B] transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                </div>
+                <div class="text-xs font-semibold text-[#E5C78B] uppercase tracking-wider">هندسة الويب</div>
+                <h3 class="text-xl font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  تطوير مواقع ووردبريس وبوابات الشركات
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  تطوير مواقع احترافية للشركات، المتاجر الإلكترونية (WooCommerce)، وصفحات الهبوط الفائقة السرعة والمتوافقة تماماً مع معايير محركات البحث.
+                </p>
+                <ul class="text-xs text-emerald-300/80 space-y-1.5 list-disc list-inside">
+                  <li>تطوير قوالب وإضافات مخصصة</li>
+                  <li>تسريع المواقع وتحسين Core Web Vitals</li>
+                  <li>تأمين بوابات الشركات وحماية البيانات</li>
+                </ul>
+              </div>
+              <div class="pt-6 border-t border-emerald-950/80 mt-6 flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-mono">صفحة مخصصة ومفصلة</span>
+                <a href="/ar/services/wordpress-development.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                  <span>تفاصيل الخدمة</span>
+                  <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- خدمة 5: أنظمة ERP والبرمجيات -->
+            <div class="p-8 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#E5C78B] group-hover:border-[#C6A15B] transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                </div>
+                <div class="text-xs font-semibold text-[#E5C78B] uppercase tracking-wider">أنظمة الأعمال</div>
+                <h3 class="text-xl font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  تطوير أنظمة ERP والحلول البرمجية
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  أنظمة مخصصة لإدارة المخزون، نقاط البيع POS، الفواتير، الموارد البشرية HR، وإدارة علاقات العملاء CRM بنماذج سحابية أو مكتبية أو ويب.
+                </p>
+                <ul class="text-xs text-emerald-300/80 space-y-1.5 list-disc list-inside">
+                  <li>إدارة المخزون والمبيعات والحسابات</li>
+                  <li>إدارة الصلاحيات والأدوار وأمان البيانات</li>
+                  <li>تكامل واجهات البرمجة API ولوحات المتابعة</li>
+                </ul>
+              </div>
+              <div class="pt-6 border-t border-emerald-950/80 mt-6 flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-mono">صفحة مخصصة ومفصلة</span>
+                <a href="/ar/services/erp-system-development.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                  <span>تفاصيل الخدمة</span>
+                  <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- خدمة 6: السيو التقني -->
+            <div class="p-8 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+              <div class="space-y-4">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950/80 border border-emerald-500/30 flex items-center justify-center text-[#E5C78B] group-hover:border-[#C6A15B] transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                </div>
+                <div class="text-xs font-semibold text-[#E5C78B] uppercase tracking-wider">السيو ومحركات البحث</div>
+                <h3 class="text-xl font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  السيو التقني وهيكلة الفهرسة الرقمية
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  تدقيق شامل لقابلية الزحف والفهرسة، تطبيق الترميز الهيكلي Schema.org، وتحسين سرعة التصفح لضمان تصدر الكلمات المستهدفة بثقة.
+                </p>
+                <ul class="text-xs text-emerald-300/80 space-y-1.5 list-disc list-inside">
+                  <li>الترميز الهيكلي Schema.org JSON-LD</li>
+                  <li>هندسة الفهرسة وتوزيع الروابط الداخلية</li>
+                  <li>تدقيق السرعة وتجربة المستخدم على الهواتف</li>
+                </ul>
+              </div>
+              <div class="pt-6 border-t border-emerald-950/80 mt-6 flex items-center justify-between">
+                <span class="text-[11px] text-emerald-400 font-mono">صفحة مخصصة ومفصلة</span>
+                <a href="/ar/services/technical-seo.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                  <span>تفاصيل الخدمة</span>
+                  <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- القسم 3: مركز المعرفة للمناقصات والعروض الفنية -->
+      <!-- ========================================================= -->
+      <section id="knowledge-hub" class="py-20 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-emerald-950/60 pb-8">
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-widest text-[#E5C78B] mb-2 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+              <span>رؤى ومعارف عملية معتمدة</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              مركز المعرفة <span class="gold-gradient-text heading-hover-glow">للمناقصات والعروض الفنية</span>
+            </h2>
+            <p class="text-sm text-emerald-200/70 mt-2 max-w-2xl leading-relaxed">
+              أدلة فنية متخصصة ومفصلة تتناول آليات تحليل كراسات الشروط، منصة اعتماد، مصفوفات الامتثال، وتفادي أخطاء الاستبعاد الفني الشائعة.
+            </p>
+          </div>
+
+          <a href="/ar/articles/index.html" class="btn-ghost-gold text-xs">
+            <span>استعراض كافة الـ 132 دليلاً ومقالاً معرفياً</span>
+            <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+
+        <!-- شبكة المقالات المعرفية المميزة -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- مقال 1: ما هو العطاء وكراسة الشروط -->
+          <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs text-emerald-300/70">
+                <span class="text-[#E5C78B] font-semibold uppercase tracking-wider text-[11px]">أساسيات المناقصات</span>
+                <span>قراءة 5 دقائق</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                ما هي المناقصة؟ الفروق بين كراسة الشروط RFP وRFQ وRFI
+              </h3>
+              <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                دليل تفصيلي يوضح الفروق الجوهرية بين طلبات تقديم العروض، واستخلاص المتطلبات الإلزامية وتقييم قرار المشاركة المؤسسية.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-emerald-950/80 mt-5 flex items-center justify-between text-xs">
+              <span class="text-emerald-400/60 font-mono text-[11px]">محدث لعام 2026</span>
+              <a href="/ar/articles/what-is-a-tender-and-rfp.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                <span>قراءة الدليل</span>
+                <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- مقال 2: كيفية كتابة عرض فني احترافي -->
+          <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs text-emerald-300/70">
+                <span class="text-[#E5C78B] font-semibold uppercase tracking-wider text-[11px]">العروض الفنية</span>
+                <span>قراءة 8 دقائق</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                كيفية كتابة عرض فني احترافي لمناقصات تقنية المعلومات
+              </h3>
+              <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                خريطة عمل عملية لصياغة الملخص التنفيذي، المعمارية التقنية، خطة التنفيذ، وهيكل الفريق الفني لكسب أعلى أوزان التقييم.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-emerald-950/80 mt-5 flex items-center justify-between text-xs">
+              <span class="text-emerald-400/60 font-mono text-[11px]">محدث لعام 2026</span>
+              <a href="/ar/articles/how-to-write-a-technical-proposal.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                <span>قراءة الدليل</span>
+                <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- مقال 3: إعداد مصفوفة الامتثال -->
+          <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs text-emerald-300/70">
+                <span class="text-[#E5C78B] font-semibold uppercase tracking-wider text-[11px]">ضبط الجودة والامتثال</span>
+                <span>قراءة 6 دقائق</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                كيف تعد مصفوفة امتثال خالية من العيوب للمناقصات
+              </h3>
+              <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                منهجية دقيقة خطوة بخطوة لتحويل بنود كراسة الشروط إلى جدول امتثال وتتبع يضمن تغطية كل بند إلزامي واختياري بدقة متناهية.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-emerald-950/80 mt-5 flex items-center justify-between text-xs">
+              <span class="text-emerald-400/60 font-mono text-[11px]">محدث لعام 2026</span>
+              <a href="/ar/articles/how-to-prepare-a-compliance-matrix.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                <span>قراءة الدليل</span>
+                <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- مقال 4: دليل منصة اعتماد والمشتريات السعودية -->
+          <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs text-emerald-300/70">
+                <span class="text-[#E5C78B] font-semibold uppercase tracking-wider text-[11px]">المنافسات السعودية</span>
+                <span>قراءة 9 دقائق</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                دليل التقديم على مناقصات منصة اعتماد ونظام المنافسات السعودي
+              </h3>
+              <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                شرح عملي لأحكام نظام المنافسات والمشتريات الحكومية السعودي ولائحته التنفيذية، بروتوكولات رفع العروض، واشتراطات التأهيل.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-emerald-950/80 mt-5 flex items-center justify-between text-xs">
+              <span class="text-emerald-400/60 font-mono text-[11px]">موثق نظامياً</span>
+              <a href="/ar/articles/saudi-etimad-platform-bidding-guide.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                <span>قراءة الدليل</span>
+                <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- مقال 5: استراتيجية قرار المشاركة Bid / No-Bid -->
+          <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs text-emerald-300/70">
+                <span class="text-[#E5C78B] font-semibold uppercase tracking-wider text-[11px]">استراتيجية العطاءات</span>
+                <span>قراءة 7 دقائق</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                استراتيجية قرار المشاركة في المناقصات (Bid / No-Bid)
+              </h3>
+              <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                كيف تقيم شركات التقنية متطلبات التأهيل والقدرة التشغيلية والمخاطر وهوامش الربحية قبل استثمار الوقت في صياغة العرض الفني.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-emerald-950/80 mt-5 flex items-center justify-between text-xs">
+              <span class="text-emerald-400/60 font-mono text-[11px]">محدث لعام 2026</span>
+              <a href="/ar/articles/bid-no-bid-assessment-strategy.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                <span>قراءة الدليل</span>
+                <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- مقال 6: أسباب استبعاد العروض الفنية وكيفية تجنبها -->
+          <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-xs text-emerald-300/70">
+                <span class="text-[#E5C78B] font-semibold uppercase tracking-wider text-[11px]">تجنب الاستبعاد</span>
+                <span>قراءة 6 دقائق</span>
+              </div>
+              <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                أبرز أسباب استبعاد العروض الفنية في المناقصات وكيفية تفاديها
+              </h3>
+              <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                تحليل لأكثر الأخطاء القاتلة شيوعاً المؤدية للاستبعاد الفوري—من نقص شهادات التأهيل إلى ورود إشارات سعرية داخل المجلد الفني.
+              </p>
+            </div>
+            <div class="pt-5 border-t border-emerald-950/80 mt-5 flex items-center justify-between text-xs">
+              <span class="text-emerald-400/60 font-mono text-[11px]">محدث لعام 2026</span>
+              <a href="/ar/articles/avoiding-mandatory-tender-rejection.html" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1">
+                <span>قراءة الدليل</span>
+                <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- استعراض الأنظمة ثلاثية الأبعاد الفاخرة (Dark Luxury Cinematic Experience) -->
+      <!-- ========================================================= -->
+      <section class="py-16 border-t border-emerald-950/60 bg-gradient-to-b from-[#050806] via-[#07130D] to-[#050806] relative overflow-hidden">
+        <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-12">
+          
+          <div class="text-center max-w-3xl mx-auto space-y-3">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-xs font-semibold text-[#E5C78B]">
+              <span class="w-2 h-2 rounded-full bg-[#10B981] animate-ping"></span>
+              <span>الأنظمة الرقمية ثلاثية الأبعاد ومنصات المؤسسات</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">
+              العمق البصري، <span class="gold-gradient-text heading-hover-glow">والدقة الهندسية</span> والتنفيذ المتقن
+            </h2>
+            <p class="text-xs sm:text-sm text-emerald-200/70 leading-relaxed">
+              كل ملف مناقصة، وكل حل تقني، وكل منصة سحابية يتم بناؤها بأعلى معايير الدقة والامتثال—دمج متقن بين الفخامة الداكنة وسرعة الأداء وقوة الامتثال الفني.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            
+            <!-- أصل بصري 1: لوحة الأنظمة المالية والمؤسسية -->
+            <div class="p-4 sm:p-6 glass-panel rounded-3xl border border-emerald-500/25 space-y-4 group interactive-card">
+              <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#07130D] border border-emerald-500/20 shadow-2xl">
+                <img src="/assets/aistudio/image_1bf11bde.png" alt="واجهة الأنظمة المالية والتحليلات المؤسسية" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs">
+                  <span class="badge-gold">أتمتة الأعمال والتحليلات المؤسسية</span>
+                  <span class="text-emerald-300 font-mono text-[11px]">SaaS & Financial Systems</span>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  بوابات المؤسسات المالية ولوحات القيادة الذكية
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  تحليلات لحظية، متابعة الأداء المؤسسي، مسارات دفع وتداول مؤمنة، وأتمتة شاملة للعمليات لخدمة الشركات والمؤسسات الكبرى.
+                </p>
+              </div>
+            </div>
+
+            <!-- أصل بصري 2: التجربة ثلاثية الأبعاد متعددة الأجهزة -->
+            <div class="p-4 sm:p-6 glass-panel rounded-3xl border border-emerald-500/25 space-y-4 group interactive-card">
+              <div class="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#07130D] border border-emerald-500/20 shadow-2xl">
+                <img src="/assets/aistudio/image_5875d793.png" alt="التجربة الرقمية التفاعلية على مختلف الأجهزة" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs">
+                  <span class="badge-emerald">هندسة متوافقة مع كافة الشاشات</span>
+                  <span class="text-emerald-300 font-mono text-[11px]">3D Spatial UX</span>
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                <h3 class="text-lg font-bold text-white group-hover:text-[#E5C78B] transition-colors">
+                  تجارب بصرية تفاعلية وأنظمة ويب متعددة الأجهزة
+                </h3>
+                <p class="text-xs text-emerald-100/70 leading-relaxed">
+                  استجابة لحظية وسلسة على الهواتف، الأجهزة اللوحية، وشاشات سطح المكتب. مصممة بانعدام تام لانزياح التخطيط (CLS) وسرعة استجابة فائقة.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- القسم 4: معرض المشاريع والأعمال المختارة (25 مشروعاً من أصل +100 مشروع منفذ) -->
+      <!-- ========================================================= -->
+      <section id="portfolio" class="py-20 border-t border-emerald-950/60 bg-[#07130D]/40">
+        <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-12">
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div class="text-xs font-semibold uppercase tracking-widest text-[#E5C78B] mb-2 flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+                <span>أنظمة حية وعطاءات معتمدة</span>
+              </div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                المشاريع <span class="gold-gradient-text heading-hover-glow">والأعمال المختارة</span>
+              </h2>
+              <p class="text-sm text-emerald-200/70 mt-2 max-w-2xl leading-relaxed">
+                25 مشروعاً حياً مختاراً من أصل أكثر من 100 حل رقمي منفذ عبر بوابات الشركات، المتاجر الإلكترونية، أنظمة ERP/CRM/POS، وتطبيقات الهواتف الذكية.
+              </p>
+            </div>
+
+            <!-- أوسمة التغطية الجغرافية الدولية -->
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">🇸🇦 المملكة العربية السعودية</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">🇦🇪 الإمارات</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">🇧🇭 البحرين</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">🇺🇸 أمريكا</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">🇬🇧 بريطانيا</span>
+              <span class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-300">🇩🇪 ألمانيا</span>
+            </div>
+          </div>
+
+                <!-- تنويه نطاق سابقة الأعمال (+100 مشروع منفذ) -->
+      <div class="p-6 sm:p-8 rounded-3xl glass-panel-elevated border-2 border-[#C6A15B]/45 bg-gradient-to-br from-[#07130D] via-[#0B1F16]/80 to-[#050806] shadow-2xl space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C6A15B]/20 border border-[#C6A15B]/50 text-xs font-mono font-bold text-[#E5C78B]">
+            <span class="w-2 h-2 rounded-full bg-[#E5C78B] animate-pulse"></span>
+            <span>نطاق سابقة الأعمال: +100 مشروع رقمي منفذ</span>
+          </div>
+          <span class="text-xs font-mono text-emerald-300/90">عرض 25 مشروعاً حياً مختاراً من أصل أكثر من 100 مشروع</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">
+          أكثر من 100 مشروع منفذ.. <span class="gold-gradient-text">وهذه مجرد لمحة مختارة من أعمالنا</span>
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-200/90 leading-relaxed max-w-[90ch]">
+          تمثل المشاريع المعروضة في هذه الصفحة <strong class="text-white">عينة مختارة ومنتقاة بعناية (25 مشروعاً)</strong> من سجل أعمال فعلي يتجاوز <strong class="text-[#E5C78B]">100 مشروع رقمي متكامل تم تصميمه وتطويره وإطلاقه</strong> عبر بوابات الشركات، المتاجر الإلكترونية، أنظمة المؤسسات (ERP / CRM / POS / الأنظمة الطبية)، وتطبيقات الهواتف الذكية في السعودية والإمارات والبحرين ومصر وأوروبا وأمريكا الشمالية وآسيا.
+        </p>
+      </div>
+
+          <!-- حاوية محرك المشاريع التفاعلي -->
+          <div id="interactive-portfolio-container" class="space-y-8">
+            <!-- يتم تعبئتها ديناميكياً بواسطة main.js بـ 25+ مشروعاً، تصنيفات الخدمات، البحث اللحظي، ونافذة دراسات الحالة -->
+          </div>
+
+          <!-- بطاقة الانتقال للصفحة المستقلة للأعمال -->
+          <div class="p-6 glass-panel rounded-2xl border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 mt-8">
+            <div class="text-xs text-emerald-200/80">
+              <span class="font-bold text-white">صفحة الأعمال والمشاريع المستقلة: </span>
+              دليل متكامل يضم كافة المشاريع الـ 25 المعتمدة مع فلاتر التصفية الجغرافية والتصنيفات ونوافذ دراسات الحالة.
+            </div>
+            <a href="/ar/portfolio/index.html" class="btn-gold text-xs py-2.5 px-5 shrink-0 font-bold flex items-center gap-1.5 shadow-md">
+              <span>استعراض صفحة الأعمال والمشاريع (25 مختارة / +100 مشروع) ←</span>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- القسم: المناقصات والعطاءات الحكومية (قسم مستقل) -->
+      <!-- ========================================================= -->
+      <section id="tenders" class="py-20 border-t border-emerald-950/60 bg-[#07130D]/60">
+        <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-10">
+          <div id="tenders-experience-section" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+              <div class="space-y-2">
+                <div class="text-xs font-semibold tracking-wide text-[#E5C78B] flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B] animate-pulse"></span>
+                  <span>+400 مناقصة تم إعدادها وكتابتها وتنسيقها ومراجعتها</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                  المناقصات <span class="gold-gradient-text heading-hover-glow">الحكومية والتقنية</span>
+                </h2>
+                <p class="text-sm text-emerald-200/75 max-w-[75ch] leading-relaxed">
+                  نماذج مختارة لمشاركات وخبرات في المنافسات الحكومية والسيادية توضح منهجية صياغة العروض الفنية، تفكيك متطلبات كراسات الشروط RFP، إعداد مصفوفات الامتثال، وحوكمة اتفاقيات مستوى الخدمة عبر منصة اعتماد.
+                </p>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <a href="/ar/tenders/awarded-tenders.html" class="btn-gold text-xs py-2.5 px-5 font-bold flex items-center gap-2">
+                  <span>استعراض سجل المناقصات (+400 خبرة ومشاركة)</span>
+                  <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+        <!-- تنويه مهني إلزامي حول سابقة أعمال المناقصات -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-amber-500/10 border border-[#C6A15B]/40 text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2">
+          <div class="flex items-center gap-2 font-bold text-[#E5C78B]">
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>تنويه مهني حول سابقة أعمال المناقصات:</span>
+          </div>
+          <p class="text-slate-200/95 max-w-[90ch]">
+            المناقصات المعروضة هنا تمثل جزءاً محدوداً ومختاراً فقط من نطاق الخبرة والمشاركات التي تمتد إلى أكثر من 400 مناقصة ومشروع تقني. وقد تم اختيار هذه النماذج لعرض أمثلة تمثيلية من المشاركات والخبرات في إعداد العروض الفنية، تحليل كراسات الشروط، تدقيق الامتثال، وهندسة الحلول المرتبطة بالوزارات والجهات الحكومية والسيادية، ولا تمثل القائمة الكاملة لجميع الأعمال أو تعني ترسية جميع الـ 400+ مناقصة.
+          </p>
+        </div>
+
+        <!-- لوحة المؤشرات الرقمية الموثقة والمحدثة (+400، +50، +60) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 pt-3">
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-2 bg-[#07130D]/80">
+            <div class="text-3xl sm:text-4xl font-extrabold text-[#E5C78B] font-mono">+400</div>
+            <div class="text-sm sm:text-base font-bold text-white">أكثر من 400 مناقصة تم إعدادها وكتابتها وتنسيقها ومراجعتها</div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              تمت كتابة وإعداد وتنسيق ومراجعة أكثر من 400 مناقصة، مع التركيز على صياغة العروض الفنية، تفكيك متطلبات كراسات الشروط RFP، بناء مصفوفات الامتثال، وضمان اكتمال مستندات التقديم.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-emerald-500/35 space-y-2 bg-[#07130D]/80">
+            <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono">+50</div>
+            <div class="text-sm sm:text-base font-bold text-white">مشروعاً تمت ترسيته من جهات حكومية</div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              خبرة موثقة مرتبطة بأكثر من 50 مشروعاً تمت ترسيته من وزارات وهيئات حكومية، ضمن نطاق المشاركات والخبرات في إعداد العروض الفنية والمنافسات.
+            </p>
+          </div>
+          <div class="p-6 rounded-2xl glass-panel-elevated border border-[#C6A15B]/45 space-y-2 bg-[#07130D]/80">
+            <div class="text-3xl sm:text-4xl font-extrabold text-[#E5C78B] font-mono">+60</div>
+            <div class="text-sm sm:text-base font-bold text-white">جهة حكومية وسيادية</div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              خبرة عملية مباشرة في التعامل مع متطلبات ومواصفات كراسات الطرح واشتراطات منصة اعتماد لما يقرب من 60 وزارة وهيئة ومؤسسة حكومية وسيادية.
+            </p>
+          </div>
+        </div>
+
+            <!-- شبكة أبرز بطاقات المناقصات (6 منافسات كبرى مع نوافذ تفاعلية) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              
+              <!-- بطاقة 1: سدايا MIFON3 -->
+              <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-1 rounded-lg border text-[11px] border-emerald-500/40 text-emerald-300 bg-emerald-950/60 font-semibold flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>منافسة حكومية</span>
+                    </span>
+                    <span class="text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30">#1837</span>
+                  </div>
+                  <div class="text-xs font-semibold text-[#E5C78B] flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span>سدايا (SDAIA)</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#E5C78B] transition-colors leading-snug">
+                    تشغيل وصيانة البنية التحتية لشبكة الألياف الوطنية (MIFON3)
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                    تشغيل وصيانة شبكات DWDM ومقسم الإنترنت السعودي (SAIX) وشبكات MPLS، مع توفير خدمات استشارية متخصصة لـ Cisco لمدة 90 يوماً.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/40 border border-emerald-950 text-emerald-300 font-mono">⏱️ 36 شهراً</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 font-mono">بنية سيادية للألياف</span>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-emerald-950/80 mt-4 flex items-center justify-between text-xs">
+                  <button type="button" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1 open-tender-modal-btn" data-tender-id="tender-19-sdaia-mifon3">
+                    <span>عرض دراسة الحالة</span>
+                    <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <a href="/ar/tenders/case-sdaia-mifon-3-fiber-infrastructure-and-saix.html" class="text-[11px] text-emerald-400/80 hover:text-white underline">صفحة مخصصة</a>
+                </div>
+              </article>
+
+              <!-- بطاقة 2: وزارة الطاقة EPM -->
+              <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-1 rounded-lg border text-[11px] border-emerald-500/40 text-emerald-300 bg-emerald-950/60 font-semibold flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>منافسة حكومية</span>
+                    </span>
+                    <span class="text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30">#2026000349</span>
+                  </div>
+                  <div class="text-xs font-semibold text-[#E5C78B] flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span>وزارة الطاقة</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#E5C78B] transition-colors leading-snug">
+                    ترقية وتحسين نظام إدارة المشاريع المؤسسية (EPM)
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                    مشروع تحول استراتيجي يمتد 43 شهراً عبر 3 مراحل: تحليل الوضع الراهن والمستقبلي، وتهيئة نظامي المشاريع والاستراتيجية، ودعم فني ميداني.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/40 border border-emerald-950 text-emerald-300 font-mono">⏱️ 43 شهراً</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/60 border border-emerald-500/40 text-emerald-200 font-mono">إدارة مشاريع وطنية</span>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-emerald-950/80 mt-4 flex items-center justify-between text-xs">
+                  <button type="button" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1 open-tender-modal-btn" data-tender-id="tender-21-moe-epm">
+                    <span>عرض دراسة الحالة</span>
+                    <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <a href="/ar/tenders/case-ministry-of-energy-epm-system-upgrade.html" class="text-[11px] text-emerald-400/80 hover:text-white underline">صفحة مخصصة</a>
+                </div>
+              </article>
+
+              <!-- بطاقة 3: تطبيق تأكد (هيئة المواصفات) - تمت الترسية -->
+              <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-1 rounded-lg border text-[11px] border-emerald-500/40 text-emerald-300 bg-emerald-950/60 font-semibold flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>منافسة حكومية</span>
+                    </span>
+                    <span class="text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30">#27</span>
+                  </div>
+                  <div class="text-xs font-semibold text-[#E5C78B] flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span>هيئة المواصفات (SASO)</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#E5C78B] transition-colors leading-snug">
+                    تشغيل وصيانة وتطوير تطبيق الهواتف الذكية (تأكد)
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                    تخصيص 2,112 ساعة صيانة ودعم و500 ساعة تطوير، وفحص الباركود وعلامات الجودة، وتحديث تجربة المستخدم وسد الثغرات الأمنية.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/40 border border-emerald-950 text-emerald-300 font-mono">⏱️ 12 شهراً</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#C6A15B]/20 text-[#E5C78B] font-mono">بوابات وتطبيقات ذكية</span>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-emerald-950/80 mt-4 flex items-center justify-between text-xs">
+                  <button type="button" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1 open-tender-modal-btn" data-tender-id="tender-16-saso-taakad">
+                    <span>عرض دراسة الحالة</span>
+                    <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <a href="/ar/tenders/case-saso-taakad-mobile-app-operations-and-maintenance.html" class="text-[11px] text-emerald-400/80 hover:text-white underline">صفحة مخصصة</a>
+                </div>
+              </article>
+
+              <!-- بطاقة 4: الأمن البيئي المنصة المتكاملة - تمت الترسية -->
+              <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-1 rounded-lg border text-[11px] border-emerald-500/40 text-emerald-300 bg-emerald-950/60 font-semibold flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>منافسة حكومية</span>
+                    </span>
+                    <span class="text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30">#SFES/2026/24</span>
+                  </div>
+                  <div class="text-xs font-semibold text-[#E5C78B] flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span>القوات الخاصة للأمن البيئي</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#E5C78B] transition-colors leading-snug">
+                    المنصة الرقمية المتكاملة لإدارة الخدمات والعمليات
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                    توريد تراخيص غير محدودة لخمسة أنظمة أمنية متكاملة، تشغيل وتطوير ميداني لمدة سنتين، وصيانة وضمان لمدة 36 شهراً.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/40 border border-emerald-950 text-emerald-300 font-mono">⏱️ 24+36 شهراً</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#C6A15B]/20 text-[#E5C78B] font-mono">تراخيص غير محدودة</span>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-emerald-950/80 mt-4 flex items-center justify-between text-xs">
+                  <button type="button" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1 open-tender-modal-btn" data-tender-id="tender-33-sfes-integrated-operations-platform">
+                    <span>عرض دراسة الحالة</span>
+                    <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <a href="/ar/tenders/case-sfes-integrated-digital-platform-and-unlimited-licenses.html" class="text-[11px] text-emerald-400/80 hover:text-white underline">صفحة مخصصة</a>
+                </div>
+              </article>
+
+              <!-- بطاقة 5: صندوق التنمية العقارية - تمت الترسية -->
+              <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-1 rounded-lg border text-[11px] border-emerald-500/40 text-emerald-300 bg-emerald-950/60 font-semibold flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>منافسة حكومية</span>
+                    </span>
+                    <span class="text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30">#2610034</span>
+                  </div>
+                  <div class="text-xs font-semibold text-[#E5C78B] flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span>صندوق التنمية العقارية</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#E5C78B] transition-colors leading-snug">
+                    صيانة وتطوير البوابات وتطبيقات الجوال التمويلية
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                    تشغيل وتطوير بوابات الإسكان والتمويل وتطبيقات الجوال، إجراء اختبارات الأداء المتقدمة، وتوفير فريق مقيم بمقر الصندوق بالرياض لمدة عامين.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/40 border border-emerald-950 text-emerald-300 font-mono">⏱️ 24 شهراً</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#C6A15B]/20 text-[#E5C78B] font-mono">فريق مقيم بالرياض</span>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-emerald-950/80 mt-4 flex items-center justify-between text-xs">
+                  <button type="button" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1 open-tender-modal-btn" data-tender-id="tender-34-redf-portals-mobile">
+                    <span>عرض دراسة الحالة</span>
+                    <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <a href="/ar/tenders/case-redf-portals-and-mobile-apps-development-maintenance.html" class="text-[11px] text-emerald-400/80 hover:text-white underline">صفحة مخصصة</a>
+                </div>
+              </article>
+
+              <!-- بطاقة 6: وزارة الحرس الوطني - تمت الترسية -->
+              <article class="p-6 glass-panel rounded-2xl interactive-card border border-emerald-500/20 flex flex-col justify-between group">
+                <div class="space-y-3.5">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="px-2.5 py-1 rounded-lg border text-[11px] border-emerald-500/40 text-emerald-300 bg-emerald-950/60 font-semibold flex items-center gap-1.5">
+                      <span>🏛️</span>
+                      <span>منافسة حكومية</span>
+                    </span>
+                    <span class="text-[10px] text-emerald-400 font-mono px-2 py-0.5 rounded bg-emerald-950/70 border border-emerald-500/30">#2026/124</span>
+                  </div>
+                  <div class="text-xs font-semibold text-[#E5C78B] flex items-center gap-1.5">
+                    <span>🏛️</span>
+                    <span>وزارة الحرس الوطني</span>
+                  </div>
+                  <h4 class="text-base font-bold text-white group-hover:text-[#E5C78B] transition-colors leading-snug">
+                    دعم وتشغيل أنظمة القبول والتسجيل العسكرية
+                  </h4>
+                  <p class="text-xs text-emerald-100/70 leading-relaxed line-clamp-3">
+                    تشغيل وتطوير متكامل لمنظومة القبول والتسجيل العسكرية بكلية الملك خالد ولجنة التوظيف، عبر تقنيات Angular و .NET Core و SQL Server.
+                  </p>
+                  <div class="flex flex-wrap gap-1.5 pt-1">
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-black/40 border border-emerald-950 text-emerald-300 font-mono">⏱️ 24 شهراً</span>
+                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-[#C6A15B]/20 text-[#E5C78B] font-mono">أنظمة عسكرية سيادية</span>
+                  </div>
+                </div>
+                <div class="pt-4 border-t border-emerald-950/80 mt-4 flex items-center justify-between text-xs">
+                  <button type="button" class="text-xs font-bold text-[#E5C78B] hover:text-white flex items-center gap-1 open-tender-modal-btn" data-tender-id="tender-35-sng-admission-systems">
+                    <span>عرض دراسة الحالة</span>
+                    <svg class="w-3.5 h-3.5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                  <a href="/ar/tenders/case-saudi-national-guard-admission-and-registration-systems.html" class="text-[11px] text-emerald-400/80 hover:text-white underline">صفحة مخصصة</a>
+                </div>
+              </article>
+
+            </div>
+
+            <div class="text-center pt-2">
+              <a href="/ar/tenders/awarded-tenders.html" class="btn-ghost-gold text-xs py-3 px-6 inline-flex items-center gap-2">
+                <span>استعراض كافة دراسات حالة المناقصات المختارة (+400 خبرة ومشاركة)</span>
+                <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+            </div>
+          </div>
+
+
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- القسم 5: السيرة الذاتية والمسيرة المهنية الموثقة -->
+      <!-- ========================================================= -->
+      <section id="resume" class="py-20 w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-emerald-950/60 pb-8">
+          <div>
+            <div class="text-xs font-semibold uppercase tracking-widest text-[#E5C78B] mb-2 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+              <span>سجل الخبرات المعتمد</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              السيرة الذاتية <span class="gold-gradient-text heading-hover-glow">والملف المهني (CV)</span>
+            </h2>
+            <p class="text-sm text-emerald-200/70 mt-2 max-w-2xl leading-relaxed">
+              تم تخصيص صفحة إلكترونية مستقلة ومتكاملة للسيرة الذاتية الخاصة بيوسف تشمل السجل الوظيفي والمسؤوليات والمهارات والمؤهلات الأكاديمية دون أي تداخل مع باقي الأقسام.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="/ar/cv/index.html" class="btn-gold text-xs py-2.5 px-5 font-bold flex items-center gap-1.5 shadow-md">
+              <span>عرض السيرة الذاتية الكاملة (CV) ←</span>
+            </a>
+            <a href="/assets/aistudio/youssef_ghamry_bid_e01f8769.pdf" download="Youssef_Ghamry_CV.pdf" class="btn-ghost-gold text-xs py-2.5 px-4 flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>تحميل PDF</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- بطاقة المعاينة التنفيذية السريعة -->
+        <div class="p-8 sm:p-10 rounded-3xl glass-panel border border-[#C6A15B]/40 bg-gradient-to-br from-[#07130D] via-[#050806] to-[#0B1F16] shadow-xl space-y-6">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-emerald-950">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl border-2 border-[#C6A15B] p-1 bg-[#050806] shrink-0">
+                <img src="/assets/images/youssef-executive-avatar.jpg" alt="يوسف غمري" class="w-full h-full object-cover object-top rounded-xl" referrerpolicy="no-referrer" />
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white">يوسف غمري (Youssef Ghamry)</h3>
+                <div class="text-xs sm:text-sm font-semibold text-[#E5C78B]">أخصائي مناقصات وعروض فنية ومدقق جودة | Senior Bid QA Lead</div>
+              </div>
+            </div>
+
+            <div class="text-xs text-emerald-400 font-mono bg-emerald-950/70 border border-emerald-500/30 px-3 py-1.5 rounded-xl">
+              الوظيفة الحالية: كاتب عروض ومناقصات في Brains Valley Co
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+            <div class="p-4 rounded-2xl bg-black/40 border border-emerald-950 space-y-1">
+              <div class="text-xl font-extrabold text-[#E5C78B] font-mono">+400</div>
+              <div class="font-bold text-white">أكثر من 400 مناقصة تم إعدادها وكتابتها وتنسيقها ومراجعتها</div>
+              <p class="text-slate-400 text-[11px]">مشاريع هيئات حكومية وسيادية سعودية وخليجية</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-black/40 border border-emerald-950 space-y-1">
+              <div class="text-xl font-extrabold text-[#E5C78B] font-mono">27+</div>
+              <div class="font-bold text-white">شهادة واعتماد تخصصي معتمد</div>
+              <p class="text-slate-400 text-[11px]">اعتمادات AWS، جوجل، IBM، وميتا</p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-black/40 border border-emerald-950 space-y-1">
+              <div class="text-xl font-extrabold text-[#E5C78B] font-mono">4+</div>
+              <div class="font-bold text-white">سنوات خبرة موثقة في القطاع التقني</div>
+              <p class="text-slate-400 text-[11px]">نظام المنافسات والمشتريات ومنصة اعتماد</p>
+            </div>
+          </div>
+
+          <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-emerald-950/80">
+            <p class="text-xs text-slate-300 leading-relaxed max-w-2xl">
+              تصفح السيرة الذاتية المهنية المستقلة لمعرفة تفاصيل المسؤوليات الوظيفية، المهارات التقنية، والمؤهلات الأكاديمية واللغات.
+            </p>
+            <a href="/ar/cv/index.html" class="w-full sm:w-auto btn-gold text-xs py-3 px-8 font-bold flex items-center justify-center gap-2 shadow-lg shrink-0">
+              <span>فتح السيرة الذاتية الإلكترونية المستقلة (CV)</span>
+              <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- القسم 6: التواصل وطلب استشارة كراسة الشروط -->
+      <!-- ========================================================= -->
+      <section id="contact" class="py-20 border-t border-emerald-950/60 bg-[#07130D]/70 relative">
+        <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-12">
+          
+          <div class="border-b border-emerald-950/60 pb-8">
+            <div class="text-xs font-semibold uppercase tracking-widest text-[#E5C78B] mb-2 flex items-center gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#C6A15B]"></span>
+              <span>قنوات التواصل المباشر</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              تواصل معي <span class="gold-gradient-text heading-hover-glow">واستشارات المناقصات</span>
+            </h2>
+            <p class="text-sm text-emerald-200/70 mt-2 max-w-2xl leading-relaxed">
+              تواصل مباشرة لمناقشة تحليل كراسة الشروط RFP، إعداد العرض الفني، مراجعة الامتثال، أو بناء الحلول البرمجية.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <!-- القنوات المباشرة -->
+            <div class="lg:col-span-5 space-y-6">
+              <div class="p-8 glass-panel rounded-2xl border border-emerald-500/30 space-y-6">
+                <h3 class="text-lg font-bold text-white">القنوات المباشرة</h3>
+                
+                <div class="space-y-4 text-xs">
+                  <div class="p-3.5 bg-[#050806]/80 rounded-xl border border-emerald-500/20">
+                    <div class="text-emerald-400/70 uppercase text-[10px] font-mono">البريد الإلكتروني المباشر</div>
+                    <a href="mailto:1youssefghamry@gmail.com" class="font-bold text-white hover:text-[#E5C78B] transition-colors text-xs break-all inline-block" dir="ltr">
+                      1youssefghamry@gmail.com
+                    </a>
+                  </div>
+
+                  <div class="p-3.5 bg-[#050806]/80 rounded-xl border border-emerald-500/20">
+                    <div class="text-emerald-400/70 uppercase text-[10px] font-mono">الهاتف والواتساب</div>
+                    <a href="tel:+201503292942" class="font-bold text-white hover:text-[#E5C78B] transition-colors text-xs" dir="ltr">
+                      +201503292942
+                    </a>
+                  </div>
+
+                  <div class="p-3.5 bg-[#050806]/80 rounded-xl border border-emerald-500/20">
+                    <div class="text-emerald-400/70 uppercase text-[10px] font-mono">الموقع الجغرافي</div>
+                    <div class="font-bold text-white text-xs">القاهرة، مصر</div>
+                    <div class="text-emerald-300/60 text-[11px] mt-0.5">متاح للمشاريع والتعاقدات في السعودية ودول الخليج</div>
+                  </div>
+                </div>
+
+                <!-- زر المحادثة الفورية على الواتساب -->
+                <a href="https://wa.me/201503292942" target="_blank" rel="noopener noreferrer" class="w-full btn-emerald text-xs justify-center py-3">
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.044c.101-.116.433-.506.549-.68.116-.174.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.073.043.419-.101.824z"/></svg>
+                  <span>محادثة فورية عبر واتساب</span>
+                </a>
+              </div>
+
+              <!-- ميثاق السرية وعدم الإفصاح -->
+              <div class="p-6 glass-panel rounded-2xl border border-emerald-500/20 text-xs text-emerald-200/70 space-y-2">
+                <div class="font-bold text-white flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  <span>سرية المعلومات وميثاق عدم الإفصاح NDA</span>
+                </div>
+                <p class="leading-relaxed">
+                  تُعامل كافة كراسات الشروط، جداول الأسعار، والمواصفات الفنية للعملاء بسرية تامة وموثوقية مهنية غير قابلة للنقاش.
+                </p>
+              </div>
+            </div>
+
+            <!-- نموذج الاستفسار الفني -->
+            <div class="lg:col-span-7">
+              <div class="glass-panel p-8 rounded-2xl border border-emerald-500/30">
+                <h3 class="text-xl font-bold text-white mb-1">إرسال استفسار عمل أو مناقصة</h3>
+                <p class="text-xs text-emerald-300/70 mb-6">احصل على استشارة مهنية حول مناقصتك أو مشروعك القادم خلال 12–24 ساعة.</p>
+
+                <!-- رسالة النجاح -->
+                <div id="form-success-message" class="hidden p-6 bg-emerald-950/60 rounded-xl border border-emerald-500/40 text-center space-y-3">
+                  <svg class="w-10 h-10 text-emerald-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <h4 class="text-base font-bold text-white">تم استلام طلبك بنجاح</h4>
+                  <p class="text-xs text-emerald-200/80">شكراً لتواصلك. تم تسجيل بيانات الاستفسار وسيتم الرد عليك في غضون 12 إلى 24 ساعة كحد أقصى.</p>
+                </div>
+
+                <form id="business-inquiry-form" class="space-y-4">
+                  <!-- مصيدة البوتات Honeypot -->
+                  <div class="hidden" aria-hidden="true">
+                    <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-label="موقع الشركة" />
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="inquiry-name" class="block text-xs font-medium text-emerald-200/80 mb-1.5">الاسم بالكامل *</label>
+                      <input id="inquiry-name" type="text" name="name" required placeholder="مثال: عبد الله العتيبي" class="luxury-input" />
+                    </div>
+                    <div>
+                      <label for="inquiry-email" class="block text-xs font-medium text-emerald-200/80 mb-1.5">البريد الإلكتروني *</label>
+                      <input id="inquiry-email" type="email" name="email" required placeholder="name@company.com" class="luxury-input" dir="ltr" />
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label for="inquiry-phone" class="block text-xs font-medium text-emerald-200/80 mb-1.5">رقم الهاتف أو الواتساب (اختياري)</label>
+                      <input id="inquiry-phone" type="tel" name="phone" placeholder="+966... أو +20..." class="luxury-input" dir="ltr" />
+                    </div>
+                    <div>
+                      <label for="inquiry-type" class="block text-xs font-medium text-emerald-200/80 mb-1.5">نوع الخدمة المطلوبة *</label>
+                      <select id="inquiry-type" name="inquiry_type" class="luxury-input cursor-pointer">
+                        <option value="إعداد العروض الفنية">إعداد وصياغة العروض الفنية للمناقصات</option>
+                        <option value="مصفوفة الامتثال وضبط الجودة">إعداد مصفوفة الامتثال وضبط الجودة</option>
+                        <option value="دعم مناقصات منصة اعتماد">دعم مناقصات منصة اعتماد السعودية</option>
+                        <option value="تطوير مواقع ووردبريس">تطوير مواقع ووردبريس وبوابات الشركات</option>
+                        <option value="أنظمة ERP وبرمجيات الأعمال">أنظمة ERP والبرمجيات المخصصة</option>
+                        <option value="السيو التقني">السيو التقني وتدقيق محركات البحث</option>
+                        <option value="استشارات أعمال أخرى">استشارات أخرى</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="inquiry-subject" class="block text-xs font-medium text-emerald-200/80 mb-1.5">عنوان المناقصة أو مرجع المشروع</label>
+                    <input id="inquiry-subject" type="text" name="subject" placeholder="مثال: إعداد العرض الفني لمناقصة تقنية حكومية على منصة اعتماد" class="luxury-input" />
+                  </div>
+
+                  <div>
+                    <label for="inquiry-message" class="block text-xs font-medium text-emerald-200/80 mb-1.5">تفاصيل المتطلبات وموعد التسليم *</label>
+                    <textarea id="inquiry-message" name="message" rows="5" required placeholder="يرجى توضيح موعد إغلاق المناقصة، نطاق العمل المطلوب، وأبرز المخرجات المحددة في كراسة الشروط..." class="luxury-input"></textarea>
+                  </div>
+
+                  <button type="submit" class="w-full btn-gold text-xs py-3 justify-center">
+                    <span>إرسال طلب الاستشارة</span>
+                    <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </button>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+                    <footer class="border-t border-emerald-950/80 bg-[#050806] py-12 pb-28 lg:pb-12 text-xs text-emerald-300/60 relative z-10">
+      <div class="w-full max-w-[1920px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 space-y-8">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full border border-[#C6A15B]/50 p-0.5 bg-[#07130D]">
+              <img src="/assets/aistudio/image_ef5d64bf.png" alt="شعار يوسف غمري" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <div>
+              <span class="font-extrabold text-white gold-gradient-text tracking-wide">يوسف غمري</span>
+              <span class="text-slate-500"> — مطور Full-Stack وأخصائي أول مناقصات وضبط جودة العروض الفنية</span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-5">
+            <a href="/ar/index.html" class="hover:text-[#E5C78B] transition-colors">الرئيسية</a>
+            <a href="/ar/services/index.html" class="hover:text-[#E5C78B] transition-colors">الخدمات (93)</a>
+            <a href="/ar/cv/index.html" class="hover:text-[#E5C78B] transition-colors">السيرة الذاتية</a>
+            <a href="/ar/portfolio/index.html" class="hover:text-[#E5C78B] transition-colors">الأعمال (25 / +100)</a>
+            <a href="/ar/tenders/awarded-tenders.html" class="hover:text-[#E5C78B] transition-colors">المناقصات (+400)</a>
+            <a href="/ar/certifications/index.html" class="hover:text-[#E5C78B] transition-colors">الشهادات (+27)</a>
+            <a href="/ar/articles/index.html" class="hover:text-[#E5C78B] transition-colors">المقالات (132)</a>
+            <a href="/ar/contact/index.html" class="hover:text-white transition-colors">تواصل معي</a>
+            <a href="/index.html" class="text-[#E5C78B] font-bold" dir="ltr">English Edition (EN)</a>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-emerald-950/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div>© 2026 يوسف غمري. جميع الحقوق محفوظة. هندسة البرمجيات المتكاملة واستشارات المناقصات الحكومية.</div>
+          <div>القاهرة، مصر · المملكة العربية السعودية (منصة اعتماد) ومشاريع دولية عن بُعد</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/tenders-data.js"></script>
+    <script src="/assets/js/tenders-showcase.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>
